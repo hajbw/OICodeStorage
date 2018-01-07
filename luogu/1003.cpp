@@ -26,14 +26,14 @@ int main()
 		cin>>carpets[i].x>>carpets[i].y>>carpets[i].width>>carpets[i].height;
 
 	for (result = amountOfCarpet; result > 0 ; result)
-	{//result - 1 to access carpets[index]
+		//result - 1 to access carpets[index]
 		if(isInside(targetX,targetY,carpets[result]))
-	}
+			break;
 
 	if(result = 0)
 		result = -1;//ugly fix
 
-	cout<<result;
+	std::cout<<result;
 
 	delete [] carpets;
 
@@ -42,5 +42,5 @@ int main()
 
 bool isInside(int x,int y,carpet cover)
 {
-	return false;
+	return x >= cover.x && x <= cover.x + cover.width && y >= cover.y && y <= cover.y + cover.height;
 }
