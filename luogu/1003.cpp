@@ -9,7 +9,7 @@ using std::cin;
 struct carpet
 {
 	int x,y,width,height;
-}
+};
 
 bool isInside(int,int,carpet);
 
@@ -25,8 +25,7 @@ int main()
 	for (int i = 0; i < amountOfCarpet; ++i)
 		cin>>carpets[i].x>>carpets[i].y>>carpets[i].width>>carpets[i].height;
 
-	for (result = amountOfCarpet; result > 0 ; result)
-		//result - 1 to access carpets[index]
+	for (result = amountOfCarpet; result > 0 ; --result)//result - 1 to access carpets[index]
 		if(isInside(targetX,targetY,carpets[result]))
 			break;
 
@@ -42,5 +41,5 @@ int main()
 
 bool isInside(int x,int y,carpet cover)
 {
-	return x >= cover.x && x <= cover.x + cover.width && y >= cover.y && y <= cover.y + cover.height;
+	return x >= cover.x && ( x <= cover.x + cover.width ) && y >= cover.y && y <= cover.y + cover.height;
 }
