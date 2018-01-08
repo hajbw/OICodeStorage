@@ -2,6 +2,7 @@
 
 /*
 	P1003 铺地毯
+	已AC
 */
 
 using std::cin;
@@ -25,11 +26,13 @@ int main()
 	for (int i = 0; i < amountOfCarpet; ++i)
 		cin>>carpets[i].x>>carpets[i].y>>carpets[i].width>>carpets[i].height;
 
+	cin>>targetX>>targetY;
+
 	for (result = amountOfCarpet; result > 0 ; --result)//result - 1 to access carpets[index]
-		if(isInside(targetX,targetY,carpets[result]))
+		if(isInside(targetX,targetY,carpets[result - 1]))
 			break;
 
-	if(result = 0)
+	if(result == 0)
 		result = -1;//ugly fix
 
 	std::cout<<result;
@@ -41,5 +44,5 @@ int main()
 
 bool isInside(int x,int y,carpet cover)
 {
-	return x >= cover.x && ( x <= cover.x + cover.width ) && y >= cover.y && y <= cover.y + cover.height;
+	return x >= cover.x && x <= cover.x + cover.width && y >= cover.y && y <= cover.y + cover.height;
 }
