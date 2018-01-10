@@ -7,29 +7,33 @@ using namespace std;
 */
 
 
-struct set
+struct good_set
 {
 	int amount_of_pencil,price;
 };
 
 int main()
 {
-	int pencils_needed,result = 0,pencils[10000];
-	set pencilset[3];
+	int i,j,pencils_needed,result = 0,pencils[10002];
+	good_set pencilset[3];
 
 	cin>>pencils_needed;
-	for (int i = 0; i < 3; ++i)
-	{
+	for (i = 0; i < 3; ++i)
 		cin>>pencilset[i].amount_of_pencil>>pencilset[i].price;
-	}
 
-	for (int i = 0; i < 3; ++i)
+	for (i = 0; i < 3; ++i)
 	{
-		for (int j = pencils_needed; j >= pencilset[i].amount_of_pencil ; --j)
+		for (j = pencils_needed; j >= pencilset[i].amount_of_pencil ; --j)
 		{
-			
+			pencils[i] = (
+				pencils[i] < pencils[i - pencilset[i].amount_of_pencil] + pencilset[i].price ?
+				pencils[i - pencilset[i].amount_of_pencil] + pencilset[i].price :
+				pencils[i]
+				);
 		}
 	}
+
+	result = pencils[pencils_needed];
 
 	cout<<result;
 
