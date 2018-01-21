@@ -24,6 +24,7 @@ int main(int argc, char const *argv[])
 	if(argc == 0)//default showing
 	{
 		welcome();//what should I do next?
+		cout<<"输入你接下来要做的事\n\n
 	}
 	else//argumented processing(testing)
 	{
