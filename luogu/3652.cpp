@@ -15,7 +15,10 @@ int main()
 	for (int i = 0; i < count; ++i)
 	{
 		cin>>lines_per_program;
-		
+		for(int j = 0;j < lines_per_program)
+		{
+
+		}
 	}
 
 	return 0;

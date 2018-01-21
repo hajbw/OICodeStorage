@@ -9,11 +9,27 @@ using std::cin;
 using std::cout;
 using std::endl;
 
+struct time
+{
+	short hour,min;
+};
+
+void normalSolution();//正常解法
+void fineSolution();//比较优(没)雅(用)的解法
+void perfetSolution();//优雅的解法
+
 int main()
 {
+/*
+	normalSolution();
+	fineSolution();
+	perfetSolution();
+*/
+	return 0;
+}
 
-	//正常解法
-
+void normalSolution()//正常解法
+{
 	int a,b,c,d,e,f;
 
 	cin>>a>>b>>c>>d;
@@ -27,20 +43,13 @@ int main()
 	}
 
 	cout<<e<<f;
+}
 
-	//End 正常解法
-/*
-	//优雅解法
-	struct time
-	{
-		short hour,min;
-	};
-
+void fineSolution()//比较优雅的解法(有吗？明明更复杂了而已(｀ー´))
+{
 	time from,to,result;
 
 	cin>>from.hour>>from.min>>to.hour>>to.min;
-
-	//比较优雅的解法(有吗？明明更复杂了而已(｀ー´))
 
 	result.hour = to.hour - from.hour;
 	result.min = to.min - from.min;
@@ -49,20 +58,19 @@ int main()
 		result.min += 60;
 		result.hour--;
 	}
+	
+	cout<<result.hour<<result.min;
+}
 
-	//End比较优雅的解法
+void perfetSolution()//极其优雅的写法
+{	
+	time from,to,result;
 
-	//非常优雅的解法
-
+	cin>>from.hour>>from.min>>to.hour>>to.min;
+	
 	//TODO:operator-
 
 	result = to - from;
-
-	//End 非常优雅的解法
-
+	
 	cout<<result.hour<<result.min;
-
-	//End 优雅解法
-*/
-	return 0;
 }
