@@ -30,10 +30,7 @@ int main()
 			}
 			index++;
 		}
-
 	}
-
-	memset(line,0,76);
 
 	//calculate lines 2 output(m_count + 1 in total)
 	for (int i = 0; i < 26; ++i)
@@ -41,6 +38,9 @@ int main()
 
 	for (int i max_count; i > 0; --i)
 	{
+		//reset line
+		memset(line,0,76);
+
 		//record starred in per line
 		for (int j = 0; j < 26; ++j)
 			if(alphabet[j] >= i)
@@ -51,7 +51,7 @@ int main()
 		{
 			temp = line_starred.top();
 			line_starred.pop();
-			for (int k = 0; k < temp * 2 - 1; ++k)
+			for (int k = 0; k <= temp * 2; ++k)
 			{
 				line[k] = line[k] == '\0' ? ' ' : '*';
 			}
