@@ -8,8 +8,8 @@ leave for comer
 
 author:hajbw
 email:hajbw10@126.com
-version:0.4.1
-last changed date:Jan 20,2018
+version:0.4.2
+last changed date:Jan 21,2018
 release date:
 
 */
@@ -35,32 +35,27 @@ int main()
 	//$ in readme means to pause
 	//# to cls
 	//- for comment(ignore the rest of this line)
-/*
- 
-	while(readme_part1.readline())
+
+	while(ch = readme_part1.get())
 	{
-
-	while(ch = line[index]){
-
-	if(ch = '$')//change into switch!
-	system("pause");
-	else if(ch = '#')
-	system("cls");
-	else if(ch = '-')
-	break;
-	else{
-
-		cout.put(ch);
+		switch(ch)
+		{
+		case'$'://change into switch!
+			system("pause");
+			break;
+		case'#':
+			system("cls");
+			break;
+		case'-':
+			std::this_thread::sleep_for (std::chrono::miliseconds(500));
+			break;
+		default:
+			cout.put(ch);
+			index++;
+		}
 		std::this_thread::sleep_for (std::chrono::miliseconds(100));
 
-		index++;
 	}
-	}
-
-
-	}
-
-*/
 
 	return 0;
 }
