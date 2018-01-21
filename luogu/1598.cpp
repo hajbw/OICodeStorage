@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stack>
+#include <cstring>
 
 /*
 	P1598 垂直柱状图
@@ -32,7 +33,7 @@ int main()
 
 	}
 
-	line = "";
+	memset(line,0,76);
 
 	//calculate lines 2 output(m_count + 1 in total)
 	for (int i = 0; i < 26; ++i)
@@ -50,9 +51,9 @@ int main()
 		{
 			temp = line_starred.top();
 			line_starred.pop();
-			for (int k = 0; k < temp; ++k)
+			for (int k = 0; k < temp * 2 - 1; ++k)
 			{
-				
+				line[k] = line[k] == '\0' ? ' ' : '*';
 			}
 			cout<<line<<endl;
 		}
