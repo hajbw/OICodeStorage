@@ -9,7 +9,7 @@ leave for comer
 
 author:hajbw
 email:hajbw10@126.com
-version:0.4.4.1
+version:0.4.5
 last changed date:Jan 21,2018
 release date:
 
@@ -25,7 +25,10 @@ int main(int argc, char const *argv[])
 		welcome();
 	else
 	{
-	
+		for (int i = 0; i < argc; ++i)
+		{
+			cout<<argv[i];
+		}
 	}
 
 	ifstream readme_signature("README_SIGNATURE");
@@ -43,11 +46,11 @@ void welcome()
 
 	//testing code
 	cout<<endl;
-	std::this_thread::sleep_for (std::chrono::seconds(1));
+	this_thread::sleep_for (chrono::seconds(1));
 
 	//real stuff
 	//read char by char
-	//notice: 
+	//notice:
 	//$ in readme means to pause
 	//# to cls
 	//' for comment(ignore the rest of this line)
@@ -64,16 +67,16 @@ void welcome()
 			system("cls");
 			break;
 		case'-':
-			std::this_thread::sleep_for (std::chrono::miliseconds(500));
+			std::this_thread::sleep_for (std::chrono::milliseconds(500));
 			break;
 		case'\'':
 			while(ch != '\n')
-				ch.get();
+				readme_part1.get(ch);
 			break;
 		default:
 			cout.put(ch);
 		}
-		std::this_thread::sleep_for (std::chrono::miliseconds(50));
+		std::this_thread::sleep_for (std::chrono::milliseconds(50));
 
 	}
 
