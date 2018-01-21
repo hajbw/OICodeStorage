@@ -9,7 +9,7 @@ leave for comer
 
 author:hajbw
 email:hajbw10@126.com
-version:0.4.4
+version:0.4.4.1
 last changed date:Jan 21,2018
 release date:
 
@@ -73,7 +73,7 @@ void welcome()
 		default:
 			cout.put(ch);
 		}
-		std::this_thread::sleep_for (std::chrono::miliseconds(100));
+		std::this_thread::sleep_for (std::chrono::miliseconds(50));
 
 	}
 
