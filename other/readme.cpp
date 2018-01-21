@@ -9,7 +9,7 @@ leave for comer
 
 author:hajbw
 email:hajbw10@126.com
-version:0.4.5
+version:0.4.4.2
 last changed date:Jan 21,2018
 release date:
 
