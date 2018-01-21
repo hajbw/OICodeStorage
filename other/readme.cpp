@@ -9,20 +9,36 @@ leave for comer
 
 author:hajbw
 email:hajbw10@126.com
-version:0.4.3
+version:0.4.4
 last changed date:Jan 21,2018
 release date:
 
 */
 
-using std::cout;
-using std::endl;
-using std::cin;
+using namespace std;
 
-int main()
+void welcome();
+
+int main(int argc, char const *argv[])
 {
-	ifstream readme_part1("README");
+	if(argc == 0)
+		welcome();
+	else
+	{
+	
+	}
+
 	ifstream readme_signature("README_SIGNATURE");
+	while(!readme_signature.eof())
+		cout.put(readme_signature.get());
+
+	return 0;
+}
+
+void welcome()
+{
+
+	ifstream readme_part1("README");
 	char ch;
 
 	//testing code
@@ -61,6 +77,5 @@ int main()
 
 	}
 
-	return 0;
 }
 
