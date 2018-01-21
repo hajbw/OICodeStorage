@@ -9,7 +9,7 @@ leave for comer
 
 author:hajbw
 email:hajbw10@126.com
-version:0.4.4.2
+version:0.4.4.2.1
 last changed date:Jan 21,2018
 release date:
 
@@ -21,9 +21,11 @@ void welcome();
 
 int main(int argc, char const *argv[])
 {
-	if(argc == 0)
-		welcome();
-	else
+	if(argc == 0)//default showing
+	{
+		welcome();//what should I do next?
+	}
+	else//argumented processing(testing)
 	{
 		for (int i = 0; i < argc; ++i)
 		{
@@ -32,7 +34,7 @@ int main(int argc, char const *argv[])
 	}
 
 	ifstream readme_signature("README_SIGNATURE");
-	while(!readme_signature.eof())
+	while(!readme_signature.fail())
 		cout.put(readme_signature.get());
 
 	return 0;
