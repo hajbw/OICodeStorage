@@ -9,7 +9,7 @@ leave for comer
 
 author:hajbw
 email:hajbw10@126.com
-version:0.4.4.3
+version:0.4.4.4
 last changed date:Jan 21,2018
 release date:
 
@@ -25,15 +25,15 @@ int main(int argc, char const *argv[])
 	{
 		welcome();//what should I do next?
 		int choice;
-		cout<<"输入你接下来要做的事\n\n"
+		cout<<"输入你接下来要做的事\n\n";
 		cin>>choice;
-		switch(choice)
+		/*switch(choice)
 		{
 			case 1:
 
 				break;
 			default:
-		}
+		}*/
 
 	}
 	else//argumented processing(testing)
@@ -59,10 +59,6 @@ void welcome()
 
 	ifstream readme_part1("README");
 	char ch;
-
-	//testing code
-	cout<<endl;
-	this_thread::sleep_for (chrono::seconds(1));
 
 	//real stuff
 	//read char by char
