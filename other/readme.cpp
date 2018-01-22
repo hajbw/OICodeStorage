@@ -9,7 +9,7 @@ leave for comer
 
 author:hajbw
 email:hajbw10@126.com
-version:0.4.4.2.1
+version:0.4.4.3
 last changed date:Jan 21,2018
 release date:
 
@@ -24,7 +24,17 @@ int main(int argc, char const *argv[])
 	if(argc == 0)//default showing
 	{
 		welcome();//what should I do next?
-		cout<<"输入你接下来要做的事\n\n
+		int choice;
+		cout<<"输入你接下来要做的事\n\n"
+		cin>>choice;
+		switch(choice)
+		{
+			case 1:
+
+				break;
+			default:
+		}
+
 	}
 	else//argumented processing(testing)
 	{
@@ -32,6 +42,9 @@ int main(int argc, char const *argv[])
 		{
 			cout<<argv[i];
 		}
+		return 0;//exit to get rid of running the codes below
+
+		
 	}
 
 	ifstream readme_signature("README_SIGNATURE");
@@ -59,7 +72,8 @@ void welcome()
 	//' for comment(ignore the rest of this line)
 	//- to stop for .5 second
 
-	while(ch = readme_part1.get())
+	readme_part1.get(ch);
+	while(!readme_part1.fail())
 	{
 		switch(ch)
 		{
@@ -70,7 +84,7 @@ void welcome()
 			system("cls");
 			break;
 		case'-':
-			std::this_thread::sleep_for (std::chrono::milliseconds(500));
+			this_thread::sleep_for (chrono::milliseconds(500));
 			break;
 		case'\'':
 			while(ch != '\n')
@@ -79,8 +93,8 @@ void welcome()
 		default:
 			cout.put(ch);
 		}
-		std::this_thread::sleep_for (std::chrono::milliseconds(50));
-
+		this_thread::sleep_for (chrono::milliseconds(50));
+		readme_part1.get(ch);
 	}
 
 }
