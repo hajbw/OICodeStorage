@@ -1,7 +1,4 @@
-#include <iostream>
-#include <fstream>
-#include <thread>
-#include <chrono>
+#include <bits/stdc++.h>
 #include <windows.h>
 
 /*
@@ -21,12 +18,12 @@ void welcome();
 
 int main(int argc, char const *argv[])
 {
-	if(argc == 0)//default showing
+	//if(argc == 0)//default showing
 	{
 		welcome();//what should I do next?
-		int choice;
-		cout<<"输入你接下来要做的事\n\n";
-		cin>>choice;
+		//int choice;
+		//wcout<<"输入你接下来要做的事\n\n";
+		//wcin>>choice;
 		/*switch(choice)
 		{
 			case 1:
@@ -36,20 +33,20 @@ int main(int argc, char const *argv[])
 		}*/
 
 	}
-	else//argumented processing(testing)
+	/*else//argumented processing(testing)
 	{
 		for (int i = 0; i < argc; ++i)
 		{
-			cout<<argv[i];
+			wcout<<argv[i];
 		}
 		return 0;//exit to get rid of running the codes below
 
-		
-	}
 
-	ifstream readme_signature("README_SIGNATURE");
+	}*/
+
+	wifstream readme_signature("README_SIGNATURE");
 	while(!readme_signature.fail())
-		cout.put(readme_signature.get());
+		wcout.put(readme_signature.get());
 
 	return 0;
 }
@@ -57,8 +54,8 @@ int main(int argc, char const *argv[])
 void welcome()
 {
 
-	ifstream readme_part1("README");
-	char ch;
+	wifstream readme_part1("README");
+	wchar_t ch;
 
 	//real stuff
 	//read char by char
@@ -80,16 +77,16 @@ void welcome()
 			system("cls");
 			break;
 		case'-':
-			this_thread::sleep_for (chrono::milliseconds(500));
+			this_thread::sleep_for(chrono::milliseconds(500));
 			break;
 		case'\'':
 			while(ch != '\n')
 				readme_part1.get(ch);
 			break;
 		default:
-			cout.put(ch);
+			wcout.put(ch);
 		}
-		this_thread::sleep_for (chrono::milliseconds(50));
+		this_thread::sleep_for(chrono::milliseconds(50));
 		readme_part1.get(ch);
 	}
 
