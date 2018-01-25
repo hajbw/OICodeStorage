@@ -6,7 +6,7 @@ leave for comer
 
 author:hajbw
 email:hajbw10@126.com
-version:0.4.4.4.4
+version:0.4.4.4.5
 last changed date:Jan 25,2018
 release date:
 
@@ -15,23 +15,21 @@ release date:
 using namespace std;
 
 void welcome();
+void haveFun(int);
+
+const int CODE_MOHA = 1,
+      CODE_ENTER_HAJBW = 2,
+      CODE_STEAM = 3;
 
 int main(int argc, char const *argv[])
 {
 	//if(argc == 0)//default showing
 	{
 		welcome();//what should I do next?
-		//int choice;
-		//wcout<<"输入你接下来要做的事\n\n";
-		//wcin>>choice;
-		/*switch(choice)
-		{
-			case 1:
-
-				break;
-			default:
-		}*/
-
+		wcout<<"让我们找点乐子吧😏\n";
+		int code_habeFun;
+		cin>>code_haveFun;
+		haveFun(code_haveFun);
 	}
 	/*else//argumented processing(testing)
 	{
@@ -94,3 +92,11 @@ void welcome()
 
 }
 
+void haveFun(int code)
+{
+	switch(code)
+	{
+		case 1:
+			break;
+	}
+}
