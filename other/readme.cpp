@@ -6,7 +6,7 @@ leave for comer
 
 author:hajbw
 email:hajbw10@126.com
-version:0.4.4.4.5
+version:0.4.4.5
 last changed date:Jan 25,2018
 release date:
 
@@ -23,10 +23,11 @@ const int CODE_MOHA = 1,
 
 int main(int argc, char const *argv[])
 {
+	setlocale(LC_ALL,"");
 	//if(argc == 0)//default showing
 	{
 		welcome();//what should I do next?
-		wcout<<"让我们找点乐子吧😏\n";
+		wcout<<u8"让我们找点乐子吧😏\n";
 		int code_habeFun;
 		cin>>code_haveFun;
 		haveFun(code_haveFun);
@@ -96,7 +97,11 @@ void haveFun(int code)
 {
 	switch(code)
 	{
-		case 1:
+		case CODE_MOHA:
+			break;
+		case CODE_ENTER_HAJBW:
+			break;
+		case CODE_STEAM:
 			break;
 	}
 }
