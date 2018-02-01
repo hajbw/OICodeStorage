@@ -28,8 +28,8 @@ int main(int argc, char const *argv[])
 	{
 		welcome();//what should I do next?
 		wcout<<u8"让我们找点乐子吧😏\n";
-		int code_habeFun;
-		cin>>code_haveFun;
+		int code_haveFun;
+		cin>>code_habeFun;
 		haveFun(code_haveFun);
 	}
 	/*else//argumented processing(testing)
