@@ -1,4 +1,7 @@
-http://blog.csdn.net/thinktalk/article/details/52204135
+to read Unicode:
+	http://blog.csdn.net/thinktalk/article/details/52204135
+
+
 
 ------temp------
 
