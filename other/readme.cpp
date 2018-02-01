@@ -23,9 +23,9 @@ const int CODE_MOHA = 1,
 
 int main(int argc, char const *argv[])
 {
-	setlocale(LC_ALL,"");
+	//setlocale(LC_ALL,"");
 	//another solution
-	//locale::global(locale("en_US.UTF-8"));
+	//locale::global(locale("zh_CN.UTF-8"));
 
 	//if(argc == 0)//default showing
 	{
