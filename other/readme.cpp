@@ -26,6 +26,9 @@ int main(int argc, char const *argv[])
 	//setlocale(LC_ALL,"");
 	//another solution
 	//locale::global(locale("zh_CN.UTF-8"));
+	//both doesn't work(´;︵;`)
+	locale loc_instance;
+	locale::global(loc_instance);
 
 	//if(argc == 0)//default showing
 	{
