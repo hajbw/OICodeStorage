@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include <windows.h>
+#include <codecvt>
 
 /*
 leave for comer
@@ -18,8 +19,10 @@ void welcome();
 void haveFun(int);
 
 const int CODE_MOHA = 1,
-      CODE_ENTER_HAJBW = 2,
-      CODE_STEAM = 3;
+	CODE_ENTER_HAJBW = 2,
+	CODE_STEAM = 3;
+
+locale loc_instance();
 
 int main(int argc, char const *argv[])
 {
@@ -27,7 +30,6 @@ int main(int argc, char const *argv[])
 	//another solution
 	//locale::global(locale("zh_CN.UTF-8"));
 	//both doesn't work(´;︵;`)
-	locale loc_instance();
 
 	//if(argc == 0)//default showing
 	{
@@ -58,8 +60,11 @@ int main(int argc, char const *argv[])
 void welcome()
 {
 
-	wifstream readme_part1("README");
+	wifstream readme_part1("README",ios::binary);
 	wchar_t ch;
+
+	//imbue to fix encoding issues
+	readme_part1.imbue(std::locale(readme_part1.getloc(), new std::codecvt_utf16<wchar_t, 0x10ffff, std::consume_header>));
 
 	//real stuff
 	//read char by char
@@ -71,8 +76,7 @@ void welcome()
 
 	//this might be the problem
 	//which outputs garbled chars
-	readme_part1.get(ch);
-	while(!readme_part1.fail())
+	while(readme_part1.get(ch))
 	{
 		switch(ch)
 		{
@@ -93,7 +97,6 @@ void welcome()
 			wcout.put(ch);
 		}
 		this_thread::sleep_for(chrono::milliseconds(20));
-		readme_part1.get(ch);
 	}
 
 }
