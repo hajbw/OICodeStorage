@@ -19,7 +19,7 @@ int  *parent,point_count,edge_count;
 
 int main()
 {
-	int result = 0,chosen_edge_count = 0,temp_edge_index = 0;
+	int result = 0,chosen_edge_count = 0,temp_edge_index = 0,temp_root_a,remp_root_b;
 	cin>>point_count>>edge_count;
 
 	parent = new int[point_count];
@@ -35,7 +35,25 @@ int main()
 	sort(edges,edges + edge_count,compare_by_weight);
 
 	//find it now!
-	while(chosen_edge_count < edge_count)
+	while(chosen_edge_count < edge_count - 1)
+	{
+		a = find(edges[temp_edge_index].from);
+		b = find(edges[temp_edge_index].to);
+		if(a != b)
+		{
+			parent[a] = b;
+			sum += edges[temp_edge_index];
+			++chosen_edge_count;
+		}
+		++temp_edge_index;
+		if(temp_edge_index == edge_count)
+		{
+			cout<<"orz";
+		}
+
+	}
+
+	cout<<result;
 
 	return 0;
 
