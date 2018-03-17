@@ -1,4 +1,3 @@
-#include <bits/libc++.h>
 #include <iostream>
 #include <cstring>
 #include <algorithm>
@@ -19,7 +18,7 @@ int  *parent,point_count,edge_count;
 
 int main()
 {
-	int result = 0,chosen_edge_count = 0,temp_edge_index = 0,temp_root_a,remp_root_b;
+	int result = 0,chosen_edge_count = 0,temp_edge_index = 0,a,b;
 	cin>>point_count>>edge_count;
 
 	parent = new int[point_count];
@@ -29,7 +28,7 @@ int main()
 
 	for (int i = 0; i < edge_count; ++i)
 	{
-		cin>>Edge[i].from>>Edge[i].to>>Edge[i].weight;
+		cin>>edges[i].from>>edges[i].to>>edges[i].weight;
 	}
 
 	sort(edges,edges + edge_count,compare_by_weight);
@@ -37,23 +36,29 @@ int main()
 	//find it now!
 	while(chosen_edge_count < edge_count - 1)
 	{
-		a = find(edges[temp_edge_index].from);
-		b = find(edges[temp_edge_index].to);
+		a = find_root(edges[temp_edge_index].from);
+		b = find_root(edges[temp_edge_index].to);
+
 		if(a != b)
 		{
 			parent[a] = b;
-			sum += edges[temp_edge_index];
+			result += edges[temp_edge_index].weight;
 			++chosen_edge_count;
 		}
+
 		++temp_edge_index;
-		if(temp_edge_index == edge_count)
+
+		/*if(temp_edge_index == edge_count)
 		{
 			cout<<"orz";
-		}
+		}*/
 
 	}
 
 	cout<<result;
+
+	delete parent[];
+	delete edges[];
 
 	return 0;
 
