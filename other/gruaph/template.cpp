@@ -57,8 +57,8 @@ int main()
 
 	cout<<result;
 
-	delete parent[];
-	delete edges[];
+	delete [] parent;
+	delete [] edges;
 
 	return 0;
 
