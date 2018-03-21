@@ -46,10 +46,11 @@ int main()
 
 		++edge_index;
 
-		/*if(edge_index == edge_count)
+		if(edge_index == edge_count)
 		{
 			cout<<"orz";
-		}*/
+			return 0;
+		}
 
 	}
 
@@ -61,8 +62,10 @@ int main()
 
 int find_root(int i)
 {
-	if(parent[i] = i)
+	/*if(parent[i] = i)
 		return i;
 	else
 		return parent[i] = find_root(parent[i]);
+	*/
+	return parent[i] = parent[parent[i]];
 }
