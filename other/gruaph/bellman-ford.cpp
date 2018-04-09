@@ -3,7 +3,7 @@
 
 /*
 	bellman-ford template
-	now for luogu p1073
+	for instance,see luogu\1529.cpp
 */
 
 const int MAX_V = 100000,MAX_E = 500000;
