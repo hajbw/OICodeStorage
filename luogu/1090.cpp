@@ -3,6 +3,10 @@
 #include <algorithm>
 #include <cstring>
 
+/*
+	P1090 合并果子
+*/
+
 using namespace std;
 
 int main()
