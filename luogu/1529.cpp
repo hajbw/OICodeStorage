@@ -25,15 +25,13 @@ int degree[MAX_V];
 
 int main()
 {
-	int Ecount,length;
+	int Ecount,length,result_cowNo,result_length;
 	char a,b;
 
 	memset();
 	
 	//input
-
 	cin>>Ecount;
-	
 	for(int i = 0;i < Ecount;++i)
 	{
 		cin>>a>>b>>length;
@@ -46,6 +44,10 @@ int main()
 	}
 
 	//calculate
+
+	//output
+	cout<<char(result_cowNo > 13 ? result_cowNo + 'A' :result_cowNo + 'a' );
+	cout<<result_length;
 
 	return 0;
 }
