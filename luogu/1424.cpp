@@ -2,6 +2,7 @@
 
 /*
 	P1424 小鱼的航程(改进版)
+	已AC
 */
 
 using namespace std;
@@ -10,18 +11,16 @@ int main()
 {
 	const int distance_per_day = 250,distance_per_week = 1250;
 	int x;
-	long long n,distance;
+	long long n,distance = 0LL;
 
 	cin>>x>>n;
 
-	distance = distance_per_week * (n / 7);
-
-	if(x < 6 && n % 7 + x > 5)
+	for (int i = 0; i < n; ++i)
 	{
-		distance += (6 - x) + (n % 7 + x - 5); 
+		if(x != 6 && x != 7)
+			distance += 250;
+		x = ( x == 7 ? 1 : x + 1 );
 	}
-	else
-		distance += distance_per_day * (n % 7);
 
 	cout<<distance;
 
