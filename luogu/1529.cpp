@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <queue>
+#include <climits>
 #include <cstring>
 #include <algorithm>
 
@@ -14,7 +16,7 @@ struct adjecency_list_node
 	int v,length;
 };
 
-int diatance[MAX_V],parent[MAX_V];
+int distance[MAX_V],parent[MAX_V];
 bool isFinished[MAX_V] {false};
 vector<adjecency_list_node> adjecency_list[MAX_V]
 
@@ -28,7 +30,7 @@ int main()
 	int Ecount,length,result_cowNo,result_length;
 	char a,b;
 
-	memset();
+	memset(distance,INT_MAX,MAX_V);
 	
 	//input
 	cin>>Ecount;
