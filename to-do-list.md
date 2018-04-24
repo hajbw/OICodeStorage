@@ -1,16 +1,15 @@
-#TO-DO LIST
 
-##OJs
+#short term
 
-###Luogu
+##This MayDay
 
-###CodeVS
+###luogu
 
-##Free Codings
+-p2661
 
-- a (simple) tree
+-graph,tree,etc
 
-- a high precision calculator
+#long term(or something I'll never do)
 
 ##Devoloping
 
