@@ -1,6 +1,11 @@
 #include <iostream>
 #include <cstring>
 
+/*
+	RT
+	terminated
+*/
+
 using namespace std;
 
 const int MAXN = 100;
