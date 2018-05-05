@@ -8,7 +8,18 @@ using std::endl;
 
 const MAXV = 100;MAXE = 150;
 
-std::vector<int> adjacency_list[MAXV];
+struct Edge
+{
+	int to,len;
+
+	Edge(int to,int len)
+	{
+		this.to = to;
+		this.len = len;
+	}
+};
+
+std::vector<Edge> adjacency_list[MAXV];
 
 int main()
 {
@@ -19,7 +30,7 @@ int main()
 	{
 		//format: from to lenth
 		cin>>a>>b>>c;
-		adjacency_list[a]
+		adjacency_list[a].push_back(new Edge(b,c));
 	}
 
 	return 0;
