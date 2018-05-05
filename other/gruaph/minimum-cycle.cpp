@@ -24,14 +24,23 @@ int timer = 0,result = 19260817;
 
 void boynextdoor(int i,int start_time)
 {
-
+	int j;
+	timme[i] = timer;
+	++timer;
+	for (std::vector<Edge>::iterator it = adj_list[i].begin(); it != adj_list[i].end(); ++it)
+	{
+		j = *it.to;
+		if(!timme[j])
+			boynextdoor(p,start_time);
+		
+	}
 }
 
 int main()
 {
-	int n,a,b,c;
+	int m,n,a,b,c;
 	
-	cin>>n;
+	cin>>m>>n;
 	for (int i = 0; i < n; ++i)
 	{
 		//format: from to lenth
@@ -39,7 +48,9 @@ int main()
 		adjacency_list[a].push_back(new Edge(b,c));
 	}
 
-	boynextdoor(1,0);
+	for(int i = 0; i < m; ++i)
+		if(timme[i])
+			boynextdoor(i,++timer);
 
 	cout<<result;
 
