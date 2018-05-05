@@ -37,7 +37,7 @@ int main()
 		cin>>a>>b>>c;
 		adjacency_list[a].push_back(new Edge(b,c));
 	}
-
+		
 	cin>>n;
 	dfs(n);
 
