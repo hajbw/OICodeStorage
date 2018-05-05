@@ -11,9 +11,12 @@ using std::endl;
 
 const int MAXV = 10000,MAXE = 200000;
 
-//unweighted graph
+//unweighted graph!
 std::vector<int> adj_list[MAXV];
-int m,n,a,b;
+std::vector<int> rev_adj_list[MAXV];
+int m,n,a,b,result = 19260817;
+
+
 
 int main()
 {
@@ -23,4 +26,5 @@ int main()
 		cin>>a>>b;
 		adj_list[a].push_back(b);
 	}
+	cin>>a>>b;
 }
