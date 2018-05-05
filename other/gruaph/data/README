@@ -1,0 +1,11 @@
+#description
+
+$data <= just a pure graph made of $form
+
+$form <= {
+	$n <= amount of edges
+	$from1 $to1 $length1
+	$from2 $to2 $length2
+	...
+	$fromn $ton $lengthn
+}
