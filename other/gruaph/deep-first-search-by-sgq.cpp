@@ -5,10 +5,14 @@ using namespace std;
 
 const int MAXN = 100;
 
-int to[MAXN],len[MAXN],h[MAXN] = {0},next[MAXN] = {0};
+int to[MAXN],len[MAXN],h[MAXN] = {0},next[MAXN] = {0},visited[MAXN] = {0};
 
 void dfs(int i)
 {
+	if (visited[i])
+		return;
+	visited[i] = 1;
+
 	int edge_pointer = h[i];
 	//cout<<"point "<<i<<endl;
 	while(edge_pointer != 0)
