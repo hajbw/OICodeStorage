@@ -32,7 +32,7 @@ void DFS(int i)
 
 int main()
 {
-	int m,n,a,b,i,result = 19260817;
+	int m,n,a,b,i;
 	
 	memset(dist,63,sizeof(dist));
 
@@ -49,6 +49,7 @@ int main()
 	//DFS rev-graph
 	DFS(b);
 	
+	//exclude unavailble points
 	for(i = 0;i < n;++i)
 		if(available[i] == -1)
 			for (it = rev_adj_list[i].begin(); it != rev_adj_list[i].end(); ++it)
@@ -68,7 +69,7 @@ int main()
 
 		for (it = rev_adj_list[i].begin(); it != rev_adj_list[i].end(); ++it)
 		{
-			if(dist[*it] > dist[i] + 1)
+			if(available[*it] == 1 && dist[*it] > dist[i] + 1)
 			{
 				dist[*it] = dist[i] + 1;
 				if(!in_queue[*it])
