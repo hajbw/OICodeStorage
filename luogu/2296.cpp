@@ -16,29 +16,25 @@ const int MAXV = 10000,MAXE = 200000;
 //unweighted graph!
 //std::vector<int> adj_list[MAXV];
 std::vector<int> rev_adj_list[MAXV];
-int available[MAXV] = {-1},dist[MAXV];
+std::vector<int>::iterator it;
+int available[MAXV] = {-1},dist[MAXV],in_queue[MAXV] = {0};
 
 void DFS(int i)
 {
-	if(available[i] = -1)
+	if(available[i] != -1)
 		return;
 	available[i] = 1;
-	for(std::vector<int>::iterator it = rev_adj_list[i].begin();it != rev_adj_list[i].end();++it)
+	for(it = rev_adj_list[i].begin();it != rev_adj_list[i].end();++it)
 	{
 		DFS(*it);
 	}
-}
-
-void DFS_exclude(int i)
-{
-
 }
 
 int main()
 {
 	int m,n,a,b,i,result = 19260817;
 	
-	memset(dist,19260817,sizeof(dist));
+	memset(dist,63,sizeof(dist));
 
 	//Vertice,Edge
 	cin>>n>>m;
@@ -54,15 +50,40 @@ int main()
 	DFS(b);
 	
 	for(i = 0;i < n;++i)
-		if(!available[i]);
-			
+		if(available[i] == -1)
+			for (it = rev_adj_list[i].begin(); it != rev_adj_list[i].end(); ++it)
+			{
+				available[*it] = 0;
+			}
 	
 	//SPFA
 	std::queue<int> que;
-	que.push(a);
+	que.push(b);
+	in_queue[b] = 1;
+	dist[b] = 0;
+	while(!que.empty())
+	{
+		i = que.front();
+		que.pop();
+
+		for (it = rev_adj_list[i].begin(); it != rev_adj_list[i].end(); ++it)
+		{
+			if(dist[*it] > dist[i] + 1)
+			{
+				dist[*it] = dist[i] + 1;
+				if(!in_queue[*it])
+				{
+					que.push(*it);
+					in_queue[*it] = 1;
+				}
+			}
+		}
+
+		in_queue[i] = 0;
+	}
 	
 	
-	cout<<result;
-	
+	cout<<dist[a];
+
 	return 0;
 }
