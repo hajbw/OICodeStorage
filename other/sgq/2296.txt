@@ -1,0 +1,180 @@
+#include<iostream>
+#include<cstring>
+#define maxn 10001
+#define maxm 200001
+using namespace std;
+int n,m,s,t;//点数边数,起点终点
+int can[maxn];//点的三种状态0：可达终点,但不可出现，-1不可达终点，1可出现在路径
+int dis[maxn];//存距离
+struct node
+{  int v,next;
+};
+node g[maxm+1];
+int h[maxn];//链的头指针
+int num=0;//空间使用指针
+void readdata()
+{  memset(h,0,sizeof(h));
+   cin>>n>>m;
+   for(int i=1,a,b;i<=m;i++)
+   {  cin>>a>>b;
+       if(a==b) continue;
+       num++;
+      g[num].v=a;
+      g[num].next=h[b];
+      h[b]=num;
+   }
+   cin>>s>>t;
+}
+void dfs(int t)//从t点深搜
+{  can[t]=1;
+   int p,e;
+   e=h[t];
+   while( e!=0)
+   { p=g[e].v;
+      if( can[p]!=1) dfs(p);
+      e=g[e].next;
+   }
+}
+void findcan(int t)
+{  memset(can,-1,sizeof(can));
+   dfs(t);
+ /* 
+  can[t]=1;
+   int list[maxn],head=0,tail=0;
+   list[tail]=t;tail++;
+   int p,e;
+   while(head<tail )
+   {  p=list[head];head++;
+      e=h[p];
+      while(e!=0)
+       {  if( can[ g[e].v ]==-1 )
+          { can[ g[e].v ]=1;
+            list[tail]= g[e].v; tail++;
+          }
+            e= g[e].next;
+       }
+   }*/
+   int e;
+   for(int i=1;i<=n;i++)
+     if(can[i]==-1) 
+     {  e=h[i];
+        while(e!=0)
+        {  if(can[ g[e].v ]==1) can[ g[e].v ]=0;
+           e=g[e].next; 
+        }
+     }
+}
+void findshort(int t)
+{  int list[maxn],head=0,tail=0;
+   memset(dis,-1,sizeof(dis));
+   dis[t]=0;
+   list[tail]=t;tail++; can[t]=0;
+   int p,e;
+   while(head<tail)
+   { p=list[head];head++;
+     e=h[p];
+     while(e!=0)
+     { if( can[ g[e].v ]==1 )
+       {  dis[ g[e].v ]=dis[ p ]+1;
+          can[ g[e].v ]=0;
+          list[tail]=g[e].v;tail++;
+       }
+       e=g[e].next;
+     }
+   }
+}
+int main()
+{ 
+   readdata();
+   findcan(t);
+   findshort(t);
+   cout<<dis[s];
+}
+
+
+
+
+
+
+
+
+
+#include<iostream>
+#include<cstring>
+#define maxn 100000
+#define maxm 2000000
+using namespace std;
+int n,m,s,t;//点数边数,起点终点
+int can[maxn];//点的三种状态0：可达终点,但不可出现，-1不可达终点，1可出现在路径
+int dis[maxn];//存距离
+struct node
+{  int v,next;
+};
+node g[maxm+1];
+int h[maxn];//链的头指针
+int num=0;//空间使用指针
+void readdata()
+{  memset(h,0,sizeof(h));
+   cin>>n>>m;
+   for(int i=1,a,b;i<=m;i++)
+   {  cin>>a>>b;
+       if(a==b) continue;
+       num++;
+      g[num].v=a;
+      g[num].next=h[b];
+      h[b]=num;
+   }
+   cin>>s>>t;
+}
+void findcan(int t)
+{  memset(can,-1,sizeof(can));
+   can[t]=1;
+   int list[maxn],head=0,tail=0;
+   list[tail]=t;tail++;
+   int p,e;
+   while(head<tail )
+   {  p=list[head];head++;
+      e=h[p];
+      while(e!=0)
+       {  if( can[ g[e].v ]==-1 )
+          { can[ g[e].v ]=1;
+            list[tail]= g[e].v; tail++;
+          }
+            e= g[e].next;
+       }
+   }
+   for(int i=1;i<=n;i++)
+     if(can[i]==-1) 
+     {  e=h[i];
+        while(e!=0)
+        {  if(can[ g[e].v ]==1) can[ g[e].v ]=0;
+           e=g[e].next; 
+        }
+     }
+}
+void findshort(int t)
+{  int list[maxn],head=0,tail=0;
+   memset(dis,-1,sizeof(dis));
+   dis[t]=0;
+   list[tail]=t;tail++; can[t]=0;
+   int p,e;
+   while(head<tail)
+   { p=list[head];head++;
+     e=h[p];
+     while(e!=0)
+     { if( can[ g[e].v ]==1 )
+       {  dis[ g[e].v ]=dis[ p ]+1;
+          can[ g[e].v ]=0;
+          list[tail]=g[e].v;tail++;
+       }
+       e=g[e].next;
+     }
+   }
+}
+int main()
+{ 
+   readdata();
+   findcan(t);
+   findshort(t);
+   cout<<dis[s];
+}
