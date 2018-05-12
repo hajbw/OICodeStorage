@@ -18,7 +18,7 @@ int main()
 	cin>>n>>m;
 
 	que.push(n);
-	layer.push(1);
+	layer.push(0);
 
 	while(!que.empty())
 	{
@@ -26,9 +26,11 @@ int main()
 		que.pop();
 		curr_layer = layer.front() + 1;
 		layer.pop();
-		for (int i = low; i < high; ++i)
+		low = -m > m - curr ? -m : m - curr;
+		high = m < n - curr ? m : n - curr;
+		for (int i = low; i < high; i += 2)
 		{
-			if(!(curr+i))
+			if(curr+i = 0)
 			{
 				cout<<curr_layer;
 				return 0;
