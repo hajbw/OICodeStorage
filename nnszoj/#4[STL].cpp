@@ -7,16 +7,25 @@ using std::stack;
 
 int main()
 {
-	char ch;
+	char ch[100];
 	stack<char> st;
+	int n,index;
 
-	while(cin.get(ch))
+	cin>>n;
+
+	for (int i = 0; i < n; ++i)
 	{
-		if(ch == st.top())
-			st.pop();
-		else
-			st.push(ch);
-	}
+		index = 0;
+		cin.getline(ch);
+		while(ch[index] != '\n')
+		{
+			if(ch[index] == st.top())
+				st.pop();
+			else
+				st.push(ch[index]);
+			++index;
+		}
 
-	cout<<(st.empty() ? "YES" : "NO")
+		cout<<(st.empty() ? "YES" : "NO");
+	}
 }
