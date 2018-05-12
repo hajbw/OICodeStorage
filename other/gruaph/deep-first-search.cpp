@@ -1,6 +1,11 @@
 #include <iostream>
 #include <vector>
 
+/*
+	DFS template
+	terminated
+*/
+
 using std::cin;
 using std::cout;
 using std::endl;
@@ -14,13 +19,13 @@ struct Edge
 
 	Edge(int to,int len)
 	{
-		this.to = to;
-		this.len = len;
+		this->to = to;
+		this->len = len;
 	}
 };
 
-vector<int> adjacency_list[MAXV];
-int visited[MAXV] {0};
+vector<Edge> adjacency_list[MAXV];
+int visited[MAXV];
 
 void fuckV(int i)
 {
@@ -36,11 +41,11 @@ void dfs(int i)
 {
 	visited[i] = 1;
 	for (std::vector<Edge>::iterator it = adjacency_list[i].begin(); it != adjacency_list[i].end(); ++it)
-		if(!visited[*it.to])
+		if(!visited[(*it).to])
 		{
 			fuckE(i,*it);
 			fuckV(i);
-			dfs(*it.to);
+			dfs((*it).to);
 		}
 }
 
@@ -53,7 +58,7 @@ int main()
 	{
 		//format: from to lenth
 		cin>>a>>b>>c;
-		adjacency_list[a].push_back(new Edge(b,c));
+		adjacency_list[a].push_back(Edge(b,c));
 	}
 		
 	cin>>n;
