@@ -24,14 +24,12 @@ int timer = 0,result = 19260817;
 
 void boynextdoor(int i,int start_time)
 {
-	int j;
 	timme[i] = timer;
 	++timer;
 	for (std::vector<Edge>::iterator it = adj_list[i].begin(); it != adj_list[i].end(); ++it)
 	{
-		j = *it.to;
-		if(!timme[j])
-			boynextdoor(p,start_time);
+		if(!timme[*it.to])
+			boynextdoor(*it.to,start_time);
 		
 	}
 }
@@ -49,7 +47,7 @@ int main()
 	}
 
 	for(int i = 0; i < m; ++i)
-		if(timme[i])
+		if(!timme[i])
 			boynextdoor(i,++timer);
 
 	cout<<result;
