@@ -26,11 +26,11 @@ int main()
 		que.pop();
 		curr_layer = layer.front() + 1;
 		layer.pop();
-		low = -m > m - curr ? -m : m - curr;
-		high = m < n - curr ? m : n - curr;
-		for (int i = low; i < high; i += 2)
+		low = curr - m > 0 ? curr - m : m - curr;
+		high = curr + m < n ? curr + m : n - m; 
+		for (int i = low; i <= high; i += 2)
 		{
-			if(curr+i = 0)
+			if(i = 0)
 			{
 				cout<<curr_layer;
 				return 0;
