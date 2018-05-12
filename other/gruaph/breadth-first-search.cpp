@@ -21,6 +21,11 @@ struct Edge
 
 std::vector<Edge> adjacency_list[MAXV];
 
+void BFS()
+{
+	
+}
+
 int main()
 {
 	int n,a,b,c;
