@@ -35,3 +35,6 @@
 
 # NOIP Input File
 *.in
+
+#tester
+/other/boring-tester.cpp
