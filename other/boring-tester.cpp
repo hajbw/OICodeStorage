@@ -2,9 +2,15 @@
 
 using namespace std;
 
-bool a[128];
- int main()
+int arr1[20];
+
+int main()
 {
-	cout<<sizeof(a);
+	int arr2[10];
+
+	for (int i = 0; i < 20; ++i)
+	{
+		cout<<arr1[i]<<"  "<<arr2[i]<<endl;
+	}
 	return 0;
 }
