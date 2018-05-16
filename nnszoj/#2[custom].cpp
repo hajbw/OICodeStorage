@@ -33,7 +33,7 @@ int main()
 		mid = (low + high + 1)/2;
 	}
 	
-	cout<<mid + 1;
+	cout<<mid;
 	
 	return 0;
 }
