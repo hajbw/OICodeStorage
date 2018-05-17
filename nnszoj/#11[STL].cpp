@@ -10,6 +10,8 @@ using std::cin;
 using std::cout;
 using std::queue;
 
+int visited[100];
+
 int main()
 {
 	int n,m,curr,curr_layer,low,high;
@@ -30,7 +32,10 @@ int main()
 		high = curr + m > n ? cirr + m : n - m -curr; 
 		for (int i = low; i <= high; i += 2)
 		{
-			if(i = 0)
+			if(visited[i])
+				continue;
+			visited[i] = 1;
+			if(i = n)
 			{
 				cout<<curr_layer;
 				return 0;
