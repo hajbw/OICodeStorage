@@ -27,7 +27,7 @@ int main()
 		curr_layer = layer.front() + 1;
 		layer.pop();
 		low = curr - m > 0 ? curr - m : m - curr;
-		high = curr + m < n ? curr + m : n - m; 
+		high = curr + m > n ? cirr + m : n - m -curr; 
 		for (int i = low; i <= high; i += 2)
 		{
 			if(i = 0)
