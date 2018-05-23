@@ -7,11 +7,11 @@
 using std::cin;
 using std::cout;
 
-typedef int num;
+typedef unsigned long num;
 
-const int mo = 100000007;//ha
+const int mo = 10000007;//ha
 
-num stirling1(num m,num,n)
+num stirling1(num m,num n)
 {
 	if(m == n)
 		return 1;
@@ -19,16 +19,16 @@ num stirling1(num m,num,n)
 		return 1;
 	if(m == 0)
 		return 0;
-	return stirling1(m - 1,n - 1) % mo + stirling1(n - 1,m)*(n - 1) % mo;
+	return (stirling1(m - 1,n - 1) % mo + stirling1(m,n - 1) * (n - 1) % mo) % mo;
 }
 
 int main()
 {
-	int m,n;
+	num m,n;
 
 	cin>>n>>m;
 
-	cout<<stirling1(m,n) % mo;
+	cout<<stirling1(m,n);
 
 	return 0;
 }
