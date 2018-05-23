@@ -7,7 +7,9 @@ using std::stack;
 
 stack<double> num;
 
-stack<int> operate;
+stack<int> operaters;
+
+char operater[] = "+-*/";
 
 int main()
 {
