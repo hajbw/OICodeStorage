@@ -17,7 +17,7 @@ int main()
 	{
 		index = 0;
 		cin.getline(ch);
-		while(ch[index] != '\n')
+		while(ch[index])
 		{
 			if(ch[index] == st.top())
 				st.pop();
