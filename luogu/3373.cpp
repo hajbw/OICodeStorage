@@ -15,39 +15,93 @@ const int
 	OP_ADD = 2,
 	OP_OUT = 3;
 
-struct node
+struct Node
 {
 	int left,right,sum;
-};
+	long long delay = 0;
+
+	Node(int left,int right,int sum)
+	{
+		this->left = left;
+		this->right = right;
+		this->sum = sum;
+		delay = 0ll;
+	}
+
+	Node()
+	{
+		Node(0,0,0);
+	}
+
+}tree[MAXN * 4];
+
+void bulid_tree(int,int,int);
+void multiply(int,int,int);
+void add(int,int,int);
+int query(int,int);
+
+int M,N,P,arr[MAXN];
 
 int main()
 {
-	int M,N,P;
 	int op_type,x,y,k;
 
 	cin>>M>>N>>P;
 
-	for(int i = 0; i < N; ++i)
-	{
-		//input & build
-	}
+	for (int i = 0; i < N; ++i)
+		cin>>arr[i];
 
+	bulid_tree(0,1,N);
+	
 	for (int i = 0; i < M; ++i)
 	{	
 		cin>>op_type;
 		if(op_type == OP_MUL)
 		{
-
+			cin>>x>>y>>k;
+			multiply(x,y,k);
 		}
 		else if(op_type == OP_ADD)
 		{
-
+			cin>>x>>y>>k;
+			add(x,y,k);
 		}
 		else
 		{
-			
+			cin>>x>>y;
+			cout<<query(x,y);
 		}
 	}
 
 	return 0;
+}
+
+void bulid_tree(int index,int left,int right)
+{
+	tree[index].left = left;
+	tree[index].right = right;
+	if(left == right)
+	{
+		tree[index].sum = arr[left];
+		return;
+	}
+	int mid = (left + right) / 2;
+	bulid_tree(index << 1 + 1,left,mid);
+	bulid_tree(index << 1 + 2,mid + 1,right);
+	tree[index].sum = tree[index << 1 + 1].sum + tree[index << 1 + 2].sum;
+}
+
+void multiply(int left,int right,int num)
+{
+
+}
+
+void add(int left,int right,int num)
+{
+
+}
+
+int query(int index,int left,int right)
+{
+	
 }
