@@ -28,4 +28,5 @@ int main()
 		}
 		last = curr;
 	}
+	cout<<maxd + 1;
 }
