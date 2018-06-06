@@ -1,9 +1,21 @@
 #include <iostream>
 #include <stack>
 
+/*
+	#4. 括号匹配
+*/
+
 using std::cin;
 using std::cout;
 using std::stack;
+
+inline bool match(char &l,char &r)
+{
+	return 
+		('(' == l && ')' == r) ||
+		('[' == l && ']' == r) ||
+		('{' == l && '}' == r) ;
+}
 
 int main()
 {
@@ -19,7 +31,7 @@ int main()
 		cin.getline(ch);
 		while(ch[index])
 		{
-			if(ch[index] == st.top())
+			if(match(st.top(),ch[index]))
 				st.pop();
 			else
 				st.push(ch[index]);
