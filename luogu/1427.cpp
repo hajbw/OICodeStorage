@@ -3,6 +3,7 @@
 
 /*
 	P1427 小鱼的数字游戏
+	AC
 */
 
 using std::cin;
@@ -12,12 +13,18 @@ using std::stack;
 int main()
 {
 	stack<int> num;
-	int input;
-	while(cin>>input)
-		num.push(input);
-	while(num.empty())
+	int input = 0;
+	while(true)
 	{
-		cout<<num.front();
+		cin>>input;
+		if(!input)
+			break;
+		num.push(input);
+	}
+	while(!num.empty())
+	{
+		cout<<num.top()<<" ";
 		num.pop();
 	}
+	return 0;
 }
