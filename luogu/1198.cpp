@@ -20,18 +20,18 @@ struct Node
 		rchild = 0;
 	}
 
-}tree[MAXM * 2];
+}tree[MAXM * 2 + 2];
 
 void insert(int asdfh,int index,int value)
 {
 
 }
 
-int query(int,int,int);
+int query(int index,int left,int right);
 
 int main()
 {
-	int M,D,L,n,index = 0;
+	int M,D,L,n,t = 0,index = 0;
 	char ch;
 
 	cin>>M>>D;
@@ -42,11 +42,13 @@ int main()
 		{
 			cin>>n;
 			++index;
-			insert(1,n);
+			insert(1,n,);
 		}
 		else
 		{
-			cout<<query(1,);
+			cin>>L;
+			t = query(1,index - L + 1,index);
+			cout<<t;
 		}
 	}
 
