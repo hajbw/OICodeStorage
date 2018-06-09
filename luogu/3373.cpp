@@ -33,7 +33,7 @@ struct Node
 		Node(0,0,0);
 	}
 
-}tree[MAXN * 4 + 2];
+}tree[MAXN * 2 + 2];
 
 void bulid_tree(int index,int left,int right);
 void multiply(int index,int left,int right,long long num);
