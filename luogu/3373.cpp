@@ -44,6 +44,8 @@ int M,N,P,arr[MAXN];
 
 int main()
 {
+	std::ios::sync_with_stdio(false);
+
 	int op_type,x,y;
 	long long k;
 
@@ -86,7 +88,7 @@ void bulid_tree(int index,int left,int right)
 		tree[index].sum = arr[left];
 		return;
 	}
-	int mid = (left + right) / 2;
+	int mid = left + right >> 1;
 	bulid_tree(index << 1 ,left,mid);
 	bulid_tree(index << 1 | 1,mid + 1,right);
 	tree[index].sum = tree[index << 1].sum + tree[index << 1 | 1].sum;
@@ -106,6 +108,17 @@ void add(int index,int left,int right,long long num)
 int query(int index,int left,int right)
 {
 	if(tree[index].left == left && tree[index].right == right)
-		return (tree[index].sum + ) % P;
-	
+		return (tree[index].sum +
+			tree[index].delay * (right - left + 1)) % P;
+
+	int mid = tree[index].left + tree[index].right >> 1;
+
+	if(right <= mid)
+		return (query(index << 1,left,right) + 
+			tree[index].delay * (right - left + 1)) % P;
+	if(left > mid)
+		return (query(index << 1 | 1,left,right) +
+			tree[index].delay * (right - left + 1)) % P;
+
+
 }
