@@ -9,7 +9,7 @@ using std::cin;
 using std::cout;
 using std::stack;
 
-inline bool match(char &l,char &r)
+inline bool match(char l,char r)
 {
 	return 
 		('(' == l && ')' == r) ||
