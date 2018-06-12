@@ -18,14 +18,15 @@ const int
 struct Node
 {
 	int left,right,sum;
-	long long delay;
+	long long delay_add,delay_mul;
 
 	Node(int left,int right,int sum)
 	{
 		this->left = left;
 		this->right = right;
 		this->sum = sum;
-		delay = 0ll;
+		delay_add = 0ll;
+		delay_mul = 1ll;
 	}
 
 	Node()
@@ -33,7 +34,7 @@ struct Node
 		Node(0,0,0);
 	}
 
-}tree[MAXN * 2 + 2];
+}tree[MAXN << 2 | 2];
 
 void bulid_tree(int index,int left,int right);
 void multiply(int index,int left,int right,long long num);
@@ -103,7 +104,7 @@ void multiply(int index,int left,int right,long long num)
 void add(int index,int left,int right,long long num)
 {
 	if(tree[index].left == left && tree[index].right == right)
-		tree[index].delay += num;
+		tree[index].delay_add += num;
 	
 	int mid = tree[index].left + tree[index].right >> 1;
 
@@ -115,7 +116,9 @@ void add(int index,int left,int right,long long num)
 	if(left > mid)
 	{
 		add(index << 1 | 1,left,right,num);
+		return;
 	}
+	
 	add(index << 1,left,mid,num);
 	add(index << 1 | 1,mid + 1,right,num);
 }
@@ -124,20 +127,20 @@ int query(int index,int left,int right)
 {
 	if(tree[index].left == left && tree[index].right == right)
 		return (tree[index].sum +
-			tree[index].delay * (right - left + 1)) % P;
+			tree[index].delay_add * (right - left + 1)) % P;
 
 	int mid = tree[index].left + tree[index].right >> 1;
 
 	if(right <= mid)
 		return (query(index << 1,left,right) + 
-			tree[index].delay * (right - left + 1)) % P;
+			tree[index].delay_add * (right - left + 1)) % P;
 	if(left > mid)
 		return (query(index << 1 | 1,left,right) +
-			tree[index].delay * (right - left + 1)) % P;
+			tree[index].delay_add * (right - left + 1)) % P;
 
 	return (
 		query(index << 1,left,mid) +
 		query(index << 1 | 1,mid + 1,right) +
-		tree[index].delay * (right - left + 1)
+		tree[index].delay_add * (right - left + 1)
 		) % P;
 }
