@@ -12,7 +12,10 @@ using std::string;
 void lower_case(string &str)
 {
 	for(string::iterator it = str.begin();it != str.end();++it)
+	{
+		//loweracse *it (char)
 		*it = char(std::tolower(*it));
+	}
 }
 
 int main()
@@ -20,29 +23,28 @@ int main()
 	std::ios::sync_with_stdio(false);
 
 	string word,article;
+	int first_index = -1,index = -1,times = 0;
 
-	std::getline(cin,word);
-	std::getline(cin,article);
+	cin>>word;
 
 	lower_case(word);
-	lower_case(article);
 
-	word = ' ' + word + ' ';
-	article = ' ' + article + ' ';
-
-	if(article.find(word) != string::npos)
-		cout<<-1;
-	else
+	while(cin>>article)
 	{
-		int first_index,index,times = 0;
-		first_index = index = article.find(word);
-		while(index != string::npos)
+		lower_case(article);
+		++index;
+		if(word == article)
 		{
+			if(first_index < 0)
+				first_index = index;
 			++times;
-			index = article.find(word,index + 1);
 		}
-		cout<<first_index<<" "<<times;
 	}
+
+	if(first_index < 0)
+		cout<< -1;
+	else
+		cout<<times<<" "<<first_index;
 
 	return 0;
 }
