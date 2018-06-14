@@ -10,6 +10,9 @@
 		store a few alkane
 		I/O with different type
 
+
+	author:hajbw
+	version:v0.0.1(1)-alpha
 */
 
 using std::cin;
@@ -20,16 +23,29 @@ using std::string;
 using std::stack;
 using std::map;
 
+typedef int PROC_CTRL;
+
+const PROC_CTRL
+	PROC_EXIT = 0;
+
 class Alkane
 {
 public:
-	const char mapping[2] = {'H','C'};
+
+	static const char *periodic_table[108] = {"H","He","Li","Be","B","C","N","O"};
+
+	/*
+	class Element
+	{
+		int order;
+	}
+	*/
 
 	Alkane();
-	Alkane(string to_parse)
+	Alkane(string name,string expression)
 	{
 		stack<char> st;
-		for(string::iterator it = to_parse.begin();it != to_parse.end();++it)
+		for(string::iterator it = expression.begin();it != expression.end();++it)
 		{
 
 		}
@@ -37,56 +53,30 @@ public:
 
 
 private:
-	vector<vector<int>> graph,rev_graph;
 
 
 
 }
 
 void intro();
-void help();
+void help(string query);
+PROC_CTRL process(vector<string> &commands);
 
-int main()
+int main(int argc, char const *argv[])
 {
 	map<string, Alkane> alkanes;
 
 	intro();
 
-	string command;
-	char ch;
 	while(true)
 	{
-		cout>>"\n->";
-		cin>>command;
-		if(command == "exit")
-			break;
-		else if(command == "alkane")
-		{
-			string name,xpr;
-			cin>>name>>xpr;
-			if(alkanes.count(name))
-				cout<<"\""<<name<<"\" already exist."
-			else
-			{
-				alkanes.insert()
-			}
+		string temp;
+		vector<string> commands;
 
-		}
-		else if(command == "output")
-		{
-			string name;
-			map::iterator it;
-			cin>>name;
-			it = alkanes.find(name);
-			if(it == alkanes.end())
-				cout<<"\""<<name<<"\" does not exists!";
-			else
-			{
-				cout<<it->second
-			}
-		}
-		else
-			cout<<"command not supported!";
+		cout>>"\n->";
+		while(cin>>temp)
+			commands.push_back(temp);
+
 	}
 
 	return 0;
@@ -94,10 +84,48 @@ int main()
 
 void intro()
 {
-	cout<<"hajbw Alkane shower.";
+	cout<<"hajbw Alkane shower,version 0.0.1(1).";
 }
 
-void help()
+void help(string query)
 {
-	cout<<"";
+	if(!query)
+	{
+		intro();
+		cout<<"\n\nThese are all internally supported commands.\n\n"<<
+			"Type \"help [command]\" to get detailed help about [command].\n"<<
+			"exit\n"<<
+			"alkane [name] = [expression]\n"<<
+			"output [name]";
+	}
+
+}
+
+PROC_CTRL process(vector<string> &commands)
+{
+	if(commands[0] == "exit")
+		return PROC_EXIT;
+	else if(commands[0] == "alkane")
+	{
+		if(alkanes.count(name))
+			cout<<"\""<<name<<"\" already exist."
+		else
+		{
+			alkanes.insert();
+		}
+
+	}
+	else if(commands[0] == "output")
+	{
+		map::iterator it;
+		it = alkanes.find(name);
+		if(it == alkanes.end())
+			cout<<"\""<<name<<"\" does not exists!";
+		else
+		{
+			cout<<it->second
+		}
+	}
+	else
+		cout<<"commands not supported!";
 }
