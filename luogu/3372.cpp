@@ -27,7 +27,7 @@ struct Node
 		delay = 0ll;
 	}
 
-}tree[MAXN << 2 | 2];
+}tree[(MAXN << 2) | 2];
 
 void bulid_tree(int index,int left,int right);
 void add(int index,int left,int right,long long num);
@@ -42,7 +42,7 @@ int main()
 	int op_type,x,y;
 	long long k;
 
-	cin>>x>>y;
+	cin>>N>>M;
 
 	for (int i = 0; i < N; ++i)
 		cin>>arr[i];
@@ -76,7 +76,7 @@ void bulid_tree(int index,int left,int right)
 		tree[index].sum = arr[left];
 		return;
 	}
-	int mid = left + right >> 1;
+	int mid = (left + right) >> 1;
 	bulid_tree(index << 1 ,left,mid);
 	bulid_tree(index << 1 | 1,mid + 1,right);
 	tree[index].sum = tree[index << 1].sum + tree[index << 1 | 1].sum;
@@ -87,7 +87,7 @@ void add(int index,int left,int right,long long num)
 	if(tree[index].left == left && tree[index].right == right)
 		tree[index].delay += num;
 	
-	int mid = tree[index].left + tree[index].right >> 1;
+	int mid = (tree[index].left + tree[index].right) >> 1;
 
 	if(right <= mid)
 	{
@@ -111,7 +111,7 @@ long long query(int index,int left,int right)
 			tree[index].sum +
 			tree[index].delay * (right - left + 1);
 
-	int mid = tree[index].left + tree[index].right >> 1;
+	int mid = (tree[index].left + tree[index].right) >> 1;
 
 	if(right <= mid)
 		return
