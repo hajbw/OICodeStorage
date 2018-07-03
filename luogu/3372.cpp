@@ -81,7 +81,7 @@ void add(int node,int left,int right,num k)
 num query(int node,int left,int right)
 {
 	if(l(node) == left && r(node) == right)
-		return val(node) + del(node) * (r(node) - l(node));
+		return val(node) + del(node) * (r(node) - l(node) + 1ll);
 
 	int mid = (l(node) + r(node)) >> 1;
 	
@@ -97,6 +97,8 @@ num query(int node,int left,int right)
 
 int main()
 {
+	std::ios::sync_with_stdio(false);
+
 	int op_type,x,y;
 	num k;
 
@@ -118,7 +120,7 @@ int main()
 		else
 		{
 			cin>>x>>y;
-			cout<<query(1,x,y);
+			cout<<query(1,x,y)<<endl;
 		}
 	}
 
