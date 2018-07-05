@@ -22,7 +22,8 @@ int main()
 	for(int i = 0;i < k;++i)
 	{
 		cin>>x>>y;
-		bucket[x].insert(y);
+		if(y)
+			bucket[x].insert(y);
 	}
 
 	while(n != 0)
@@ -31,6 +32,8 @@ int main()
 		ans *= bucket[bit].size() + 1;
 		n /= 10;
 	}
+
+	cout<<ans;
 
 	return 0;
 }
