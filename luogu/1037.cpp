@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 #include <set>
 
 /*
@@ -8,21 +9,13 @@
 using std::cin;
 using std::cout;
 using std::set;
-
-typedef unsigned long long num;
+using std::string;
 
 set<int> bucket[10];
-int visited[10];
-
-void DFS(int i)
-{
-	for(set<int>::iterator it = bucket[i].begin();it != bucket[i].end();++it)
-		DFS(*it);
-}
 
 int main()
 {
-	num n;
+	string n;
 	int k,bit,ans = 1,x,y;
 
 	cin>>n>>k;
@@ -34,15 +27,8 @@ int main()
 			bucket[x].insert(y);
 	}
 
-	//DFS&union bucket
-
-
-	while(n != 0)
-	{
-		bit = n % 10;
-		ans *= bucket[bit].size() + 1;
-		n /= 10;
-	}
+	for(string::iterator it = n.begin();i != n.end();++it)
+		ans *= bucket[*it - '0'].size() + 1;
 
 	cout<<ans;
 
