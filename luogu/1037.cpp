@@ -11,11 +11,19 @@ using std::set;
 
 typedef unsigned long long num;
 
+set<int> bucket[10];
+int visited[10];
+
+void DFS(int i)
+{
+	for(set<int>::iterator it = bucket[i].begin();it != bucket[i].end();++it)
+		DFS(*it);
+}
+
 int main()
 {
 	num n;
 	int k,bit,ans = 1,x,y;
-	set<int> bucket[10];
 
 	cin>>n>>k;
 
