@@ -26,13 +26,8 @@ int main()
 			bucket[x].insert(y);
 	}
 
-	for(int i = 0;i < 10;++i)
-	{
-		for(set<int>::iterator it = bucket[i].begin();it != bucket[i].end();++it)
-		{
-			
-		}
-	}
+	//DFS&union bucket
+
 
 	while(n != 0)
 	{
