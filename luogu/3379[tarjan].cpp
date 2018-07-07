@@ -17,9 +17,21 @@ const int
 	STAT_VISITING = 1,
 	STAT_VISITED = 2;
 
+struct Target
+{
+	int a,b;
+}target[MAXN];
+
 vector<int> graph[MAXN];
 int M,N,S;
-int target_a[MAXN],target_b[MAXN],stat[MAXN];
+int stat[MAXN],fa[MAXN];
+
+int find(int v)
+{
+	if(v != fa[v])
+		fa[v] = find(fa[v]);
+	return fa[v];
+}
 
 void tarjan(int v)
 {
@@ -45,11 +57,14 @@ int main()
 	{
 		cin>>x>>y;
 		graph[x].push_back(y);
-		graph[y].push_back(x);		
+		graph[y].push_back(x);
+		fa[i] = i;
 	}
 
 	for(int i = 0;i < M;++i)
-		cin>>target_a>>target_b;
+		cin>>target[i].a>>target[i].b;
+
+	tarjan(S);
 
 	for (int i = 0;i < M; ++i)
 		cout<<ans[i]<<endl;
