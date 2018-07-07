@@ -3,18 +3,22 @@
 
 using std::cin;
 using std::cout;
+using std::ostream;
+using std::istream;
 
 struct BigInt
 {
-public:
+//public:
 	static const int MAX_BIT = 1000000;
 
-private:
+//private:
 	char sign;//1 if negative
 	int index;
 	unsigned char data[MAX_BIT];
 
-public:
+//public:
+
+	//constructors
 
 	BigInt()
 	{
@@ -40,19 +44,18 @@ public:
 		this.index = index;
 	}
 
+	//operators
+
 	BigInt operator=(BigInt &a)
 	{
-		
+		this.sign = a.sign;
+		this.index = a.index;
+		std::memcpy(this.data,a.data,sizeof(char) * (index));
 	}
 
 	BigInt operator=(long long num)
 	{
 		this = BigInt(num);
-	}
-
-	BigInt operator=(char * num)
-	{
-		
 	}
 
 	BigInt operator+(BigInt &a)
@@ -65,7 +68,22 @@ public:
 
 	}
 
+	//functions
+
+	int size()
+	{
+		return index;
+	}
+
 };
+
+ostream& operator<<(ostream &out,const BigInt &a)
+{
+	if(a.sign)
+		cout<<'-';
+	for(int i = a.index;i > -1;--i)
+		cout<<a
+}
 
 int main()
 {
