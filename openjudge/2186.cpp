@@ -23,17 +23,17 @@ const int
 vector<int> graph[MAXV],c_graph[MAXV],components_id;
 vector<vector<int>> components;
 std::stack<int> st;
-//  WTF      timestamp             in-degree
-int low[MAXV],dfn[MAXV],stat[MAXV],id[MAXV];
-int V,E,clock = 0;
+//  WTF      timestamp
+int low[MAXV],dfn[MAXV],stat[MAXV];
+int V,E,jzm_clock = 0;
 
 //get Strongly Connected Components
 void tarjan(int u)
 {
 	++stat[u];//ing:1
-	++clock;
-	dfn[u] = low[u] = clock;
-	stack.push(u);
+	++jzm_clock;
+	dfn[u] = low[u] = jzm_clock;
+	st.push(u);
 	for(vector<int>::iterator it = graph[u].begin();it != graph[u].end();++it)
 	{
 		if(!dfn[*it])
@@ -68,25 +68,40 @@ int main()
 	std::ios::sync_with_stdio(false);
 
 	int x,y;
+	vector<int> ans;
 
 	cin>>V>>E;
 
 	for(int i = 0;i < E;++i)
 	{
 		cin>>x>>y;// x -> y
-		++id[y];
 	}
 
 	tarjan(1);
 
-	//sum up every component
+	//sum up the out degree every component
 	for(auto it = components.begin();it != components.end();++it)
 	{
 		int sum = 0;
-		for(auto iit = (*it).begin();iit != (*it).end();++iit)
-			sum += id[*iit];
-		components_id.push_back(sum);
+		for(vector<int>::iterator iit = (*it).begin();iit != (*it).end();++iit)
+		{
+			sum += graph[*iit].size();
+		}
+		if(!sum)
+		{
+			if(ans.empty())
+				ans = *it;
+			else
+			{
+				ans.clear();
+				ans.push_back(0);
+			}
+		}
+
 	}
+
+	for(vector<int>::iterator it = ans.begin(); it != ans.end();++it)
+		cout<<*it;
 
 	return 0;
 }
