@@ -7,6 +7,7 @@
 
 using std::cin;
 using std::cout;
+using std::endl;
 using std::vector;
 
 const int MAXN = 500000,MAXM = 500000;
