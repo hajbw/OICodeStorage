@@ -22,5 +22,19 @@ int union_find(int x)
 
 int main()
 {
+	std::ios::sync_with_stdio(false);
+
+	int x,y;
+
+	cin>>N>>M>>S;
+
+	tree[1] = S;
+
+	for(int i = 0;i < N - 1;++i)
+	{
+		cin>>x>>y;
+
+	}
+
 	return 0;
 }
