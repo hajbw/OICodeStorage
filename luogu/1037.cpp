@@ -26,6 +26,14 @@ int main()
 			bucket[x].insert(y);
 	}
 
+	for(int i = 0;i < 10;++i)
+	{
+		for(set<int>::iterator it = bucket[i].begin();it != bucket[i].end();++it)
+		{
+			
+		}
+	}
+
 	while(n != 0)
 	{
 		bit = n % 10;
