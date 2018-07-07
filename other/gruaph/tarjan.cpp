@@ -3,6 +3,12 @@
 #include <stack>
 #include <utility>
 
+#define min(a,b) (a < b ? a : b)
+
+/*
+	get Strongly Connected Components
+*/
+
 using std::cin;
 using std::cout;
 using std::endl;
@@ -14,11 +20,11 @@ const int
 	STAT_VISITING = 1,
 	STAT_VISITED = 2;
 
-vector<int> graph[MAXV];
+vector<int> graph[MAXV],c_graph[MAXV];
 vector<vector<int>> components;
 std::stack<int> st;
-//  WTF      timestamp
-int low[MAXV],dfn[MAXV],stat[MAXV];
+//  WTF      timestamp             in-degree
+int low[MAXV],dfn[MAXV],stat[MAXV],id[MAXV];
 int clock = 0;
 
 //get Strongly Connected Components
