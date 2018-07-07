@@ -8,13 +8,15 @@
 
 - info&comments
 
-- using
+- "using" command
 
 - typedefines
 
 - consts
 
 - structs
+
+- global variants
 
 - functions
 
