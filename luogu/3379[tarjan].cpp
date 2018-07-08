@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include <vector>
 
 /*
@@ -20,11 +21,12 @@ const int
 struct Target
 {
 	int a,b;
-}target[MAXN];
+}
+target[MAXM];
 
 vector<int> graph[MAXN];
 int M,N,S;
-int stat[MAXN],fa[MAXN];
+int stat[MAXN],fa[MAXN],ans[MAXM];
 
 int find(int v)
 {
@@ -38,7 +40,7 @@ void tarjan(int v)
 	++stat[v];
 	for(vector<int>::iterator it = graph[v].begin();it != graph[v].end();++it)
 	{
-
+		tarjan(*it);
 	}
 	++stat[v];
 }
@@ -50,8 +52,6 @@ int main()
 	int x,y;
 
 	cin>>N>>M>>S;
-
-	tree[1] = S;
 
 	for(int i = 0;i < N - 1;++i)
 	{
