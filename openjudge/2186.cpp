@@ -75,30 +75,10 @@ int main()
 	for(int i = 0;i < E;++i)
 	{
 		cin>>x>>y;// x -> y
+		graph[x].push_back(y);
 	}
 
 	tarjan(1);
-
-	//sum up the out degree every component
-	for(auto it = components.begin();it != components.end();++it)
-	{
-		int sum = 0;
-		for(vector<int>::iterator iit = (*it).begin();iit != (*it).end();++iit)
-		{
-			sum += graph[*iit].size();
-		}
-		if(!sum)
-		{
-			if(ans.empty())
-				ans = *it;
-			else
-			{
-				ans.clear();
-				ans.push_back(0);
-			}
-		}
-
-	}
 
 	for(vector<int>::iterator it = ans.begin(); it != ans.end();++it)
 		cout<<*it;
