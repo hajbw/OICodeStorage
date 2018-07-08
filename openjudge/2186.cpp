@@ -78,7 +78,13 @@ int main()
 		graph[x].push_back(y);
 	}
 
-	tarjan(1);
+	for(int i = 1;i <= n;++i)
+	{
+		if(stat[i])
+			continue;
+		jzm_clock = 0;//-1s
+		tarjan(i);
+	}
 
 	for(vector<int>::iterator it = ans.begin(); it != ans.end();++it)
 		cout<<*it;
