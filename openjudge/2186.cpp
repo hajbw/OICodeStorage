@@ -6,7 +6,7 @@
 #define min(a,b) (a < b ? a : b)
 
 /*
-	get Strongly Connected Components
+	2186:Popular Cows
 */
 
 using std::cin;
