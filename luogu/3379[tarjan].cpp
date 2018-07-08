@@ -1,32 +1,30 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
+#include <cstdio>
+//sorry,iostream
 
 /*
 	P3379【模板】最近公共祖先（LCA）
 	Tarjan version
 */
 
-using std::cin;
-using std::cout;
-using std::endl;
-using std::vector;
+using std::printf;
+using std::scanf;
 
-const int
-	MAXN = 500000,MAXM = 500000,
-	STAT_UNVISITED = 0,
-	STAT_VISITING = 1,
-	STAT_VISITED = 2;
+const int MAXN = 500005,MAXM = 500005,DEBUG = 1;
 
-struct Target
+typedef int iEdge;
+typedef int iVert;
+
+struct Edge
 {
-	int a,b;
+	int to,next;
 }
-target[MAXM];
+edges[MAXN*2],querys[MAXM*2];// *2 scale for 2 directions
 
-vector<int> graph[MAXN];
-int M,N,S;
-int stat[MAXN],fa[MAXN],ans[MAXM];
+int
+	cnt_edges,cnt_query,
+	head_graph[MAXN],head_query[MAXM],
+	M,N,S,
+	fa[MAXN],visited[MAXN],ans[MAXM];
 
 int find(int v)
 {
@@ -37,37 +35,82 @@ int find(int v)
 
 void tarjan(int v)
 {
-	++stat[v];
-	for(vector<int>::iterator it = graph[v].begin();it != graph[v].end();++it)
+	fa[v] = v;
+	visited[v] = 1;
+	for(iEdge i = head_graph[v];i != 0;i = edges[i].next)
 	{
-		tarjan(*it);
+		if(!visited[edges[i].to])
+		{
+			tarjan(edges[i].to);
+			fa[edges[i].to] = v;
+		}
 	}
-	++stat[v];
+
+	for(iEdge i = head_query[v];i != 0;i = edges[i].next)
+		if(visited[querys[i].to])
+		{
+			ans[i >> 1] = find(querys[i].to);
+			printf("%d \n",ans[i >> 1]);
+		}
+
+	if(DEBUG)
+		printf("v: %d vi: %d fa: %d \n",v,visited[v],fa[v]);
+}
+
+void addedge(int u,int v)
+{
+	edges[cnt_edges].to = v;
+	edges[cnt_edges].next = head_graph[u];
+	head_graph[u] = cnt_edges;
+	if(DEBUG)
+		printf("addedge %d -> %d ,cnt: %d\n",u,v,cnt_edges);
+	++cnt_edges;
+}
+
+void addquery(int u,int v)
+{
+	edges[cnt_query].to = v;
+	edges[cnt_query].next = head_query[u];
+	head_query[u] = cnt_query;
+	if(DEBUG)
+		printf("addquery %d -> %d ,cnt: %d\n",u,v,cnt_query);
+	++cnt_query;
 }
 
 int main()
 {
-	std::ios::sync_with_stdio(false);
-
 	int x,y;
 
-	cin>>N>>M>>S;
+	scanf("%d %d %d",&M,&N,&S);
 
 	for(int i = 0;i < N - 1;++i)
 	{
-		cin>>x>>y;
-		graph[x].push_back(y);
-		graph[y].push_back(x);
-		fa[i] = i;
+		scanf("%d %d",&x,&y);
+		addedge(x,y);
+		addedge(y,x);
 	}
 
 	for(int i = 0;i < M;++i)
-		cin>>target[i].a>>target[i].b;
+	{
+		scanf("%d %d",&x,&y);
+		addquery(x,y);
+		addquery(y,x);
+	}
+
+	if(DEBUG)
+		puts("\n");
 
 	tarjan(S);
 
-	for (int i = 0;i < M; ++i)
-		cout<<ans[i]<<endl;
+	for(int i = 0;i < M; ++i)
+		printf("%d\n",ans[i]);
+
+	if(DEBUG)
+	{
+		puts("\n");
+		for(int i = 0;i <= N;++i)
+			printf("vi: %d ",visited[i]);
+	}
 
 	return 0;
 }
