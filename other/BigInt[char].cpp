@@ -80,9 +80,9 @@ struct BigInt
 ostream& operator<<(ostream &out,const BigInt &a)
 {
 	if(a.sign)
-		cout<<'-';
+		out.put('-');
 	for(int i = a.index;i > -1;--i)
-		cout<<a
+		out.put(a.data[i]);
 }
 
 int main()
