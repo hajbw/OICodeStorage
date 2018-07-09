@@ -2,6 +2,7 @@
 
 /*
 	P1217 [USACO1.5]回文质数 Prime Palindromes
+	AC
 */
 
 using std::cin;
@@ -28,7 +29,8 @@ int main()
 		++i;
 
 	for(;i < 5960 && arr[i] <= b;++i)
-		cout<<arr[i]<<endl;
+		if(arr[i] >= a)
+			cout<<arr[i]<<endl;
 
 	return 0;
 }
