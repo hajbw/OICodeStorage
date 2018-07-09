@@ -2,6 +2,7 @@
 
 /*
 	P1149 火柴棒等式
+	AC
 */
 
 using std::cin;
