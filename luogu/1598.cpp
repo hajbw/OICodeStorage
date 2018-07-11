@@ -1,66 +1,49 @@
 #include <iostream>
-#include <stack>
 #include <cstring>
+
+#define max(a,b) (a > b ? a : b)
 
 /*
 	P1598 垂直柱状图
 */
 
-using namespace std;
+using std::cin;
+using std::cout;
+using std::endl;
+
+int alphabet[26];//counter,a[0] for 'A'
 
 int main()
 {
-	int[26] alphabet{0};//counter,0 for 'A'
-	char[76] line;
-	int index = 0,max_count = 0,temp = 0;
-	char ch;
-	stack<char> line_starred;
+	char line[105];//unable to convert const char[52] to char[105] ... wtf
+	int max_count = 0;
 
-	//read and sum the words
+	//read and sum up the words
 	for(int i = 0; i < 4; ++i)
 	{
-		cin.readline(line,76);
+		cin.getline(line,101);
 
-		while(line[index] != '\0')
-		{
-			ch = line[index];
-			if(ch >= 'A' && ch <= 'Z')
-			{
-				alphabet[ch - 'A']++;
-			}
-			index++;
-		}
+		for(int i = 0;line[i] != '\0';++i)
+			if(line[i] >= 'A' && line[i] <= 'Z')
+				alphabet[line[i] - 'A']++;
 	}
 
 	//calculate lines 2 output(m_count + 1 in total)
 	for (int i = 0; i < 26; ++i)
-		max_count = alphabet[i] > max_count ? alphabet : max_count;
+		max_count = max(max_count,alphabet[i]);
 
-	for (int i max_count; i > 0; --i)
+	//output
+	std::memset(line,0,sizeof(line));
+	for(int i = max_count;i > 0;--i)
 	{
-		//reset line
-		memset(line,0,76);
-
-		//record starred in per line
-		for (int j = 0; j < 26; ++j)
+		line = "                                                   ";//26+25 spaces
+		for(int j = 0;j < 26;++j)
 			if(alphabet[j] >= i)
-				line_starred.push(j);
-
-		//output
-		while(!line_starred.empty())
-		{
-			temp = line_starred.top();
-			line_starred.pop();
-			for (int k = 0; k <= temp * 2; ++k)
-			{
-				line[k] = line[k] == '\0' ? ' ' : '*';
-			}
-			cout<<line<<endl;
-		}
-
+				line[j * 2] = '*';
+		cout<<line<<endl;
 	}
 
-	cout<<"A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"
+	cout<<"A B C D E F G H I J K L M N O P Q R S T U V W X Y Z";
 
 	return 0;
 }
