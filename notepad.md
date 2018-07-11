@@ -5,3 +5,6 @@ to read Unicode:
 also for Unicode in Winodws
 	https://blog.csdn.net/haiross/article/details/45074355
 	https://stackoverflow.com/questions/25274797/converting-code-pages-in-c
+
+c++ fast reading
+	https://www.cnblogs.com/Peper/p/7451137.html
