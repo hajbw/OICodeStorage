@@ -1,13 +1,14 @@
-#include <iostream>
+#include <cstdio>
 #include <cstring>
 #include <algorithm>
 
 /**
 	P1223 排队接水
+	82
 */
 
-using std::cin;
-using std::cout;
+using std::scanf;
+using std::printf;
 
 const int MAXN = 1005;
 
@@ -19,21 +20,26 @@ arr[MAXN];
 
 int main()
 {
-	int n,total_time = 0;
+	int
+		n,curr_time = 0,//arr[i]'s waiting time
+		total_time = 0;//total wating time
 
-	cin>>n;
+	scanf("%d",&n);
 	for(int i = 1;i <= n;++i)
 	{
 		arr[i].order = i;
-		cin>>arr[i].time;
+		scanf("%d",&arr[i].time);
 	}
 
-	std::sort(arr + 1,arr + n + 1,[](rnl a,rnl,b) -> bool{return a.time < b.time;});
+	std::sort(arr + 1,arr + n + 1,[](rnl &a,rnl &b) -> bool{return a.time < b.time;});
 
 	for(int i = 1;i <= n;++i)
-		cout<<arr[i].order<<" ";
+	{
+		printf("%d ",arr[i].order);
+		total_time += arr.time * (n - i);
+	}
 
-	//..
+	printf("\n%.2f",double(total_time) / n);
 
-	cout<<std::endl<<   <<float(total_time) / n;
+	return 0;
 }
