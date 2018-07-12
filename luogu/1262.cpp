@@ -21,10 +21,15 @@ using std::vector;
 const int MAXV = 3005,MAXE = 12000;
 
 vector<int> graph[MAXV];
-int cost[MAXV];//cost to buy.unable if 0
-int n,p,r;//... ntr???
+int
+	cost[MAXV],//cost to buy.unable if 0.
+	fa[MAXV],//father(v),union_find set.
+	n,p,r;//... ntr???
 
-int jzm_clock,timestamp[MAXV];
+int
+	jzm_clock,//clock
+	dfn[MAXV],//timestamp_discover_time
+	low[MAXV];//WTF
 void tarjan(int v)
 {
 
@@ -46,7 +51,7 @@ int main()
 	{
 		scanf("%d %d",&x,&y);
 		graph[x].push_back(y);
-	}		
+	}
 
 	return 0;
 }
