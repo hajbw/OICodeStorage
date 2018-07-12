@@ -7,9 +7,10 @@
 
 using std::cin;
 using std::cout;
+using std::endl;
 using std::memset;
 
-const int MAXN = 1005;
+const int MAXN = 1005,DEBUG = 1,READ_MAX_LINE_LENGTH = 50;
 
 struct hole
 {
@@ -17,22 +18,21 @@ struct hole
 }
 holes[MAXN];
 
-int
-	T,n,h,r,
-	fa[MAXN],
-	hole_index,
-	top[MAXN],top_index,//connected to top
-	bot[MAXN],bot_index;
+struct uset
+{
+	int high,low;
+}
+usets[MAXN];
 
-unsigned long long R;
+int fa[MAXN],usets_mofa_mapping[MAXN],uset_mapping_index;
 
-char buf[40];
+char buf[READ_MAX_LINE_LENGTH];
 template<class T> void read(T &x,T &y,T &z)
 {
 	x = y = z = 0;
 
 	char *ptr = buf;
-	cin.getline(buf,40);
+	cin.getline(buf,READ_MAX_LINE_LENGTH);
 	int flag = 0;
 	while(*ptr < '0' || *ptr > '9')
 	{
@@ -41,7 +41,7 @@ template<class T> void read(T &x,T &y,T &z)
 	}
 	while(*ptr >= '0' && *ptr <= '9')
 	{
-		x = (x<<1) + (x<<3) + (*ptr-'0')//2x+8x+int(*ptr)
+		x = (x<<1) + (x<<3) + (*ptr-'0');//2x+8x+int(*ptr)
 		++ptr;
 	}
 	if(flag)
@@ -54,7 +54,7 @@ template<class T> void read(T &x,T &y,T &z)
 	}
 	while(*ptr >= '0' && *ptr <= '9')
 	{
-		y = (y<<1) + (y<<3) + (*ptr-'0')//2y+8y+int(*ptr)
+		y = (y<<1) + (y<<3) + (*ptr-'0');//2y+8y+int(*ptr)
 		++ptr;
 	}
 	if(flag)
@@ -67,64 +67,78 @@ template<class T> void read(T &x,T &y,T &z)
 	}
 	while(*ptr >= '0' && *ptr <= '9')
 	{
-		z = (z<<1) + (z<<3) + (*ptr-'0')//2z+8z+int(*ptr)
+		z = (z<<1) + (z<<3) + (*ptr-'0');//2z+8z+int(*ptr)
 		++ptr;
 	}
 	if(flag)
 		z = ~z + 1;
 }
 
-inline int find(int v)
+int find(int v)
 {
 	if(v != fa[v])
 		fa[v] = find(fa[v]);
 	return fa[v];
 }
 
-inline void uni(int a,int b)
+long long R;
+inline int touch(hole &a,hole &b)
 {
-	fa[a] = b;
-}
-
-inline int touched(hole &a,hole &b)
-{
-	return long long((a.x-b.x)) * (a.x-b.x) + (a.y-b.y) + (a.y-b.y) + (a.z-b.z) * (a.z-b.z) <= R;
+	return ((long long)a.x-b.x) * (a.x-b.x) + (a.y-b.y) + (a.y-b.y) + (a.z-b.z) * (a.z-b.z) <= R;
 }
 
 int main()
 {
 	std::ios::sync_with_stdio(false);
-
+	
 	int
+		T,n,h,r,
+		hole_index,
 		x,y,z,
-		tp,tb;//tp:top-top,h + r ; tb:top-bottom, h - r
-
+		i,j,k,
+		ans;
+		
+	char str[READ_MAX_LINE_LENGTH];
+		
 	cin>>T;
-	for(int i = 0;i < T;++i)
+	cin.getline(str,READ_MAX_LINE_LENGTH);//cin had EATEN my test data!
+	for(i = 0;i < T;++i)
 	{
+		//initialize,initialize,initialize...
 		memset(holes,0,sizeof(holes));
+		memset(usets,0,sizeof(usets));
 		memset(fa,0,sizeof(fa));
-		memset(top,0,sizeof(top));
-		memset(top,0,sizeof(bot));
 
 		read(n,h,r);
 
+		//more initializayions && optimizations
+		for(j = 0;j < n;++j)
+			fa[j] = j;
+		hole_index = ans = 0;
 		R = 4*r*r;
-		tp = h + r;
-		tb = h - r;
 
-		for(int j = 0;j < n;++j)
+		for(j = 0;j < n;++j)
 		{
 			read(x,y,z);
-			if(z < -r || z > r + h)
+			if(z < -r || z > h + r)
 				continue;
-			holes[hole_index] = {x,y,z};
-			if(z < r)
-			{
-				bot[bot_index++] = hole_index;
-			}
-			if(z > h - r)
+			holes[hole_index].x = x;
+			holes[hole_index].y = y;
+			holes[hole_index].z = z;
+			usets[hole_index].high = z + r;
+			usets[hole_index].low = z - r;			
+			++hole_index;
+
+			//union touched holes ... O(n^2),sad
+			for(k = 0;k < hole_index;++k)
+				if(touch(holes[hole_index],holes[k]) &&
+					find(hole_index) != find(k))
+						fa[hole_index] = k;
 		}
+
+
+		cout<<(ans ? "Yes" : "No")<<endl;
 	}
+
 	return 0;
 }
