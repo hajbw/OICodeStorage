@@ -48,7 +48,7 @@ void addedge(int u,int v,int cap)
 int* f(int u,int v)
 /**
 	adapter for sgq's f[][] (flow martix)
-	hope i would never be useful
+	hope it would never be useful
 */
 {
 	int edge = head[u];
@@ -131,4 +131,3 @@ int main()
 
 	return 0;
 }
-
