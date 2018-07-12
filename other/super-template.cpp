@@ -30,19 +30,41 @@
 
 using std::cin;
 
-#ifndef READ_MAX_LINE_LEN
-#define READ_MAX_LINE_LEN 40
+#ifndef READ_MAX_LINE_LENTH
+#define READ_MAX_LINE_LENTH 40
 #endif
 
-//version 1:read three
+//version 1: read one(in one line)
 
-char buf[READ_MAX_LINE_LEN];
+template<class T>void read(T &x)
+{
+	x = 0;
+	char *ptr = buf;
+	cin.getline(buf,READ_MAX_LINE_LENTH);
+	int flag = 0;
+	while(*ptr < '0' || *ptr > '9')
+	{
+		flag ^= (*ptr == '-');
+		++ptr;
+	}
+	while(*ptr >= '0' && *ptr <= '9')
+	{
+		x = (x<<1) + (x<<3) + (*ptr-'0')//2x+8x+int(*ptr)
+		++ptr;
+	}
+	if(flag)
+		x = ~x + 1;
+}
+
+//version 2:read three
+
+char buf[READ_MAX_LINE_LENTH];
 template<class T> void read(T &x,T &y,T &z)
 {
 	x = y = z = 0;
 
 	char *ptr = buf;
-	cin.getline(buf,READ_MAX_LINE_LEN);
+	cin.getline(buf,READ_MAX_LINE_LENTH);
 	int flag = 0;
 	while(*ptr < '0' || *ptr > '9')
 	{
@@ -89,7 +111,7 @@ template<class T> void read(T &x,T &y,T &z)
 template<class T>void read(T **x,int n)
 {
 	char *ptr = buf;
-	cin.getline(buf,READ_MAX_LINE_LEN);
+	cin.getline(buf,READ_MAX_LINE_LENTH);
 	int flag = 0;
 
 	for(int i = 0;i < n;++i)
