@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 
 /**
 	P3958 奶酪
@@ -6,6 +7,7 @@
 
 using std::cin;
 using std::cout;
+using std::memset;
 
 const int MAXN = 1005;
 
@@ -14,6 +16,12 @@ struct hole
 	int x,y,z;
 }
 holes[MAXN];
+
+int
+	T,n,h,r,
+	fa[MAXN];
+
+unsigned long long R;
 
 char buf[40];
 template<class T> void read(T &x,T &y,T &z)
@@ -66,13 +74,18 @@ template<class T> void read(T &x,T &y,T &z)
 
 inline int touched(hole &a,hole &b)
 {
-
+	return (a.x-b.x) * (a.x-b.x) + (a.y-b.y) + (a.y-b.y) + (a.z-b.z) * (a.z-b.z) <= R;
 }
 
 int main()
 {
-	int T,n,h,r;
-
-	scanf("")
+	scanf("%d",&T);
+	for(int i = 0;i < T;++i)
+	{
+		memset(holes,0,sizeof(holes));
+		memset(fa,0,sizeof(fa));
+		read(n,h,r);
+		R = 4*r*r;
+	}
 	return 0;
 }
