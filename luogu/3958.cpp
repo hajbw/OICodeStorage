@@ -1,6 +1,22 @@
 #include <iostream>
 #include <cstring>
 
+#ifndef max
+#define max(a,b) (a > b ? a : b)
+#endif
+
+#ifndef min
+#define min(a,b) (a < b ? a : b)
+#endif
+
+#ifndef maxx
+#define maxx(a,b) if(a < b)a = b
+#endif
+
+#ifndef minn
+#define minn(a,b) if(a > b)a = b
+#endif
+
 /**
 	P3958 奶酪
 */
@@ -24,7 +40,8 @@ struct uset
 }
 usets[MAXN];
 
-int fa[MAXN],usets_mofa_mapping[MAXN],uset_mapping_index;
+int fa[MAXN];
+//int usets_mofa_mapping[MAXN],uset_mapping_index;
 
 char buf[READ_MAX_LINE_LENGTH];
 template<class T> void read(T &x,T &y,T &z)
@@ -115,7 +132,7 @@ int main()
 		for(j = 0;j < n;++j)
 			fa[j] = j;
 		hole_index = ans = 0;
-		R = 4*r*r;
+		R = long long(r)*r<<2;
 
 		for(j = 0;j < n;++j)
 		{
@@ -126,16 +143,36 @@ int main()
 			holes[hole_index].y = y;
 			holes[hole_index].z = z;
 			usets[hole_index].high = z + r;
-			usets[hole_index].low = z - r;			
-			++hole_index;
+			usets[hole_index].low = z - r;
 
 			//union touched holes ... O(n^2),sad
 			for(k = 0;k < hole_index;++k)
 				if(touch(holes[hole_index],holes[k]) &&
 					find(hole_index) != find(k))
-						fa[hole_index] = k;
+				{
+					fa[hole_index] = k;
+					maxx(usets[k].high,usets[hole_index].high);
+					minn(usets[k].low,usets[hole_index].low);
+				}
+
+			++hole_index;
 		}
 
+		for(int j = 0;j < n;++j)
+			if(usets[j].high > h && usets[j].low < 0)
+			{
+				ans = 1;
+				break;
+			}
+
+		/*
+		for(int j = 0;j < uset_mapping_index;++j)
+			if(usets[usets_mofa_mapping[j]].high > h &&
+				usets[usets_mofa_mapping[j]].low < 0)
+			{
+				ans = 1;
+				break;
+			}*/
 
 		cout<<(ans ? "Yes" : "No")<<endl;
 	}
