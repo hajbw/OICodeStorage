@@ -8,11 +8,11 @@
 using std::cin;
 using std::cout;
 
-const MAXV = 10000,MAXE = 50000;
+const MAXV = 10005,MAXE = 100010;
 
 struct Edge
 {
-	int to,next,cap;
+	int to,next,cap,flow;
 }
 edges[MAXE];
 
@@ -30,9 +30,29 @@ void addedge(int u,int v,int cap)
 	++edge_index;
 }
 
+int dfs(int s,int amount)
+/**
+	dfs to improve
+
+	arguments:
+		s:current point
+		amount:how much could this dfs path improve(in previous step)
+
+	return:
+		how much could this dfs path improve
+*/
+{
+	if(s == T)
+		return amount;
+	for(int edge = head[s];edge != 0;edge = edges[edge].next)
+	{
+
+	}
+}
+
 int main()
 {
-	int u,v,cap;
+	int u,v,cap,t,flow = 0;
 
 	cin>>V>>E>>S>>T;
 
@@ -42,7 +62,10 @@ int main()
 		addedge(u,v,cap);
 	}
 
-	//cout<<ans;
+	while(t = dfs(S,19260817))
+		flow += t;
+
+	cout<<flow;
 
 	return 0;
 }
