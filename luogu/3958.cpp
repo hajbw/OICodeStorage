@@ -19,7 +19,9 @@ holes[MAXN];
 
 int
 	T,n,h,r,
-	fa[MAXN];
+	fa[MAXN],
+	top[MAXN],top_index,//connected to top
+	bot[MAXN],bot_index;
 
 unsigned long long R;
 
@@ -71,21 +73,44 @@ template<class T> void read(T &x,T &y,T &z)
 		z = ~z + 1;
 }
 
+int find(int v)
+{
+	if(v != fa[v])
+		fa[v] = find(fa[v]);
+	return fa[v];
+}
+
+void uni(int a,int b)
+{
+	fa[a] = b;
+}
+
+
 
 inline int touched(hole &a,hole &b)
 {
-	return (a.x-b.x) * (a.x-b.x) + (a.y-b.y) + (a.y-b.y) + (a.z-b.z) * (a.z-b.z) <= R;
+	return long long((a.x-b.x)) * (a.x-b.x) + (a.y-b.y) + (a.y-b.y) + (a.z-b.z) * (a.z-b.z) <= R;
 }
 
 int main()
 {
-	scanf("%d",&T);
+	std::ios::sync_with_stdio(false);
+
+	int x,y,z;
+
+	cin>>T;
 	for(int i = 0;i < T;++i)
 	{
 		memset(holes,0,sizeof(holes));
 		memset(fa,0,sizeof(fa));
+		memset(top,0,sizeof(top));
+		memset(top,0,sizeof(bot));
 		read(n,h,r);
 		R = 4*r*r;
+		for(int j = 0;j < n;++j)
+		{
+			read(x,y,z);
+		}
 	}
 	return 0;
 }
