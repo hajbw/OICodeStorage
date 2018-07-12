@@ -4,6 +4,12 @@
 
 //basics
 
+// :)
+#pragma GCC optimize("O2")
+#pragma G++ optimize("O2")
+#pragma GCC diagnostic warning "-std=c++11"
+#pragma G++ diagnostic warning "-std=c++11"
+
 #ifndef min
 #define min(a,b) (a < b ? a : b)
 #endif
@@ -22,19 +28,19 @@
 
 using std::cin;
 
-#ifndef MAX_LINE_LENGTH
-#define MAX_LINE_LENGTH 40
+#ifndef READ_MAX_LINE_LEN
+#define READ_MAX_LINE_LEN 40
 #endif
 
 //version 1:read three
 
-char buf[MAX_LINE_LENGTH];
+char buf[READ_MAX_LINE_LEN];
 template<class T> void read(T &x,T &y,T &z)
 {
 	x = y = z = 0;
 
 	char *ptr = buf;
-	cin.getline(buf,MAX_LINE_LENGTH);
+	cin.getline(buf,READ_MAX_LINE_LEN);
 	int flag = 0;
 	while(*ptr < '0' || *ptr > '9')
 	{
@@ -81,7 +87,7 @@ template<class T> void read(T &x,T &y,T &z)
 template<class T>void read(T **x,int n)
 {
 	char *ptr = buf;
-	cin.getline(buf,MAX_LINE_LENGTH);
+	cin.getline(buf,READ_MAX_LINE_LEN);
 	int flag = 0;
 
 	for(int i = 0;i < n;++i)
