@@ -74,19 +74,17 @@ template<class T> void read(T &x,T &y,T &z)
 		z = ~z + 1;
 }
 
-int find(int v)
+inline int find(int v)
 {
 	if(v != fa[v])
 		fa[v] = find(fa[v]);
 	return fa[v];
 }
 
-void uni(int a,int b)
+inline void uni(int a,int b)
 {
 	fa[a] = b;
 }
-
-
 
 inline int touched(hole &a,hole &b)
 {
