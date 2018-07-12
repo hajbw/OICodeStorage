@@ -64,7 +64,8 @@ int main()
 	for(int i = 0;i < E;++i)
 	{
 		cin>>u>>v>>cap;
-		addedge(u,v,cap);
+		if(u != v)
+			addedge(u,v,cap);
 	}
 
 	do
