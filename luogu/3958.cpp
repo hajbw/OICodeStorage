@@ -20,6 +20,7 @@ holes[MAXN];
 int
 	T,n,h,r,
 	fa[MAXN],
+	hole_index,
 	top[MAXN],top_index,//connected to top
 	bot[MAXN],bot_index;
 
@@ -96,7 +97,9 @@ int main()
 {
 	std::ios::sync_with_stdio(false);
 
-	int x,y,z;
+	int
+		x,y,z,
+		tp,tb;//tp:top-top,h + r ; tb:top-bottom, h - r
 
 	cin>>T;
 	for(int i = 0;i < T;++i)
@@ -105,11 +108,24 @@ int main()
 		memset(fa,0,sizeof(fa));
 		memset(top,0,sizeof(top));
 		memset(top,0,sizeof(bot));
+
 		read(n,h,r);
+
 		R = 4*r*r;
+		tp = h + r;
+		tb = h - r;
+
 		for(int j = 0;j < n;++j)
 		{
 			read(x,y,z);
+			if(z < -r || z > r + h)
+				continue;
+			holes[hole_index] = {x,y,z};
+			if(z < r)
+			{
+				bot[bot_index++] = hole_index;
+			}
+			if(z > h - r)
 		}
 	}
 	return 0;
