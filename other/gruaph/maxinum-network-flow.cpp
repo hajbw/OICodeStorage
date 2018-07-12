@@ -1,6 +1,14 @@
 #include <iostream>
 #include <cstring>
 
+#ifndef min
+#define min(a,b) (a < b ? a : b)
+#endif
+
+#ifndef max
+#define max(a,b) (a > b ? a : b)
+#endif
+
 /**
 	template:maxinum-network-flow
 	also passing luogu P3376
@@ -37,24 +45,62 @@ void addedge(int u,int v,int cap)
 	rev_head[v] = edge_index;
 }
 
-int dfs(int s,int amount)
+int* f(int u,int v)
+{
+	for(int edge = head[u];edge != 0;edge = edges[edge].next)
+		if(edges[edge].to = v)
+			break;
+	return edge ? &edges[edge].flow : (int*)0;
+}
+
+int dfs(int u,int amount)
 /**
 	dfs to improve
 
 	arguments:
-		s:current point
+		u:current point
 		amount:how much could this dfs path improve(in previous step)
 
 	return:
 		how much could this dfs path improve
 */
 {
-	if(s == T)
+	if(u == T)
 		return amount;
-	for(int edge = head[s];edge != 0;edge = edges[edge].next)
-	{
+	visited[u] = 1;
 
+	int v,min_,t;
+
+	for(int edge = head[u];edge != 0;edge = edges[edge].next)
+	{
+		v = edges[edge].to;
+		if(!visited[v] && edges[edge].cap > edges[edge].flow)
+		{
+			min_ = min(amount,edges[edge].cap - edges[edge].flow);
+			t = dfs(u,min_);
+			if(t)
+			{
+				edges[edge].flow += t;
+				return t;
+			}
+		}
 	}
+	for(int edge = rev_head[u];edge != 0;edge = edges[edge].next)
+	{
+		v = edge[edge].to;
+		if(!visited[v] && edges[edge].flow > 0)
+		{
+			min_ = min(amount,edges[edge].flow);
+			t = dfs(u,min_);
+			if(t)
+			{
+				edges[edge].flow -= t;
+				return t;
+			}
+		}
+	}
+
+	return 0;
 }
 
 int main()
