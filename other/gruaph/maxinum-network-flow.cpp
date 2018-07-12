@@ -74,15 +74,14 @@ int dfs(int u,int amount)
 		return amount;
 	visited[u] = 1;
 
-	int v,min_,t;
+	int min_,t;
 
 	for(int edge = head[u];edge != 0;edge = edges[edge].next)
 	{
-		v = edges[edge].to;
-		if(!visited[v] && edges[edge].cap > edges[edge].flow)
+		if(!visited[edges[edge].to] && edges[edge].cap > edges[edge].flow)
 		{
 			min_ = min(amount,edges[edge].cap - edges[edge].flow);
-			t = dfs(v,min_);
+			t = dfs(edges[edge].to,min_);
 			if(t)
 			{
 				edges[edge].flow += t;
@@ -92,11 +91,10 @@ int dfs(int u,int amount)
 	}
 	for(int edge = rev_head[u];edge != 0;edge = edges[edge].next)
 	{
-		v = edges[edge].to;
-		if(!visited[v] && edges[edge].flow > 0)
+		if(!visited[edges[edge].to] && edges[edge].flow > 0)
 		{
 			min_ = min(amount,edges[edge].flow);
-			t = dfs(v,min_);
+			t = dfs(edges[edge].to,min_);
 			if(t)
 			{
 				edges[edge].flow -= t;
