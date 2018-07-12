@@ -46,8 +46,13 @@ void addedge(int u,int v,int cap)
 }
 
 int* f(int u,int v)
+/**
+	adapter for sgq's f[][] (flow martix)
+	hope i would never be useful
+*/
 {
-	for(int edge = head[u];edge != 0;edge = edges[edge].next)
+	int edge = head[u];
+	for(;edge != 0;edge = edges[edge].next)
 		if(edges[edge].to = v)
 			break;
 	return edge ? &edges[edge].flow : (int*)0;
@@ -77,7 +82,7 @@ int dfs(int u,int amount)
 		if(!visited[v] && edges[edge].cap > edges[edge].flow)
 		{
 			min_ = min(amount,edges[edge].cap - edges[edge].flow);
-			t = dfs(u,min_);
+			t = dfs(v,min_);
 			if(t)
 			{
 				edges[edge].flow += t;
@@ -87,11 +92,11 @@ int dfs(int u,int amount)
 	}
 	for(int edge = rev_head[u];edge != 0;edge = edges[edge].next)
 	{
-		v = edge[edge].to;
+		v = edges[edge].to;
 		if(!visited[v] && edges[edge].flow > 0)
 		{
 			min_ = min(amount,edges[edge].flow);
-			t = dfs(u,min_);
+			t = dfs(v,min_);
 			if(t)
 			{
 				edges[edge].flow -= t;
@@ -119,7 +124,7 @@ int main()
 	do
 	{
 		std::memset(visited,0,sizeof(visited));
-		temp = dfs(S,19260817);
+		temp = dfs(S,1073741823);
 		flow += temp;
 	}
 	while(temp);
