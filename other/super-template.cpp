@@ -2,6 +2,18 @@
 	hajbw super template
 */
 
+//basics
+
+#ifndef min
+#define min(a,b) (a < b ? a : b)
+#endif
+
+#ifndef max
+#define max(a,b) (a > b ? a : b)
+#endif
+
+//end basics
+
 //fast read
 
 #ifndef _IOSTREAM_
