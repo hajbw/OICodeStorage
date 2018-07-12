@@ -21,9 +21,8 @@ int
 	edge_index,
 	rev_edge_index,
 	head[MAXV]
-	rev_head[MAXV];
-
-
+	rev_head[MAXV],
+	uesd[MAXV];
 
 void addedge(int u,int v,int cap)
 {
