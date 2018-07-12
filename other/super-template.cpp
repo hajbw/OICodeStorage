@@ -20,6 +20,14 @@
 #define max(a,b) (a > b ? a : b)
 #endif
 
+#ifndef maxx
+#define maxx(a,b) (if(a < b)a = b;)
+#endif
+
+#ifndef minn
+#define minn(a,b) (if(a > b)a = b;)
+#endif
+
 //end basics
 
 //fast read
