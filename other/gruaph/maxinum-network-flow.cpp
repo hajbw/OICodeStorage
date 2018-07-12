@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 
 /**
 	template:maxinum-network-flow
@@ -22,7 +23,7 @@ int
 	rev_edge_index,
 	head[MAXV]
 	rev_head[MAXV],
-	uesd[MAXV];
+	visited[MAXV];
 
 void addedge(int u,int v,int cap)
 {
@@ -56,7 +57,7 @@ int dfs(int s,int amount)
 
 int main()
 {
-	int u,v,cap,t,flow = 0;
+	int u,v,cap,temp,flow = 0;
 
 	cin>>V>>E>>S>>T;
 
@@ -66,8 +67,13 @@ int main()
 		addedge(u,v,cap);
 	}
 
-	while(t = dfs(S,19260817))
-		flow += t;
+	do
+	{
+		std::memset(visited,0,sizeof(visited));
+		temp = dfs(S,19260817);
+		flow += temp;
+	}
+	while(temp);
 
 	cout<<flow;
 
