@@ -14,12 +14,14 @@ struct Edge
 {
 	int to,next,cap,flow;
 }
-edges[MAXE];
+edges[MAXE],rev_edges[MAXE];
 
 int
 	V,E,S,T,//Vertices,Edges,Start point,Terminate point
 	edge_index,
-	head[MAXV];
+	rev_edge_index,
+	head[MAXV]
+	rev_head[MAXV];
 
 
 
@@ -28,6 +30,9 @@ void addedge(int u,int v,int cap)
 	edges[edge_index] = {v,head[u],cap};
 	head[u] = edge_index;
 	++edge_index;
+	rev_edges[rev_edge_index] = {u,rev_head[v],cap};
+	rev_head[v] = rev_edge_index;
+	++rev_edge_index;
 }
 
 int dfs(int s,int amount)

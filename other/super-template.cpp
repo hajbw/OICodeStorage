@@ -90,4 +90,4 @@ template<class T>void read(T **x,int n)
 	}
 }
 
-//end faet read
+//end fast read
