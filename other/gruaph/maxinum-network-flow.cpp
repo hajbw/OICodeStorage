@@ -9,7 +9,7 @@
 using std::cin;
 using std::cout;
 
-const MAXV = 10005,MAXE = 100010;
+const int MAXV = 10005,MAXE = 100010;
 
 struct Edge
 {
@@ -20,19 +20,21 @@ edges[MAXE],rev_edges[MAXE];
 int
 	V,E,S,T,//Vertices,Edges,Start point,Terminate point
 	edge_index,
-	rev_edge_index,
-	head[MAXV]
+	head[MAXV],
 	rev_head[MAXV],
 	visited[MAXV];
 
 void addedge(int u,int v,int cap)
 {
-	edges[edge_index] = {v,head[u],cap};
+	edges[edge_index].to = v;
+	edges[edge_index].next = head[u];
+	edges[edge_index].cap = cap;
 	head[u] = edge_index;
 	++edge_index;
-	rev_edges[rev_edge_index] = {u,rev_head[v],cap};
-	rev_head[v] = rev_edge_index;
-	++rev_edge_index;
+	rev_edges[edge_index].to = v;
+	rev_edges[edge_index].next = rev_head[u];
+	rev_edges[edge_index].cap = cap;
+	rev_head[v] = edge_index;
 }
 
 int dfs(int s,int amount)
@@ -80,3 +82,4 @@ int main()
 
 	return 0;
 }
+
