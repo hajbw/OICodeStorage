@@ -5,6 +5,8 @@
 //basics
 
 // :)
+// :(
+//unuseful:ignored
 #pragma GCC optimize("O2")
 #pragma G++ optimize("O2")
 #pragma GCC diagnostic warning "-std=c++11"
@@ -22,7 +24,7 @@
 
 //fast read
 
-#ifndef _IOSTREAM_
+#ifndef _GLIBCXX_IOSTREAM
 #include <iostream>
 #endif
 
