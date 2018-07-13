@@ -41,7 +41,6 @@ struct uset
 usets[MAXN];
 
 int fa[MAXN];
-//int usets_mofa_mapping[MAXN],uset_mapping_index;
 
 char buf[READ_MAX_LINE_LENGTH];
 template<class T> void read(T &x,T &y,T &z)
@@ -165,14 +164,6 @@ int main()
 				break;
 			}
 
-		/*
-		for(int j = 0;j < uset_mapping_index;++j)
-			if(usets[usets_mofa_mapping[j]].high > h &&
-				usets[usets_mofa_mapping[j]].low < 0)
-			{
-				ans = 1;
-				break;
-			}*/
 
 		cout<<(ans ? "Yes" : "No")<<endl;
 	}
