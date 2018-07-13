@@ -81,7 +81,7 @@ template<class T> void read(T &x,T &y,T &z)
 	}
 	while(*ptr >= '0' && *ptr <= '9')
 	{
-		x = (x<<1) + (x<<3) + (*ptr-'0')//2x+8x+int(*ptr)
+		x = (x<<1) + (x<<3) + (*ptr-'0');//2x+8x+int(*ptr)
 		++ptr;
 	}
 	if(flag)
@@ -94,7 +94,7 @@ template<class T> void read(T &x,T &y,T &z)
 	}
 	while(*ptr >= '0' && *ptr <= '9')
 	{
-		y = (y<<1) + (y<<3) + (*ptr-'0')//2y+8y+int(*ptr)
+		y = (y<<1) + (y<<3) + (*ptr-'0');//2y+8y+int(*ptr)
 		++ptr;
 	}
 	if(flag)
@@ -107,7 +107,7 @@ template<class T> void read(T &x,T &y,T &z)
 	}
 	while(*ptr >= '0' && *ptr <= '9')
 	{
-		z = (z<<1) + (z<<3) + (*ptr-'0')//2z+8z+int(*ptr)
+		z = (z<<1) + (z<<3) + (*ptr-'0');//2z+8z+int(*ptr)
 		++ptr;
 	}
 	if(flag)
