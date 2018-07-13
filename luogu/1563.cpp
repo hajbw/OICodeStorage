@@ -1,11 +1,18 @@
 #include <iostream>
 #include <string>
 
+#define calc(f1,f2) (f1 ^ f2 ? 1 : -1)
+
+/**
+	P1563 玩具谜题
+*/
+
 using std::cin;
 using std::cout;
+using std::endl;
 using std::string;
 
-const int MAXM = 100005,MAXN = 100005;
+const int MAXM = 100010,MAXN = 100010;
 
 struct toy
 {
@@ -21,13 +28,17 @@ int main()
 	cin>>n>>m;
 
 	for(int i = 0;i < n;++i)
-		cin>>toys[i].revert>>toys[i].name;
+		cin>>toys[i].face>>toys[i].name;
 
 	for(int i = 0;i < m;++i)
 	{
 		cin>>face>>amount;
-		//TODO
-		index = (toys[index].face ^ face)
+		index += calc(toys[index].face,face) * amount % n;
+		if(index < 0)
+			index += n;
 	}
 
+	cout<<toys[index].name;
+
+	return 0;
 }
