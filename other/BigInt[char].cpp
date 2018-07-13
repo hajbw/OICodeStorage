@@ -36,6 +36,27 @@ struct BigInt
 
 	BigInt(long long num)
 	{
+		*this = num;
+	}
+
+	BigInt(BigInt &a)
+	{
+		sign = a.sign;
+		index = a.index;
+		std::memcpy(data,a.data,sizeof(data));
+	}
+
+	BigInt(BigInt *a)
+	{
+		sign = a->sign;
+		index = a->index;
+		std::memcpy(data,a->data,sizeof(data));
+	}
+
+	//operators
+
+	BigInt& operator=(long long num)
+	{
 		int index = 0;
 		if(num < 0ll)
 		{
@@ -49,44 +70,18 @@ struct BigInt
 			++index;
 		}
 		this->index = index;
+
+		return &(*this);
 	}
 
-	BigInt(BigInt &a)
+	BigInt& operator+(BigInt &a)
 	{
-		sign = a.sign;
-		index = a.index;
-		std::memcpy(data,a.data,sizeof(data));
-	}
-
-	//operators
-
-	void operator=(long long num)
-	{
-		*this = BigInt(num);
-	}
-
-	BigInt operator+(BigInt &a)
-	{
-		BigInt res = *this;
+		BigInt res(this);
 		res += a;
 		return res;
 	}
 
-	/*BigInt operator-(BigInt &a)
-	{
-		BigInt res = *this;
-		res -= a;
-		return res;
-	}*/
-
-	/*BigInt operator-()
-	{
-		BigInt res = *this;
-		res.sign = !res.sign;
-		return res;
-	}*/
-
-	BigInt operator*(BigInt &a)
+	BigInt& operator*(BigInt &a)
 	{
 		BigInt res;
 		res.sign = this->sign ^ a.sign;
@@ -126,15 +121,11 @@ struct BigInt
 		*this = *this * a;
 	}
 
-	//functions
-
-	/*int size()
-	{
-		return index;
-	}*/
-
 };
 
+/**
+	NOTE:use friend maybe?
+*/
 ostream& operator<<(ostream &out,const BigInt &a)
 {
 	if(a.sign)
@@ -170,22 +161,5 @@ istream& operator>>(istream &in,BigInt &a)
 
 int main()
 {
-	std::ios::sync_with_stdio(false);
-
-	BigInt x,y;
-	int operation;
-
-	while(cin>>x>>operation>>y)
-	{
-		switch(operation)
-		{
-			case 1:
-				cout<<x+y;
-				break;
-			case 2:
-				cout<<x-y;
-		}
-	}
-
 	return 0;
 }
