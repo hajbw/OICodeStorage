@@ -9,7 +9,7 @@
 #define max(a,b) (a > b ? a : b)
 #endif
 
-#define rev(edg_index) (edg_index ^ 1)
+#define rev(i) (i ^ 1)
 
 /**
 	template:maxinum-network-flow
@@ -18,6 +18,7 @@
 
 using std::cin;
 using std::cout;
+using std::endl;
 
 const int MAXV = 10005,MAXE = 100010,READ_MAX_LINE_LENTH = 40;
 
@@ -35,7 +36,7 @@ edges[MAXE << 1];
 
 int
 	V,E,S,T,//Vertices,Edges,Start point,Terminate point
-	edge_index,
+	edge_index = 2,
 	head[MAXV],
 	visited[MAXV];
 
@@ -151,6 +152,10 @@ int main()
 		if(u != v)
 			addedge(u,v,cap);
 	}
+
+	if(DEBUG)
+		for(int i = 0;i < edge_index;++i)
+			cout<<i<<edges[i]<<endl;
 
 	do
 	{
