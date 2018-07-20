@@ -21,16 +21,8 @@ struct Node
 {
 	int left,right;
 	num val,delay;
-
-	Node()
-	{
-		left = right = 0;
-		val = delay = 0ll;
-	}
 }
 tree[MAXN << 2 | 2];
-
-int M,N;
 
 num arr[MAXN];
 
@@ -95,11 +87,31 @@ num query(int node,int left,int right)
 		query(node << 1 | 1,mid + 1,right);
 }
 
+template<class T>void read(T &x)
+{
+	char ch;
+	int sign = 0;
+	x = 0;
+	cin.get(ch);
+	while(ch < '0' || ch > '9')
+	{
+		sign ^= (ch == '-');
+		ch.get(ch);
+	}
+	while(ch >= '0' && ch <= '9')
+	{
+		x = (x << 1) + (x << 3) + ch - '0';
+		cin.get(ch);
+	}
+	if(sign)
+		x = ~x + 1;
+}
+
 int main()
 {
 	std::ios::sync_with_stdio(false);
 
-	int op_type,x,y;
+	int op_type,x,y,M,N;
 	num k;
 
 	cin>>N>>M;
