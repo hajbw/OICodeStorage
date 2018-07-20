@@ -21,11 +21,11 @@
 #endif
 
 #ifndef maxx
-#define maxx(a,b) (if(a < b)a = b;)
+#define maxx(a,b) (if(a < b)a = b)
 #endif
 
 #ifndef minn
-#define minn(a,b) (if(a > b)a = b;)
+#define minn(a,b) (if(a > b)a = b)
 #endif
 
 //end basics
