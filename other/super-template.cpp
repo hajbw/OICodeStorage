@@ -42,6 +42,8 @@ using std::cin;
 #define READ_MAX_LINE_LENTH 40
 #endif
 
+char buf[READ_MAX_LINE_LENTH];
+
 //version 1: read one(in one line)
 
 template<class T>void read(T &x)
@@ -57,7 +59,7 @@ template<class T>void read(T &x)
 	}
 	while(*ptr >= '0' && *ptr <= '9')
 	{
-		x = (x<<1) + (x<<3) + (*ptr-'0')//2x+8x+int(*ptr)
+		x = (x<<1) + (x<<3) + (*ptr-'0');//2x+8x+int(*ptr)
 		++ptr;
 	}
 	if(flag)
@@ -66,7 +68,6 @@ template<class T>void read(T &x)
 
 //version 2:read three
 
-char buf[READ_MAX_LINE_LENTH];
 template<class T> void read(T &x,T &y,T &z)
 {
 	x = y = z = 0;
