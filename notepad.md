@@ -8,3 +8,6 @@ also for Unicode in Winodws
 
 c++ fast reading
 	https://www.cnblogs.com/Peper/p/7451137.html
+
+inv
+	http://www.cnblogs.com/linyujun/p/5194184.html
