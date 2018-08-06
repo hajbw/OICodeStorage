@@ -142,3 +142,26 @@ template<class T>void read(T **x,int n)
 }
 
 //end fast read
+
+//fast power
+
+const int P = 19260817;
+
+long long fast_pow(long long a,long long b)
+{
+	long long result = 1ll;
+	while(b)
+	{
+		if(b & 1ll)
+			result = result * a % P;
+		a = a * a % P;
+		b >>= 1;
+	}
+	return result;
+}
+
+//gcd
+long long gcd(long long a,long long b)
+{
+	return b ? gcd(b,a % b) : a;
+}
