@@ -153,11 +153,32 @@ long long fast_pow(long long a,long long b)
 	while(b)
 	{
 		if(b & 1ll)
+			result = result * a;
+		a = a * a;
+		b >>= 1;
+	}
+	return result;
+}
+
+long long fast_pow_mod(long long a,long long b)
+{
+	long long result = 1ll;
+	while(b)
+	{
+		if(b & 1ll)
 			result = result * a % P;
 		a = a * a % P;
 		b >>= 1;
 	}
 	return result;
+}
+
+long long inv_mod(long long a)
+/**
+	= 1 / a % P
+*/
+{
+	return fast_pow_mod(a,P - 2);
 }
 
 //gcd
