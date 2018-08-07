@@ -33,6 +33,10 @@
 //fast read
 
 template<class T> void read(istream &in,T &x)
+/**
+	templated normal fast read.
+	available.
+*/
 {
 	char ch = '\0';
 	int flag = 0;
@@ -77,9 +81,11 @@ template<class T>void readline(istream &in,T &x)
 		x = -x;
 }
 
-//SUPER SUPER GREAT version
-
 template<class T>void read(istream &in,T *x,int n)
+/**
+	SUPER SUPER GREAT fast fast read.
+	debugging.
+*/
 {
 	char *buf,*ptr;
 	buf = ptr = new char[READ_MAX_LINE_LENTH];
@@ -107,11 +113,14 @@ template<class T>void read(istream &in,T *x,int n)
 
 //end fast read
 
-//fast power
-
+//normal base for modding(%)
 const int P = 19260817;
 
 long long fast_pow(long long a,long long b)
+/**
+	fast power (long long version).
+	return: a ^ b.(it's not a xor b !)
+*/
 {
 	long long result = 1ll;
 	while(b)
@@ -125,6 +134,10 @@ long long fast_pow(long long a,long long b)
 }
 
 template<class T> T fast_pow(T a,T b)
+/**
+	fast power (template version).
+	return: a ^ b.(it's not a xor b !)
+*/
 {
 	T result = 1;
 	while(b)
@@ -138,7 +151,11 @@ template<class T> T fast_pow(T a,T b)
 }
 
 long long fast_pow_mod(long long a,long long b)
-{
+/**
+	fast power with mod(long long version).
+	return: a ^ b % P.(it's not a xor b !)
+*/
+	{
 	long long result = 1ll;
 	while(b)
 	{
@@ -150,20 +167,21 @@ long long fast_pow_mod(long long a,long long b)
 	return result;
 }
 
-//inverse
-
 long long inv_mod(long long a)
 /**
+	inverse.
 	inv(a) = a^(p-2) (mod p)
-	return : 1 / a % P
+	return: 1 / a % P
 */
 {
 	return fast_pow_mod(a,P - 2);
 }
 
-//gcd
-
 long long gcd(long long a,long long b)
+/**
+	GCD(Greatest Common Divisor).
+	long long version.
+*/
 {
 	return b ? gcd(b,a % b) : a;
 }
