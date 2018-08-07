@@ -32,7 +32,11 @@
 
 //fast read
 
-template<class T> void read(istream &in,T &x)
+#ifndef _GLIBCXX_ISTREAM
+#include <istream>
+#endif
+
+template<class T> void read(std::istream &in,T &x)
 /**
 	templated normal fast read.
 	available.
