@@ -61,7 +61,7 @@ struct BigInt
 		if(num < 0ll)
 		{
 			sign = 1;
-			num = ~num + 1;
+			num = -num;
 		}
 		while(num)
 		{
@@ -146,7 +146,7 @@ istream& operator>>(istream &in,BigInt &a)
 	in.get(ch);
 	while(ch < '0' || ch > '9')
 	{
-		a.sign |= (ch == '-');
+		a.sign ^= (ch == '-');
 		in.get(ch);
 	}
 	while(ch >= '0' && ch <= '9')

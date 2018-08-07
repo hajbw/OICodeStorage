@@ -32,20 +32,37 @@
 
 //fast read
 
+template<class T> void read(istream &in,T &x)
+{
+	char ch = '\0';
+	int flag = 0;
+	x = 0;
+	in.get(ch);
+	while(ch < '0' || ch > '9')
+	{
+		flag ^= (ch == '-');
+		in.get(ch);
+	}
+	while(ch >= '0' && ch <= '9')
+	{
+		x = (x<<1) + (x<<3) + (ch-'0');
+		in.get(ch);
+	}
+	if(flag)
+		x = -x;
+}
+
 #ifndef READ_MAX_LINE_LENTH
 #define READ_MAX_LINE_LENTH 40
 #endif
 
-char buf[READ_MAX_LINE_LENTH];
-
-//version 1: read one(in one line)
-
 template<class T>void readline(istream &in,T &x)
 {
-	x = 0;
-	char *ptr = buf;
-	cin.getline(buf,READ_MAX_LINE_LENTH);
+	static char buf[READ_MAX_LINE_LENTH];
 	int flag = 0;
+	char *ptr = buf;
+	x = 0;
+	cin.getline(buf,READ_MAX_LINE_LENTH);
 	while(*ptr < '0' || *ptr > '9')
 	{
 		flag ^= (*ptr == '-');
@@ -57,7 +74,7 @@ template<class T>void readline(istream &in,T &x)
 		++ptr;
 	}
 	if(flag)
-		x = ~x + 1;
+		x = -x;
 }
 
 //SUPER SUPER GREAT version
@@ -83,7 +100,7 @@ template<class T>void read(istream &in,T *x,int n)
 			++ptr;
 		}
 		if(flag)
-			x[n] = ~x[n] + 1;
+			x[n] = -x[n];
 	}
 	delete [] buf;
 }
@@ -100,9 +117,22 @@ long long fast_pow(long long a,long long b)
 	while(b)
 	{
 		if(b & 1ll)
-			result = result * a;
-		a = a * a;
+			result *= a;
+		a *= a;
 		b >>= 1;
+	}
+	return result;
+}
+
+template<class T> T fast_pow(T a,T b)
+{
+	T result = 1;
+	while(b)
+	{
+		if(b % 2)
+			result *= a;
+		a *= a;
+		b /= 2;
 	}
 	return result;
 }
