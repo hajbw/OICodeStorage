@@ -2,14 +2,6 @@
 	hajbw super template
 */
 
-// :)
-// :(
-//unuseful:ignored
-#pragma GCC optimize("O2")
-#pragma G++ optimize("O2")
-#pragma GCC diagnostic warning "-std=c++11"
-#pragma G++ diagnostic warning "-std=c++11"
-
 #ifndef min
 #define min(a,b) (a < b ? a : b)
 #endif
@@ -17,6 +9,16 @@
 #ifndef max
 #define max(a,b) (a > b ? a : b)
 #endif
+
+#ifdef min
+#undef min
+#endif
+#define min(a,b) (a < b ? a : b)
+
+#ifdef max
+#undef max
+#endif
+#define max(a,b) (a > b ? a : b)
 
 #ifndef maxx
 #define maxx(a,b) (if(a < b)a = b)
