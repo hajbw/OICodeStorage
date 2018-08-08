@@ -33,7 +33,6 @@ public:
 			this->obj = obj;
 		}
 
-
 	}
 
 	bool_array(unsigned n = DEFAULT_SIZE)
@@ -69,4 +68,5 @@ public:
 	{
 		return data_size * sizeof(unsigned);
 	}
+	
 };
