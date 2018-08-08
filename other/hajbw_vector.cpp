@@ -4,8 +4,12 @@
 	only a template 
 */
 
-#ifndef _CSTDIO_
-#include <cstdio>
+#ifndef _GLIBCXX_IOSTREAM
+#include <iostream>
+#endif
+
+#ifndef _GLIBCXX_CSTRING
+#include <cstring>
 #endif
 
 class hajbw_vector_array
@@ -61,25 +65,19 @@ public:
 
 };
 
-class hajbw_vector_linked_list
+template<class T> class hajbw_vector_linked_list
 {
+
 public:
 
-	struct Node
+	struct node
 	{
-		int data;
-		Node* next;
+		
 	};
-
-private:
-
-
-
-public:
 
 	hajbw_vector_linked_list()
 	{
 
 	}
 
-}
+};

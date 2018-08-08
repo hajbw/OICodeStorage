@@ -68,5 +68,5 @@ public:
 	{
 		return data_size * sizeof(unsigned);
 	}
-	
+
 };
