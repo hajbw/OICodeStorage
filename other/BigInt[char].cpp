@@ -16,17 +16,18 @@ using std::istream;
 
 struct BigInt
 {
-//public:
-	static const int MAX_BIT = 1000000;
 
-//private:
-	int sign;//1 if negative
-	int index;
+	friend std::ostream& operator<<(std::ostream &out,const BigInt &a);
+	friend std::istream& operator>>(std::istream &in,BigInt &a);
+
+	int
+		sign,//1 if negative
+		index;
 	unsigned char data[MAX_BIT];
 
-//public:
+public:
 
-	//constructors
+	static const int MAX_BIT = 1000000;
 
 	BigInt()
 	{
@@ -81,6 +82,13 @@ struct BigInt
 		return res;
 	}
 
+	BigInt operator-(BigInt &a)
+	{
+		BigInt res(this);
+		res -=a;
+		return res;
+	}
+
 	BigInt& operator*(BigInt &a)
 	{
 		BigInt res;
@@ -111,10 +119,10 @@ struct BigInt
 			--index;
 	}
 
-	/*void operator-=(BigInt &a)
+	void operator-=(BigInt &a)
 	{
 		*this += -a;
-	}*/
+	}
 
 	void operator*=(BigInt &a)
 	{
@@ -126,7 +134,7 @@ struct BigInt
 /**
 	NOTE:use friend maybe?
 */
-ostream& operator<<(ostream &out,const BigInt &a)
+std::ostream& operator<<(std::ostream &out,const BigInt &a)
 {
 	if(a.sign)
 		out.put('-');
@@ -135,7 +143,7 @@ ostream& operator<<(ostream &out,const BigInt &a)
 	return out;
 }
 
-istream& operator>>(istream &in,BigInt &a)
+std::istream& operator>>(std::istream &in,BigInt &a)
 {
 	a.sign = 0;
 	a.index = 0;

@@ -19,7 +19,9 @@ public:
 	class bool_array_operator
 	{
 		bool_array *obj;
-		unsigned index,offsset;
+		unsigned index,offset;
+		
+		public:
 
 		bool_array_operator(bool_array *obj,unsigned index)
 		{
@@ -33,7 +35,7 @@ public:
 			this->obj = obj;
 		}
 
-	}
+	};
 
 	bool_array(unsigned n = DEFAULT_SIZE)
 	{
@@ -44,9 +46,11 @@ public:
 
 	bool_array(bool arr[],unsigned n)
 	{
-		bool_array(n);
+		data_size = (n + sizeof(unsigned) - 1) / sizeof(unsigned);
+		data = new unsigned[data_size];
+		std::memset(data,0,sizeof(data));
 		for(int i = 0;i < n;++i)
-			data[i / sizeof(unsigned)] |= 1 << (index % sizeof(unsigned));
+			data[i / sizeof(unsigned)] |= 1 << (i % sizeof(unsigned));
 	}
 
 	~bool_array()
@@ -59,9 +63,9 @@ public:
 		return data[index / sizeof(unsigned)] & (1 << (index % sizeof(unsigned)));
 	}
 
-	bool_array_operator operator[](unsigned index)
+	bool_array_operator operator[](int index)
 	{
-		return new bool_array_operator(this,index);
+		return bool_array_operator(this,index);
 	}
 
 	int size()
@@ -70,3 +74,8 @@ public:
 	}
 
 };
+
+int main()
+{
+	return 0;
+}
