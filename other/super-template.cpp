@@ -2,31 +2,21 @@
 	hajbw super template
 */
 
-#ifndef min
-#define min(a,b) (a < b ? a : b)
-#endif
-
-#ifndef max
-#define max(a,b) (a > b ? a : b)
-#endif
+#define min(a,b) ((a) < (b) ? (a) : (b))
+#define max(a,b) ((a) > (b) ? (a) : (b))
 
 #ifdef min
 #undef min
 #endif
-#define min(a,b) (a < b ? a : b)
+#define min(a,b) ((a) < (b) ? (a) : (b))
 
 #ifdef max
 #undef max
 #endif
-#define max(a,b) (a > b ? a : b)
+#define max(a,b) ((a) > (b) ? (a) : (b))
 
-#ifndef maxx
-#define maxx(a,b) (if(a < b)a = b)
-#endif
-
-#ifndef minn
-#define minn(a,b) (if(a > b)a = b)
-#endif
+#define maxx(a,b) (if((a) < (b))(a) = (b))
+#define minn(a,b) (if((a) > (b))(a) = (b))
 
 //end basics
 
