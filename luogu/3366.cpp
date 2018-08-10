@@ -16,15 +16,14 @@ edges[MAXE];
 
 int V,E,iedge = 0,fa[MAXV];
 
-void addedge(int u,int v,int w)
-{
-	edges[++iedge] = (edge){u,v,w};
-}
-
 int mininum_spanning_tree_kruskal()
 {
 	int Vchosen = 0;
 	std::sort(edges,edges + V);
+	while(Vchosen < V)
+	{
+
+	}
 }
 
 template<class T>void read(std::istream &in,T &x)
@@ -49,7 +48,11 @@ int main()
 		read(cin,u);
 		read(cin,v);
 		read(cin,w);
-		addedge(u,v,w);
+		edges[i] = (edge){u,v,w};
 	}
+
+	w = mininum_spanning_tree_kruskal();
+	cout<<(w = -1 ? "orz" : w);
+
 	return 0;
 }
