@@ -18,7 +18,14 @@
 #define maxx(a,b) (if((a) < (b))(a) = (b))
 #define minn(a,b) (if((a) > (b))(a) = (b))
 
-//end basics
+template<class T1,class T2>struct hpair
+{
+	T1 first;
+	T2 second;
+	hpair():first(),second(){}
+	hpair(T1 a):first(a),second(){}
+	hpair(T1 a,T2 b):first(a),second(b){}
+}
 
 //fast read
 
@@ -48,6 +55,18 @@ template<class T> void read(std::istream &in,T &x)
 	}
 	if(flag)
 		x = -x;
+}
+
+template<class T> void read(T &x,std::istream &in = std::cin)
+/**
+	packed fast read with default argument (cin) for istream &in
+*/
+{
+	char ch = '\0';int flag = 0;x = 0;
+	in.get(ch);
+	while(ch < '0' || ch > '9'){flag ^= (ch == '-');in.get(ch);}
+	while(ch >= '0' && ch <= '9'){x = (x<<1) + (x<<3) + (ch-'0');in.get(ch);}
+	if(flag)x = -x;
 }
 
 #ifndef READ_MAX_LINE_LENTH
