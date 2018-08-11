@@ -25,6 +25,13 @@ template<class T1,class T2>struct hpair
 	hpair():first(),second(){}
 	hpair(T1 a):first(a),second(){}
 	hpair(T1 a,T2 b):first(a),second(b){}
+	bool operator<(hpair &a)
+	{
+		return 
+			this->first = a.first ? 
+			this->second < a.second :
+			this->first < a.first;
+	}
 }
 
 //fast read
