@@ -106,6 +106,8 @@ int mininum_spanning_tree_prim()
 	return 0;
 }
 
+
+
 int main()
 {
 	int u,v,w;
