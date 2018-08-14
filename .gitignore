@@ -41,3 +41,6 @@
 
 #pycache
 __pycache__/
+
+#test folder
+/tester/
