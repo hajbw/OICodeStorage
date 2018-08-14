@@ -38,3 +38,6 @@
 
 #tester
 /other/boring-tester.cpp
+
+#pycache
+__pycache__/
