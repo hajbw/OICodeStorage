@@ -1,12 +1,19 @@
 #include <iostream>
 #include <queue>
 
+#define DEBUG 1
+
+#if DEBUG
+#include <windows.h>
+#endif
+
 /**
 	P2622 关灯问题II
 */
 
 using std::cin;
 using std::cout;
+using std::queue;
 
 const int MAXN = 11,MAXM = 101;
 
@@ -19,7 +26,8 @@ struct ipair
 
 int
 	M,N,
-	lights[MAXM][MAXN];
+	lights[MAXM][MAXN],
+	vis[1<<MAXN];
 
 template<class T>inline void read(T &x)
 {
@@ -30,18 +38,45 @@ template<class T>inline void read(T &x)
 	if(flag)x = -x;
 }
 
+inline int operate(int &stat,int &i)
+{
+	int ans = stat;
+	for(int j = 0;j < N;++j)
+	{
+		if(lights[i][j] == 1)
+			ans |= 1<<j;
+		if(lights[i][j] == -1)
+			ans &= ~(1<<j);
+	}
+	return ans;
+}
+
 int bfs()
 {
 	queue<ipair> quq;
+	int temp;
 
 	quq.push(ipair((1<<N)-1,0));
 
 	while(!quq.empty())
 	{
+		if(!quq.front().stat)
+			return quq.front().step;
+
 		for(int i = 0;i < M;++i)
-			quq.push(ipair(operate(i),quq.top().step+1));
+		{
+			temp = operate(quq.front().stat,i);
+			if(!vis[temp])
+			{
+				quq.push(ipair(temp,quq.front().step+1));
+				vis[temp] = 1;
+			}
+		}
+
 		quq.pop();
 	}
+
+	return -1;
 }
 
 int main()
@@ -54,6 +89,10 @@ int main()
 			read(a),lights[i][j] = a;
 
 	cout<<bfs();
+
+#if DEBUG
+	system("pause");
+#endif
 
 	return 0;
 }
