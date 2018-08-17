@@ -10,14 +10,7 @@
 def p(n):
 	if n < 2:
 		return 0
-	return (n - 1) * p1(n - 1)
-
-def p1(n):
-	if n < 1:
-		return 0
-	if n < 3:
-		return 1
-	return p(n - 1) + p1(n - 1)
+	return (n - 1) * ( p(n - 1) + p(n - 2) )
 
 for n in range(1,10):
 	print(p(n))
