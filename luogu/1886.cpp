@@ -2,7 +2,8 @@
 
 /**
 	P1886 滑动窗口
-	using monotone queue
+	ver.1
+	using user-defined monotone queue
 	homotone queue(大嘘)
 */
 
@@ -13,30 +14,13 @@ const int MAXN = 1000010;
 
 struct node
 {
-	int val;
-	node* prev;
+	int value,index;
+	node* prev,next;
 
-	node():val(),prev(){}
-	node(int a):val(a),prev(){}
-	node(node* a):val(),prev(a){}
-	node(int a,node *b):val(a),prev(b){}
-}
-head(),tail(&head);
+	node():value(0),prev(),next(){}
+};
 
-void push_back(int n)
-{
-
-}
-
-int pop_front()
-{
-
-}
-
-int pop_back()
-{
-
-}
+int min_num[MAXN],max_num[MAXN];
 
 template<class T>void read(T &x)
 {
@@ -49,8 +33,12 @@ template<class T>void read(T &x)
 
 int main()
 {
-	int N,K;
+	int N,K,num;
+	node min_head,min_head;
 
 	read(N);read(K);
 	for(int i = 0;i < N;++i)
+	{
+		read(num);
+	}
 }
