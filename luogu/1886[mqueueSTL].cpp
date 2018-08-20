@@ -1,6 +1,12 @@
 #include <iostream>
 #include <deque>
 
+#define DEBUG 1
+
+#if DEBUG
+#include <windows.h>
+#endif
+
 /**
 	P1886 滑动窗口
 	ver.2
@@ -23,12 +29,12 @@ struct hpair
 
 int num[MAXN],N,K;
 
-template<class T>void read(T &x)
+template<class T>void read(T &x,std::istream &in = cin)
 {
-	char ch;int flag = 0;x = 0;
+	char ch = '\0';int flag = 0;x = 0;
 	in.get(ch);
 	while(ch < '0' || ch > '9'){flag ^= (ch == '-');in.get(ch);}
-	while(ch >= '0' && ch <= '9'){x = (x<<1) + (x<<3) + (ch-'0');in.get(ch);}
+	while(ch >= '0' && ch <= '9'){x = (x<<1) + (x<<3) + ch - '0';in.get(ch);}
 	if(flag)x = -x;
 }
 
@@ -41,10 +47,10 @@ void get_min()
 		//push in
 		while(quq.back().value > num[i] && !quq.empty())
 			quq.pop_back();
-		quq.push_back(hpair);
+		quq.push_back(hpair(num[i],i));
 
 		if(quq.front().index > i - K)
-			quq.pop_head();
+			quq.pop_front();
 
 		if(i > K - 2)
 			cout<<quq.front().value<<" ";
@@ -60,10 +66,10 @@ void get_max()
 		//push in
 		while(quq.back().value < num[i] && !quq.empty())
 			quq.pop_back();
-		quq.push_back(hpair);
+		quq.push_back(hpair(num[i],i));
 
 		if(quq.front().index > i - K)
-			quq.pop_head();
+			quq.pop_front();
 
 		if(i > K - 2)
 			cout<<quq.front().value<<" ";
@@ -72,13 +78,19 @@ void get_max()
 
 int main()
 {
+	int a;
+
 	read(N);read(K);
-	for(int i = 0;i > N;++i)
-		read(num[i]);
+	for(int i = 0;i < N;++i)
+		read(num[a]);
 
 	get_min();
 	cout<<"\n";
 	get_max();
+
+#if DEBUG
+	system("pause");
+#endif
 
 	return 0;
 }

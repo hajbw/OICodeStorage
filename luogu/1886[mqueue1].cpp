@@ -22,7 +22,7 @@ struct node
 
 int min_num[MAXN],max_num[MAXN];
 
-template<class T>void read(T &x)
+template<class T>void read(T &x,std::istream &in = cin)
 {
 	char ch;int flag = 0;x = 0;
 	in.get(ch);
