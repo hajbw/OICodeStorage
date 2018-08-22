@@ -1,6 +1,11 @@
 #include <iostream>
 
 #define max(a,b) ((a) > (b) ? (a) : (b))
+#define DEBUG 1
+
+#if DEBUG
+#include <windows.h>
+#endif
 /**
 	contest 1 problem 4 #25
 	D. 圣诞树(tree)
@@ -51,17 +56,32 @@ int main()
 	{
 		read(a);
 		tvalue[i] = value[i] = a;
-		while(!(ch == '\0' || ch == '\n'))
-		{
-
-		}
+		
 	}
+
+#if DEBUG
+	//traversal
+	for(int i = 0;i < N;++i)
+	{
+		cout<<i<<"\t:\t";
+		for(int j = head[i];j;j = edges[j].next)
+		{
+			cout<<j<<"\t";
+		}
+		cout<<"\n";
+	}
+
+#endif
 
 	for(int i = 0;i < N;++i)
 		if(!vis[i])
 			ans = max(ans,dfs(i));
 
 	cout<<ans;
+
+#if DEBUG
+	system("pause");
+#endif
 
 	return 0;
 }
