@@ -52,7 +52,7 @@ void get_min()
 		if(quq.front().index > i - K)
 			quq.pop_front();
 
-		if(i > K - 2)
+		if(i > K)
 			cout<<quq.front().value<<" ";
 	}
 }
@@ -71,7 +71,7 @@ void get_max()
 		if(quq.front().index > i - K)
 			quq.pop_front();
 
-		if(i > K - 2)
+		if(i > K)
 			cout<<quq.front().value<<" ";
 	}
 }
@@ -80,9 +80,9 @@ int main()
 {
 	int a;
 
-	read(N);read(K);
+	read(N);read(K);K -= 2;
 	for(int i = 0;i < N;++i)
-		read(num[a]);
+		read(a),num[i] = a;
 
 	get_min();
 	cout<<"\n";
