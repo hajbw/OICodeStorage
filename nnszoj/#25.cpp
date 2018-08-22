@@ -9,7 +9,7 @@
 using std::cin;
 using std::cout;
 
-const int MAXN = 105,BUF_LEN = 400;
+const int MAXN = 105;
 
 struct edge
 {
@@ -18,7 +18,7 @@ struct edge
 edges[MAXN];
 
 int value[MAXN],tvalue[MAXN],vis[MAXN],head[MAXN],edge_cnt;
-char buf[BUF_LEN],ch;
+char ch;
 
 template<class T>void read(T &x)
 {
@@ -51,8 +51,6 @@ int main()
 	{
 		read(a);
 		tvalue[i] = value[i] = a;
-		cin.getline(buf,BUF_LEN);
-		char *ch = buf;
 		while(!(ch == '\0' || ch == '\n'))
 		{
 
