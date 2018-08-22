@@ -1,5 +1,10 @@
 #include <iostream>
 
+#define DEBUG 1
+
+#if DEBUG
+#include <windows.h>
+#endif
 /**
 	P1049 装箱问题
 */
@@ -34,6 +39,10 @@ int main()
 
 	for(i = V;i >= 0 && !reachable[i];--i) ;
 	cout<<V - i;
+
+#if DEBUG
+	system("pause");
+#endif
 
 	return 0;
 }
