@@ -38,14 +38,13 @@ template<class T>void read(T &x,std::istream &in = cin)
 	if(flag)x = -x;
 }
 
-void get_min()
+inline void get_min()
 {
 	deque<hpair> quq;
 
 	for(int i = 0;i < N;++i)
 	{
-		//push in
-		while(quq.back().value > num[i] && !quq.empty())
+		while(!quq.empty() && quq.back().value > num[i])
 			quq.pop_back();
 		quq.push_back(hpair(num[i],i));
 
@@ -57,14 +56,14 @@ void get_min()
 	}
 }
 
-void get_max()
+inline void get_max()
 {
 	deque<hpair> quq;
 
 	for(int i = 0;i < N;++i)
 	{
 		//push in
-		while(quq.back().value < num[i] && !quq.empty())
+		while(!quq.empty() && quq.back().value < num[i])
 			quq.pop_back();
 		quq.push_back(hpair(num[i],i));
 
