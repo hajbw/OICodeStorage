@@ -12,7 +12,7 @@ using std::cout;
 
 const int MAXN = 5005;
 
-int price[MAXN];
+int price[MAXN],N;
 
 void read(int &x)
 {
@@ -23,5 +23,9 @@ void read(int &x)
 
 int main()
 {
+	read(N);
+	for(int i = 0;i < N;++i)
+		read(price[i]);
 
+	return 0;
 }
