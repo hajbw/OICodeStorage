@@ -1,12 +1,14 @@
 #include <iostream>
 
-#define DEBUG 1
+#define DEBUG 0
 
 #if DEBUG
 #include <windows.h>
 #endif
+
 /**
 	P1049 装箱问题
+	AC
 */
 
 using std::cin;
@@ -33,7 +35,7 @@ int main()
 		v[i] = read();
 
 	for(i = 0;i < N;++i)
-		for(j = V - v[i];j > 0;--j)
+		for(j = V - v[i];j >= 0;--j)
 			if(reachable[j])
 				reachable[j + v[i]] = 1;
 
@@ -41,6 +43,8 @@ int main()
 	cout<<V - i;
 
 #if DEBUG
+	for(int i = 0;i < V;++i)
+		cout<<reachable[i];
 	system("pause");
 #endif
 
