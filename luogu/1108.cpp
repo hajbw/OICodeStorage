@@ -12,9 +12,16 @@ using std::cout;
 
 const int MAXN = 5005;
 
+int price[MAXN];
+
 void read(int &x)
 {
 	char ch = '\0';x = 0;
 	while(ch < '0' || ch > '9')cin.get(ch);
 	while(ch >= '0' && ch <= '9'){x = (x<<1) + (x<<3) + ch - '0';cin.get(ch);}
+}
+
+int main()
+{
+
 }
