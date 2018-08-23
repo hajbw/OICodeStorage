@@ -3,6 +3,12 @@
 #define min(a,b) ((a) < (b) ? (a) : (b))
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
+#define DEBUG 1
+
+#if DEBUG
+#include <windows.h>
+#endif
+
 /**
 	P1877 [HAOI2012]音量调节
 */
@@ -10,9 +16,9 @@
 using std::cin;
 using std::cout;
 
-const int MAXN = 51,MAXL = 1005;
+const int MAXN = 52,MAXL = 1005;
 
-int levels[MAXN],reachable[MAXL];
+int levels[MAXN],reachable[MAXN][MAXL];
 
 void read(int &x)
 {
@@ -25,20 +31,29 @@ int main()
 {
 	int N,beginlevel,maxlevel,flag = 0;
 
-	read(N);read(beginlevel);read(maxlevel);
-	for(int i = 0;i < N;++i)
-		read(levels[N]);
+	read(N);
+	read(beginlevel);
+	read(maxlevel);
+	for(int i = 1;i <= N;++i)
+		read(levels[i]);
 
-	reachable[beginlevel] = 1;
-	for(int i = 0;i < N && !flag;++i)
+	for (int i = 0; i < N; ++i)
+	{
+		cout<<levels[i];
+	}
+
+	reachable[0][beginlevel] = 1;
+	for(int i = 1;i <= N && !flag;++i)
 	{
 		flag = 1;
-		for(int j = maxlevel - levels[i];j >= 0;--j)
+		for(int j = 0;j <= maxlevel - levels[i];++j)
 		{
-			if(reachable[j])
-				reachable[j + levels[i]] = 1,
-				flag = 0;
+			if(reachable[i - 1][j])
+				reachable[i][j + levels[i]] = 1,
+				flag = 0,
+				cout<<i<<" , "<<j<<" reachable.\n";
 		}
+
 	}
 
 	if(flag)
@@ -46,9 +61,15 @@ int main()
 	else
 	{
 		int i;
-		for(i = maxlevel;i >= 0 && !reachable[i];--i);
+		for(i = maxlevel;i && !reachable[N][i];--i);
 		cout<<i;
 	}
+
+#if DEBUG
+	cout<<"\nflag = "<<flag<<"\n";
+
+	system("pause");
+#endif
 
 	return 0;
 }
