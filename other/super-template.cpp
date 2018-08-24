@@ -131,6 +131,37 @@ template<class T>void read(istream &in,T *x,int n)
 	delete [] buf;
 }
 
+namespace surperb_fast_read
+/**
+	probaby BEST fast read EVER
+	usage:
+	linefeed() first
+	then read(x)
+	linefeed() again to get a new line
+*/
+{
+
+char buf[READ_MAX_LINE_LENTH],*ptr,*temp;
+
+bool linefeed()
+/**
+	read a new line into buf
+*/
+{
+	ptr = buf;
+	return bool(std::cin.getline(buf,READ_MAX_LINE_LENTH));
+}
+
+template<class T>bool read(T &x)
+{
+	int flag;temp = ptr;x = 0;
+	while(*ptr < '0' || *ptr > '9' && *ptr){flag ^= (*ptr == '-');++ptr;}
+	while(*ptr >= '0' && *ptr <= '9'){x = (x<<1) + (x<<3) + *ptr - '0';++ptr}
+	return temp == ptr;
+}
+
+}
+
 //end fast read
 
 //normal base for modding(%)
