@@ -1,5 +1,14 @@
 #include <iostream>
 
+#define min(a,b) ((a) < (b) ? (a) : (b))
+#define max(a,b) ((a) > (b) ? (a) : (b))
+
+#define DEBUG 1
+
+#if DEDUG
+#include <windows.h>
+#endif
+
 /**
 	P1047 校门外的树
 	using some WTF data structure ... whatever
@@ -16,8 +25,9 @@ struct node
 		cnt;//data
 	node *lch,*rch;// l/r child 
 
-	node(){}
-	node(int l,int r,int c):lb(l),rb(r),cnt(c){}
+	node():lb(),rb(),cnt(),lch(),rch(){}
+	node(int l,int r,int c):lb(l),rb(r),cnt(c),lch(),rch(){}
+	node(int l,int r,int c,node *lc,node *rc):lb(l),rb(r),cnt(c),lch(lc),rch(rc){}
 };
 
 node *root;
@@ -29,14 +39,26 @@ void read(int &x)
 	while(ch >= '0' && ch <= '9'){x = (x<<1) + (x<<3) + ch - '0';cin.get(ch);}
 }
 
-int cut(node *curr,int lb,int rb)
+/**void release(node *ntr)
+{
+	if(!ntr)
+		return;
+	release(ntr->lch);
+	release(ntr->rch);
+	delete ntr;
+}*/
+
+int cut(node *curr,int &lb,int &rb)
 {
 	//if out of range,return original value
 	if(lb > curr->rb || rb < curr->lb)
-		return curr-cnt;
-	//if [lb,rb] covered curr->range,curr is cut,return 0;
+		return curr->cnt;
+	//if [lb,rb] covered curr->range,curr is completely cut,return 0;
 	if(lb <= curr->lb && rb >= curr->rb)
+	{
+		/*release(curr);*/
 		return 0;
+	}
 
 	int lc = 0,rc = 0;//lcount,rcount
 
@@ -62,15 +84,29 @@ int cut(node *curr,int lb,int rb)
 		return curr->cnt;
 
 	}
-	
-	lc = cut(curr->lch,lb,rb);
-	rc = cut(cutt->rch,lb,rb);
 
-	if(!lc)//lc == 0 => [lb,rb] covered curr->lch->range
+	//has lch,rch,traversal
+	lc = cut(curr->lch,lb,rb);
+	rc = cut(curr->rch,lb,rb);
+
+	//lc == 0 => [lb,rb] covered curr->lch->range
+	//curr->lch is dead
+	//curr = curr->rch
+	if(!lc)
 	{
-		delete curr->lch;
-		//curr = rch
-	} 
+		node *temp = curr->rch;
+		*curr = (node){temp->lb,temp->rb,temp->cnt,temp->lch,temp->rch};
+		delete temp;
+		return curr->cnt;
+	}
+
+	if(!rc)
+	{
+		node *temp = curr->lch;
+		*curr = (node){temp->lb,temp->rb,temp->cnt,temp->lch,temp->rch};
+		delete temp;
+		return curr->cnt;
+	}
 
 	return curr->cnt = lc + rc;
 }
@@ -88,6 +124,10 @@ int main()
 	}
 
 	cout<<root->cnt;
+
+#if DEBUG
+	system("pause");
+#endif
 
 	return 0;
 }
