@@ -32,7 +32,7 @@ template<class T1,class T2>struct hpair
 			this->second < a.second :
 			this->first < a.first;
 	}
-}
+};
 
 //fast read
 
