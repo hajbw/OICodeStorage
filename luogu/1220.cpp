@@ -1,5 +1,8 @@
 #include <iostream>
 
+#define min(a,b) ((a) < (b) ? (a) : (b))
+#define max(a,b) ((a) > (b) ? (a) : (b))
+
 /**
 	P1220 关路灯
 */
@@ -9,17 +12,9 @@ using std::cout;
 
 const int MAXN = 55,;
 
-template<class T1,class T2>struct hpair
-{
-	T1 first;
-	T2 second;
-	hpair():first(),second(){}
-	hpair(T1 a):first(a),second(){}
-	hpair(T1 a,T2 b):first(a),second(b){}
-};
-
-int dp[MAXN][MAXN][2];
-hpair<int,int> lights[MAXN];
+int
+	power[MAXN],power_sum[MAXN],pos[MAXN],
+	dp[MAXN][MAXN][2];//least-used-power[lbound][rbound][left/right]
 
 
 template<class T> void read(T &x,std::istream &in = std::cin)
@@ -33,14 +28,18 @@ template<class T> void read(T &x,std::istream &in = std::cin)
 
 int main()
 {
-	int N,C,a,b;
+	int N,C;
 
 	read(N);read(C);
-	for(int i = 0;i < N;++i)
+	read(pos[0]);read(power[0]);
+	power_sum[0] = power[0];
+	for(int i = 1;i < N;++i)
 	{
-		read(a);read(b);
-		lights[i] = (lights){a,b};
+		read(pos[i]);read(power[i]);
+		power_sum[i] = power_sum[i - 1] + power[i];
 	}
+
+
 
 	return 0;
 }
