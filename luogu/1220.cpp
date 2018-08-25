@@ -10,7 +10,7 @@
 using std::cin;
 using std::cout;
 
-const int MAXN = 55,;
+const int MAXN = 55;
 
 int
 	power[MAXN],power_sum[MAXN],pos[MAXN],
@@ -28,9 +28,11 @@ template<class T> void read(T &x,std::istream &in = std::cin)
 
 int main()
 {
-	int N,C;
+	std::ios::sync_with_stdio(false);
 
-	read(N);read(C);
+	int N,C,a;
+
+	read(N);read(C);--C;
 	read(pos[0]);read(power[0]);
 	power_sum[0] = power[0];
 	for(int i = 1;i < N;++i)
@@ -39,7 +41,32 @@ int main()
 		power_sum[i] = power_sum[i - 1] + power[i];
 	}
 
+	for(int i = 0;i < N;++i)
+		for(int j = 0;j < N;++j)
+			dp[i][j][0] = dp[i][j][1] = 19260817;
 
+	dp[C][C][0] = dp[C][C][1] = 0;
+
+	for(int j = C;j < N;++j)
+	{
+		for(int i = j - 1;i >= 0;--i)
+		{
+			a = power_sum[N - 1] - power_sum[j] + power_sum[i];
+			dp[i][j][0] = min
+			(
+				dp[i + 1][j][0] + (pos[i + 1] - pos[i]) * a,
+				dp[i + 1][j][1] + (pos[j] - pos[i]) * a
+			);
+			a = power_sum[N - 1] - power_sum[j - 1] + power_sum[i - 1];
+			dp[i][j][1] = min
+			(
+				dp[i][j - 1][0] + (pos[j] - pos[i]) * a,
+				dp[i][j - 1][1] + (pos[j] - pos[j - 1]) * a
+			);
+		}
+	}
+
+	cout<<min(dp[0][N - 1][0],dp[0][N - 1][1]);
 
 	return 0;
 }
