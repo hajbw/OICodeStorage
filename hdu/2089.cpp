@@ -13,7 +13,7 @@ using std::cout;
 const int MAXM = 1000000,MAXN = 1000000,MAXBIT = 8;
 
 int
-	M,N,bitcount,
+	M,N,bitcount,lastbitcount,
 	dp[MAXBIT][10];//sum[bits - 1][first-num]
 
 template<class T> void read(T &x,std::istream &in = std::cin)
@@ -39,21 +39,28 @@ int main()
 {
 	std::ios::sync_with_stdio(false);
 
+	int a,b;//temp variants
+
 	while( ~(1 ^ 1) )
 	{
 		read(N);read(M);
 		if(!N && !M)
 			break;
 
-		min(countbit(M),countbit(N));
+		bitcount = min(countbit(M),countbit(N));
 
-			for(int i = 0;i < bitcount;++i)
+		//pre-processes
+		if(bitcount > lastbitcount)
+		{
+			for(int i = lastbitcount;i < bitcount;++i)
 			{
 				for(int j = 0;j < 10;++j)
 				{
 
 				}
 			}
+			lastbitcount = bitcount;
+		}
 
 	}
 }
