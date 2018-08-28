@@ -3,14 +3,12 @@ algorithm tarjan is
 	output: set of strongly connected components (sets of vertices)
 
 	index = 0
-	S = empty array
+	S = []
 	for each v in V :
 		if (v.index is undefined) :
 			strongconnect(v)
-		end if
-	end for
 
-	function strongconnect(v)
+	def strongconnect(v):
 		# Set the depth index for v to the smallest unused index
 		v.index = index
 		v.lowlink = index
@@ -30,8 +28,6 @@ algorithm tarjan is
 				# Note: The next line may look odd - but is correct.
 				# It says w.index not w.lowlink; that is deliberate and from the original paper
 				v.lowlink  = min(v.lowlink, w.index)
-			end if
-		end for
 
 		# If v is a root node, pop the stack and generate an SCC
 		if v.lowlink == v.index :
@@ -40,7 +36,6 @@ algorithm tarjan is
 				w = S.pop()
 				w.onStack = False
 				add w to current strongly connected component
-			while (w != v)
+			while w != v
 			output the current strongly connected component
-		end if
-	end function
+
