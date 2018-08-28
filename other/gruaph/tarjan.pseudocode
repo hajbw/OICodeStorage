@@ -8,34 +8,34 @@ algorithm tarjan is
 		if (v.index is undefined) :
 			strongconnect(v)
 
-	def strongconnect(v):
-		# Set the depth index for v to the smallest unused index
-		v.index = index
-		v.lowlink = index
+	def strongconnect(u):
+		# Set the depth index for u to the smallest unused index
+		u.index = index
+		u.lowlink = index
 		index = index + 1
-		S.push(v)
-		v.onStack = True
+		S.push(u)
+		u.onStack = True
 
-		# Consider successors of v
-		for each (v, w) in E :
-			if w.index is undefined :
-				# Successor w has not yet been visited; recurse on it
-				strongconnect(w)
-				v.lowlink  = min(v.lowlink, w.lowlink)
-			else if (w.onStack) :
-				# Successor w is in stack S and hence in the current SCC
-				# If w is not on stack, : (v, w) is a cross-edge in the DFS tree and must be ignored
+		# Consider successors of u
+		for each (u, v) in E :
+			if v.index is undefined :
+				# Successor v has not yet been visited; recurse on it
+				strongconnect(v)
+				u.lowlink  = min(u.lowlink, v.lowlink)
+			else if (u.onStack) :
+				# Successor u is in stack S and hence in the current SCC
+				# If u is not on stack, : (u, v) is a cross-edge in the DFS tree and must be ignored
 				# Note: The next line may look odd - but is correct.
-				# It says w.index not w.lowlink; that is deliberate and from the original paper
-				v.lowlink  = min(v.lowlink, w.index)
+				# It says u.index not u.lowlink; that is deliberate and from the original paper
+				u.lowlink  = min(u.lowlink, v.index)
 
-		# If v is a root node, pop the stack and generate an SCC
-		if v.lowlink == v.index :
+		# If u is a root node, pop the stack and generate an SCC
+		if u.lowlink == u.index :
 			start a new strongly connected component
 			repeat
-				w = S.pop()
-				w.onStack = False
-				add w to current strongly connected component
-			while w != v
+				v = S.pop()
+				v.onStack = False
+				add v to current strongly connected component
+			while v != u
 			output the current strongly connected component
 
