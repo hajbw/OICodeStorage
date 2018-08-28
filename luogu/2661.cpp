@@ -1,8 +1,7 @@
 #include <iostream>
+#include <stack>
 
-#ifndef min
 #define min(a,b) (a < b ? a : b)
-#endif
 
 /*
 	P2661 信息传递
@@ -11,34 +10,62 @@
 using std::cin;
 using std::cout;
 
-const int MAXN = 200000;
+const int MAXN = 200010;
 
 int
-	N,timer,ans = 19260817,
-	graph[MAXN],timestamp[MAXN],start[MAXN];
+	N,jzm_clock = 0,ans = 19260817,
+	graph[MAXN],dfn[MAXN],low[MAXN];
 
-void dfs(int v,int s)
-{		
-	timestamp[v] = ++timer;
-	start[v] = s;
-	if(!timestamp[to[v]])
-		dfs(to[v]);
-	else if(s == start[to[v]])
-		ans = min(ans,timestamp[v] - timestamp[to[v]]);
+stack<int> st;
+
+void read(int &x)
+{
+	char ch = '\0';x = 0;
+	cin.get(ch);
+	while(ch < '0' || ch > '9')cin.get(ch);
+	while(ch >= '0' && ch <= '9'){x = (x<<1) + (x<<3) + ch - '0';}
+}
+
+void tarjan(int u)
+{
+	int v = graph[u];
+	dfn[u] = low[u] = ++jzm_clock;
+	st.push(u);
+
+	if(!dfn[v])
+	{
+		tarjan(graph[u]);
+		low[u] = min(low[u],low[v]);
+	}
+	else
+		low[u] = min(low[u],dfn[v]);
+
+	if(low[u] = dfn[u])
+	{
+		int count = 0;
+		do
+		{
+			v = st.top();st.pop();
+			++count;
+		}
+		while(v != u);
+		if(count > 1)
+			ans = min(ans,count);
+	}
 }
 
 int main()
 {
 	std::ios::sync_with_stdio(false);
 
-	cin>>N;
+	read(N);
 
 	for(int i = 0;i < N;++i)
-		cin>>to[i];
+		read(to[i]);
 
 	for(int i = 0;i < N;++i)
-		if(!timestamp[i])
-			dfs(i,i);
+		if(!dfn[i])
+			tarjan(i);
 
 	cout<<ans;
 
