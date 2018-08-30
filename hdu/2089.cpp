@@ -10,11 +10,11 @@
 using std::cin;
 using std::cout;
 
-const int MAXM = 1000000,MAXN = 1000000,MAXBIT = 8;
+const int MAXM = 1000010,MAXN = 1000010,MAXBIT = 9;
 
 int
-	M,N,bitcount,lastbitcount,
-	dp[MAXBIT][10];//sum[bits - 1][first-num]
+	M,N,bitcount,lastbitcount = 1,
+	dp[MAXBIT][10];//sum[bits - 1][first-num],dp[i][8] for a sum up
 
 template<class T> void read(T &x,std::istream &in = std::cin)
 {
@@ -35,11 +35,40 @@ inline int countbit(int x)
 	return ans;
 }
 
+void process()
+{
+	for(int i = lastbitcount;i < bitcount;++i)
+	{
+		for(int j = 0;j < 10;++j)
+		{
+			if(j == 8)
+				continue;
+			dp[i][j] = dp[i - 1][8];
+			if(j == 6)
+				dp[i][j] -= dp[i - 1][2];
+			dp[i][8] += dp[i][j];
+		}
+	}
+}
+
+int getval(int n)
+{
+	int cbit = countbit(n);
+	for(int i = cbit;i;--i)
+	{
+		
+	}
+}
+
 int main()
 {
 	std::ios::sync_with_stdio(false);
 
 	int a,b;//temp variants
+
+	//boundary conditions
+	dp[0][0] = dp[0][1] = dp[0][2] = dp[0][3] = dp[0][4] = dp[0][5] = dp[0][6] = dp[0][7] = dp[0][9] = 1;
+	dp[0][10] = 8;
 
 	while( ~(1 ^ 1) )
 	{
@@ -47,20 +76,16 @@ int main()
 		if(!N && !M)
 			break;
 
-		bitcount = min(countbit(M),countbit(N));
+		bitcount = countbit(M);
 
 		//pre-processes
 		if(bitcount > lastbitcount)
 		{
-			for(int i = lastbitcount;i < bitcount;++i)
-			{
-				for(int j = 0;j < 10;++j)
-				{
-
-				}
-			}
+			process();
 			lastbitcount = bitcount;
 		}
+
+		cout<<getval(M) - getval(N);
 
 	}
 }
