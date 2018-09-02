@@ -23,13 +23,13 @@ struct person
 }
 *date[1300];
 
-void insert(string &name,const int &y,const int &d)
+void insert(string &name,int y,int d)
 /**
 	insert descendingly
 */
 {
 	person 
-		*p = new person(new person(name,y));
+		*p = new person(name,y),
 		**temp = &date[d];
 
 	while((*temp) && (*temp)->year > p->year)
@@ -41,7 +41,14 @@ void insert(string &name,const int &y,const int &d)
 
 string& query(int k,int s)
 {
-
+	--k;
+	person *it = date[s];
+	while(k && it->next)
+	{
+		it = it->next;
+		--k;
+	}
+	return it->name;
 }
 
 int main()
@@ -57,7 +64,7 @@ int main()
 		insert(name,date / 1000,date % 1000);
 	}
 
-	for(int i = 0;i < m;++j)
+	for(int i = 0;i < m;++i)
 	{
 		cin>>k>>s;
 		cout<<query(k,s);

@@ -16,7 +16,7 @@ using std::make_pair;
 
 const int MAXY = 100,MAXM = 13,MAXD = 32;
 
-set<pair<int,string>,std::greater<pair<int,string>>> date[1300];
+set<pair<int,string>> date[1300];
 
 void insert(string &name,const int &y,const int &d)
 /**
@@ -54,8 +54,10 @@ int main()
 	for(int i = 0;i < m;++i)
 	{
 		cin>>k>>s;
-		cout<<query(k,s);
+		cout<<query(k,s)<<std::endl;
 	}
+
+	//system("pause");
 
 	return 0;
 }
