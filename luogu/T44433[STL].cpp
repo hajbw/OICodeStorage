@@ -4,37 +4,38 @@
 
 /**
 	T44433 生日
+	using std::set
 */
 
 using std::cin;
 using std::cout;
 using std::string;
 using std::set;
+using std::pair;
+using std::make_pair;
 
 const int MAXY = 100,MAXM = 13,MAXD = 32;
 
-struct person
-{
-	string name;
-	int year;
-	person *next;
+set<pair<int,string>,std::greater<pair<int,string>>> date[1300];
 
-	person():name(),year(),next(){}
-	person(string &n,int &y):name(n),year(y),next(){}
-	person(string &n,int &y,person *ne):name(n),year(y),next(ne){}
-};
-
-void insert(person &p,const int &d)
+void insert(string &name,const int &y,const int &d)
 /**
 	insert descendingly
 */
 {
-	
+	date[d].insert(make_pair(y,name));
 }
 
-string& query(int k,int s)
+string query(int k,int s)
 {
-	
+	--k;
+	set<pair<int,string>>::iterator it = date[s].begin();
+	while(k)
+	{
+		++it;
+		--k;
+	}
+	return it->second;
 }
 
 int main()
@@ -47,10 +48,10 @@ int main()
 	for(int i = 0;i < n;++i)
 	{
 		cin>>name>>date;
-		insert(new person(name,date/1000),date%1000);
+		insert(name,date / 1000,date % 1000);
 	}
 
-	for(int i = 0;i < m;++j)
+	for(int i = 0;i < m;++i)
 	{
 		cin>>k>>s;
 		cout<<query(k,s);
