@@ -8,10 +8,7 @@
 
 using std::cin;
 using std::cout;
-
-inline int sumxor(const int &a,const int &b)
-
-int MAXN = 1000010,INF = 1000010;
+using std::endl;
 
 int main()
 {
@@ -22,7 +19,22 @@ int main()
 	{
 		cin>>l>>r;
 
+		//if(r - l < 8)
+		{
+			for(;l <= r;++l)
+				ans ^= l;
+			continue;
+		}
 
+		/*
+		for(;l % 4;++l)
+			ans ^= l;
+		for(;r % 4;--r)
+			ans ^= r;
+		//*/
 	}
+
+	cout<<ans<<endl;
+
 	return 0;
 }
