@@ -67,7 +67,7 @@ inline void get_max()
 			quq.pop_back();
 		quq.push_back(hpair(num[i],i));
 
-		if(quq.front().index > i - K)
+		if(quq.front().index < i - K)
 			quq.pop_front();
 
 		if(i > K)

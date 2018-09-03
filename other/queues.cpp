@@ -10,11 +10,11 @@ template<class T>class hdeque
 		T& data;
 		node *prev,*next;
 
-		node(){}
+		node():data(),prev(),next(){}
 		node(T &d,node *p,node *n):data(d),prev(p),next(n){}
 	};
 
-	node *head,*tail;
+	node *head,*tail,*temp;
 	size_t size_;
 
 public:
@@ -52,9 +52,9 @@ public:
 	{
 		if(!head)
 			return;
-		node *temp = head->next;
-		delete head;
-		head = temp;
+		temp = head;
+		head = head->next;
+		delete temp;
 		--size_;
 	}
 
@@ -62,7 +62,9 @@ public:
 	{
 		if(!tail)
 			return;
-		
+		temp = tail;
+		tail = tail->prev;
+		delete temp;
 		--size_;
 	}
 

@@ -17,10 +17,11 @@ struct node
 	int value,index;
 	node *prev,*next;
 
-	node(){}
+	node():value(),index(),prev(),next(){}
+	node(int v,int i):value(v),index(i),prev(),next(){}
 	node(int v,int i,node *p,node *n):value(v),index(i),prev(p),next(n){}
 }
-*head,*tail;
+*head,*tail,*temp;
 
 int num[MAXN],N,K;
 
@@ -38,25 +39,43 @@ inline void get_min(int reverse)
 
 	for(int i = 0;i < N;++i)
 	{
-		//push in
-		while(tail->prev != head && (reverse ^ tail->prev->value > num[i]))
+		//kick tail nodes out
+		while(tail && (reverse ? tail->value < num[i] : tail->value > num[i]))
 		{
-			tail->prev = tail->prev->prev;
-			delete tail->prev->next;//now tail->prev->prev->next
-			tail->prev->next = tail;
+			temp = tail;
+			tail = tail->prev;
+			delete temp;
 		}
-		
+		//push num[i] in the back
+		temp = tail;
+		tail = new node(num[i],i);
+		if(temp)
+		{
+			tail->prev = temp;
+			temp->next = tail;
+		}
+		else
+			head = tail;
 
+		if(head->index <= i - K)
+		{
+			if(head)
+			{
+				temp = head;
+				head = head->next;
+				delete temp;
+				if(!head)
+					tail = NULL;
+			}
+		}
+
+		if(i > K - 2)
+			cout<<head->value<<" ";
 	}
 }
 
 int main()
 {
-	head = new node();
-	tail = new node();
-	head->next = tail;
-	tail->prev = head;
-
 	read(N);read(K);
 	for(int i = 0;i < N;++i)
 		read(num[i]);
@@ -64,6 +83,8 @@ int main()
 	get_min(0);
 	cout<<"\n";
 	get_min(1);
+
+	system("pause");
 
 	return 0;
 }
