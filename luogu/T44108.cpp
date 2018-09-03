@@ -26,12 +26,12 @@ int main()
 			continue;
 		}
 
-		/*
+		
 		for(;l % 4;++l)
 			ans ^= l;
-		for(;r % 4;--r)
+		for(;r % 4 != 3;--r)
 			ans ^= r;
-		//*/
+		
 	}
 
 	cout<<ans<<endl;

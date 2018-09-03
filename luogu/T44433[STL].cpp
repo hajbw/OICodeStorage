@@ -48,7 +48,7 @@ int main()
 	for(int i = 0;i < n;++i)
 	{
 		cin>>name>>date;
-		insert(name,date / 1000,date % 1000);
+		insert(name,date / 10000,date % 10000);
 	}
 
 	for(int i = 0;i < m;++i)
