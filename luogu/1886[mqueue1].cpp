@@ -42,9 +42,8 @@ inline void get_min(int reverse)
 		//kick tail nodes out
 		while(tail && (reverse ? tail->value < num[i] : tail->value > num[i]))
 		{
-			temp = tail;
 			tail = tail->prev;
-			delete temp;
+			delete tail->next;
 		}
 		//push num[i] in the back
 		temp = tail;

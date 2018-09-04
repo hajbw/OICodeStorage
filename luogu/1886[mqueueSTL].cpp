@@ -3,10 +3,6 @@
 
 #define DEBUG 1
 
-#if DEBUG
-#include <windows.h>
-#endif
-
 /**
 	P1886 滑动窗口
 	ver.2
@@ -38,54 +34,33 @@ template<class T>void read(T &x,std::istream &in = cin)
 	if(flag)x = -x;
 }
 
-inline void get_min()
+inline void get_min(bool reverse)
 {
 	deque<hpair> quq;
 
 	for(int i = 0;i < N;++i)
 	{
-		while(!quq.empty() && quq.back().value > num[i])
+		while(quq.size() > 1 && (reverse ? quq.back().value < num[i] : quq.back().value > num[i]))
 			quq.pop_back();
 		quq.push_back(hpair(num[i],i));
 
-		if(quq.front().index > i - K)
+		if(quq.size() > 1 && quq.front().index <= i - K)
 			quq.pop_front();
 
-		if(i > K)
-			cout<<quq.front().value<<" ";
-	}
-}
-
-inline void get_max()
-{
-	deque<hpair> quq;
-
-	for(int i = 0;i < N;++i)
-	{
-		//push in
-		while(!quq.empty() && quq.back().value < num[i])
-			quq.pop_back();
-		quq.push_back(hpair(num[i],i));
-
-		if(quq.front().index < i - K)
-			quq.pop_front();
-
-		if(i > K)
+		if(i > K - 2)
 			cout<<quq.front().value<<" ";
 	}
 }
 
 int main()
 {
-	int a;
-
-	read(N);read(K);K -= 2;
+	read(N);read(K);
 	for(int i = 0;i < N;++i)
-		read(a),num[i] = a;
+		read(num[i]);
 
-	get_min();
+	get_min(false);
 	cout<<"\n";
-	get_max();
+	get_min(true);
 
 #if DEBUG
 	system("pause");
