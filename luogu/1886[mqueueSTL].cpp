@@ -1,12 +1,13 @@
 #include <iostream>
 #include <deque>
 
-#define DEBUG 1
+#define DEBUG 0
 
 /**
 	P1886 滑动窗口
 	ver.2
 	monotone queue using STL
+	finally AC
 */
 
 using std::cin;
@@ -40,7 +41,7 @@ inline void get_min(bool reverse)
 
 	for(int i = 0;i < N;++i)
 	{
-		while(quq.size() > 1 && (reverse ? quq.back().value < num[i] : quq.back().value > num[i]))
+		while(!quq.empty() && (reverse ? quq.back().value < num[i] : quq.back().value > num[i]))
 			quq.pop_back();
 		quq.push_back(hpair(num[i],i));
 

@@ -5,6 +5,7 @@
 	ver.1
 	using user-defined monotone queue
 	homotone queue(大嘘)
+	
 */
 
 using std::cin;
@@ -41,10 +42,8 @@ inline void get_min(int reverse)
 	{
 		//kick tail nodes out
 		while(tail && (reverse ? tail->value < num[i] : tail->value > num[i]))
-		{
 			tail = tail->prev;
-			delete tail->next;
-		}
+
 		//push num[i] in the back
 		temp = tail;
 		tail = new node(num[i],i);
@@ -60,9 +59,7 @@ inline void get_min(int reverse)
 		{
 			if(head)
 			{
-				temp = head;
 				head = head->next;
-				delete temp;
 				if(!head)
 					tail = NULL;
 			}
@@ -71,6 +68,9 @@ inline void get_min(int reverse)
 		if(i > K - 2)
 			cout<<head->value<<" ";
 	}
+
+	//clear data
+	head = tail = NULL;
 }
 
 int main()
@@ -83,7 +83,6 @@ int main()
 	cout<<"\n";
 	get_min(1);
 
-	system("pause");
 
 	return 0;
 }
