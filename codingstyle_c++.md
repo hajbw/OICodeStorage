@@ -6,7 +6,9 @@
 
 - includes
 
-- defines
+- defined functions
+
+- defined consts
 
 - "using" command
 
