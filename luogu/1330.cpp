@@ -46,7 +46,10 @@ void dfs(const int &u)
 	{
 		v = edges[i].to;
 		if(!color[v])
+		{
+			color[v] = 1 ^ color[u];
 			dfs(v);
+		}
 	}
 }
 

@@ -19,3 +19,8 @@ bool is_prime(const int &a)
 	return true;
 
 }
+
+int main()
+{
+	
+}
