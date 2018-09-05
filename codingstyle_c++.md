@@ -2,11 +2,11 @@
 
 ##Order
 
+- info&comments
+
 - includes
 
 - defines
-
-- info&comments
 
 - "using" command
 
