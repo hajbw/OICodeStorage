@@ -19,7 +19,9 @@ struct edge
 edges[MAXE];
 
 char buf[MAXL],*ch;
-int V,E,color[MAXV],head[MAXV],iedge = 1;
+int
+	V,E,head[MAXV],iedge = 1,
+	color[MAXV],color_cnt[4],flag_fail = false;
 
 inline void read(int &a,int &b)
 {
@@ -40,6 +42,9 @@ inline void addedge(const int &u,const int &v)
 
 void dfs(const int &u)
 {
+	if(flag_fail)
+		return;
+
 	int v;
 
 	for(int i = head[u];i;i = edges[i].next)
@@ -49,6 +54,11 @@ void dfs(const int &u)
 		{
 			color[v] = 1 ^ color[u];
 			dfs(v);
+		}
+		else if(color[u] == color[v])
+		{
+			flag_fail = true;
+			return;
 		}
 	}
 }
@@ -65,7 +75,14 @@ int main()
 		addedge(v,u);
 	}
 
-	for(int i = 0;i < V;++i)
-		if(!color[i])
-			dfs(i);
+	color[1] = 2;
+	++color_cnt[2];
+	dfs(1);
+
+	if(flag_fail)
+		cout<<"";
+	else
+		cout<<(color_cnt[2] < color_cnt[3] ? color_cnt[2] : color_cnt[3]);
+	
+	return 0;
 }
