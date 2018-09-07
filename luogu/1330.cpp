@@ -4,6 +4,8 @@
 
 #include <iostream>
 
+#define DEBUG 1
+
 using std::cin;
 using std::cout;
 
@@ -11,53 +13,60 @@ const int MAXE = 10010,MAXV = 100010,MAXL = 50;
 
 struct edge
 {
-	int to,next;
+	int to;
+	edge *next;
 
-	//edge():to(),next(){}
-	//edge(const int &to,const int &next):to(to),next(next){}
+	edge():to(),next(){}
+	edge(const int &to,edge *next):to(to),next(next){}
 }
-edges[MAXE];
+*head[MAXV];
 
-char buf[MAXL],*ch;
+#if DEBUG
+int fault_u,fault_v;
+#endif
+
 int
-	V,E,head[MAXV],iedge = 1,
-	color[MAXV],color_cnt[4],flag_fail = false;
+	V,E,
+	color[MAXV],
+	color_cnt[4],
+	flag_fail = false;
 
 inline void read(int &a,int &b)
 {
+	static char buf[MAXL],*ch;
 	a = b = 0;
 	cin.getline(buf,49);
 	ch = buf;
-	while(*ch < '0' || *ch > '9' && *ch)++ch;
+	while(*ch && *ch < '0' || *ch > '9')++ch;
 	while(*ch >= '0' && *ch <= '9'){a = (a<<1) + (a<<3) + *ch - '0';++ch;}
-	while(*ch < '0' || *ch > '9' && *ch)++ch;
+	while(*ch && *ch < '0' || *ch > '9')++ch;
 	while(*ch >= '0' && *ch <= '9'){b = (b<<1) + (b<<3) + *ch - '0';++ch;}
 }
 
-inline void addedge(const int &u,const int &v)
-{
-	edges[++iedge] = (edge){v,head[u]};
-	head[u] = iedge;
-}
-
-void dfs(const int &u)
+void dfs(const int &u,const int &col)
 {
 	if(flag_fail)
 		return;
 
-	int v;
+	if(!head[u])
+		return;
 
-	for(int i = head[u];i;i = edges[i].next)
+	++color_cnt[color[u] = col];
+
+	for(edge *i = head[u];i;i = i->next)
 	{
-		v = edges[i].to;
-		if(!color[v])
+		if(!color[i->to])
 		{
-			color[v] = 1 ^ color[u];
-			dfs(v);
+			++color_cnt[color[i->to] = 1 ^ col];
+			dfs(i->to);
 		}
-		else if(color[u] == color[v])
+		else if(col == color[i->to])
 		{
 			flag_fail = true;
+#if DEBUG
+			fault_u = u;
+			fault_v = i->to;
+#endif
 			return;
 		}
 	}
@@ -71,18 +80,45 @@ int main()
 	for(int i = 0;i < E;++i)
 	{
 		cin>>u>>v;
-		addedge(u,v);
-		addedge(v,u);
+		head[u] = new edge(v,head[u]);
+		head[v] = new edge(u,head[v]);
 	}
 
-	color[1] = 2;
-	++color_cnt[2];
-	dfs(1);
+	for(int i = 1;i <= V;++i)
+		if(!color[i])
+			dfs(i);
+
+
+#if DEBUG
+
+	for(int i = 1;i <= V;++i)
+	{
+		cout<<i;
+		for(edge *it = head[i];it;it = it->next)
+			cout<<" -> "<<it->to;
+		cout<<"\n";
+	}
+
+	cout<<"\n";
+
+	for(int i = 1;i <= V;++i)
+		cout<<color[i];
+
+	cout<<"\n"<<color_cnt[2]<<"\t"<<color_cnt[3]<<"\n";
 
 	if(flag_fail)
-		cout<<"";
+		cout<<fault_u<<" -> "<<fault_v;
+	else
+		cout<<(color_cnt[2] < color_cnt[3] ? color_cnt[2] : color_cnt[3]);
+
+#else
+
+	if(flag_fail)
+		cout<<"Impossible";
 	else
 		cout<<(color_cnt[2] < color_cnt[3] ? color_cnt[2] : color_cnt[3]);
 	
+#endif
+
 	return 0;
 }
