@@ -236,3 +236,37 @@ long long gcd(long long a,long long b)
 {
 	return b ? gcd(b,a % b) : a;
 }
+
+bool is_prime(const int &a)
+{
+	if(a < 2)
+		return false;
+	if(a < 4)
+		return true;
+	if(a % 6 != 1 && a % 6 != 5)
+		return false;
+
+	int sqrta = sqrt(a);
+	for(int i = 5;i <= sqrta;i += 6)
+		if(!(a % i && a % (i + 2)))
+			return false;
+
+	return true;
+}
+
+template<class T>bool is_prime(const T &a)
+{
+	if(a < 2)
+		return false;
+	if(a < 4)
+		return true;
+	if(a % 6 != 1 && a % 6 != 5)
+		return false;
+
+	int sqrta = sqrt(a);
+	for(int i = 5;i <= sqrta;i += 6)
+		if(!(a % i && a % (i + 2)))
+			return false;
+
+	return true;
+}
