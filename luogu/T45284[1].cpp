@@ -22,17 +22,6 @@ m[MAXN<<4];
 int N,W,im = 0,dp[MAXW];
 char buf[MAXL],*ch;
 
-inline int topbit(int x)
-{
-	int res = 0;
-	while(x)
-	{
-		x >>= 1;
-		++res;
-	}
-	return res;
-}
-
 void linefeed()
 {
 	cin.getline(buf,MAXL);
@@ -67,10 +56,10 @@ int main()
 		linefeed();
 		read(v);read(w);read(n);
 
-		for(int j = 1;j <= n;j <<= 1)
+		for(int j = 0;1<<j <= n;++j)
 		{
-			m[im++] = (good){v * j,w * j};
-			n -= j;
+			m[im++] = (good){v<<j,w<<j};
+			n -= 1 << j;
 		}
 		if(n)
 			m[im++] = (good){v * n,w * n};
