@@ -3,10 +3,11 @@
 
 #define min(a,b) (a < b ? a : b)
 
-#define DEBUG 1
+#define DEBUG 0
 
 /*
 	P2661 信息传递
+	AC
 */
 
 using std::cin;
@@ -30,9 +31,6 @@ void read(int &x)
 
 void tarjan(int u)
 {
-#if DEBUG
-	cout<<u<<" ";
-#endif
 	int v = graph[u];
 	dfn[u] = low[u] = ++jzm_clock;
 	st.push(u);
@@ -53,7 +51,7 @@ void tarjan(int u)
 			v = st.top();st.pop();
 			++count;
 		}
-		if(count > 0 && count < ans)
+		if(count > 1 && count < ans)
 			ans = count;
 	}
 }
@@ -64,26 +62,15 @@ int main()
 
 	read(N);
 
-	for(int i = 0;i < N;++i)
+	for(int i = 1;i <= N;++i)
 		read(graph[i]);
 
-#if DEBUG
-		for(int i = 0;i < N;++i)
-			cout<<graph[i]<<" ";
-		cout<<"\n";
-#endif
-
-	for(int i = 0;i < N;++i)
+	for(int i = 1;i <= N;++i)
 		if(!dfn[i])
 			tarjan(i);
 
 	cout<<ans;
 
-#if DEBUG
-
-	system("pause");
-
-#endif
 
 	return 0;
 }
