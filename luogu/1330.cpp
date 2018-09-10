@@ -4,6 +4,9 @@
 
 #include <iostream>
 
+#define min(a,b) ((a) < (b) ? (a) : (b))
+#define max(a,b) ((a) > (b) ? (a) : (b))
+
 #define DEBUG 1
 
 using std::cin;
@@ -43,24 +46,24 @@ inline void read(int &a,int &b)
 	while(*ch >= '0' && *ch <= '9'){b = (b<<1) + (b<<3) + *ch - '0';++ch;}
 }
 
-void dfs(const int &u,const int &col)
+void dfs(const int &u)
 {
 	if(flag_fail)
 		return;
 
+	++color_cnt[color[u]];
+
 	if(!head[u])
 		return;
-
-	++color_cnt[color[u] = col];
 
 	for(edge *i = head[u];i;i = i->next)
 	{
 		if(!color[i->to])
 		{
-			++color_cnt[color[i->to] = 1 ^ col];
+			color[i->to] = 1 ^ color[i];
 			dfs(i->to);
 		}
-		else if(col == color[i->to])
+		else if(color[i] == color[i->to])
 		{
 			flag_fail = true;
 #if DEBUG
@@ -74,7 +77,7 @@ void dfs(const int &u,const int &col)
 
 int main()
 {
-	int u,v;
+	int u,v,ans = 0;
 
 	cin>>V>>E;
 	for(int i = 0;i < E;++i)
@@ -85,40 +88,20 @@ int main()
 	}
 
 	for(int i = 1;i <= V;++i)
-		if(!color[i])
-			dfs(i);
-
-
-#if DEBUG
-
-	for(int i = 1;i <= V;++i)
 	{
-		cout<<i;
-		for(edge *it = head[i];it;it = it->next)
-			cout<<" -> "<<it->to;
-		cout<<"\n";
+		if(!color[i])
+		{
+			color_cnt[2] = color_cnt[3] = 0;
+			dfs(i);
+			if(flag_fail)
+				break;
+		}
 	}
-
-	cout<<"\n";
-
-	for(int i = 1;i <= V;++i)
-		cout<<color[i];
-
-	cout<<"\n"<<color_cnt[2]<<"\t"<<color_cnt[3]<<"\n";
-
-	if(flag_fail)
-		cout<<fault_u<<" -> "<<fault_v;
-	else
-		cout<<(color_cnt[2] < color_cnt[3] ? color_cnt[2] : color_cnt[3]);
-
-#else
 
 	if(flag_fail)
 		cout<<"Impossible";
 	else
-		cout<<(color_cnt[2] < color_cnt[3] ? color_cnt[2] : color_cnt[3]);
-	
-#endif
+		cout<<ans;
 
 	return 0;
 }
