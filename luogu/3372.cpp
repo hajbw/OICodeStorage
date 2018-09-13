@@ -31,37 +31,27 @@ int M,N;
 
 void add(const int &n,const int &lb,const int &rb,const num_t &k)
 {
-	if(lb == l(n) && rb == r(n))
+	if(lb <= l(n) && rb >= r(n))
 	{
 		tag(n) += k;
 		return;
 	}
 
-	int mid = (lb + rb) >> 1;
-
-	if(rb <= mid)
-		add(lch(n),lb,rb,k);
-	else if(lb > mid)
+	if(rb > r(lch(n)))
 		add(rch(n),lb,rb,k);
-	else
-		add(lch(n),lb,mid,k),
-		add(rch(n),mid+1,rb,k);
-
+	if(lb < l(rch(n)))
+		add(lch(n),lb,rb,k);
 }
 
 num_t query(const int &n,const int &lb,const int &rb)
 {
-	if(l(n) == lb && r(n) == rb)
-		return val(n) + tag(n) * (rb - lb + 1);
+	if(rb < l(n) || lb > r(n))
+		return 0;
 
-	int mid = (l(n) + r(n)) >> 1;
+	if(l(n) <= lb && r(n) >= rb)
+		return val(n) + tag(n) * (l(n) - r(n) + 1);
 
-	if(rb <= mid)
-		return query(lch(n),lb,rb);
-	else if(lb > mid)
-		return query(rch(n),lb,rb);
-	else
-		return query(lch(n),lb,mid) + query(rch(n),mid+1,rb);
+	return query(lch(n),lb,rb) + query(rch(n),lb,rb);
 
 }
 
@@ -71,7 +61,7 @@ void build_tree(const int &n,const int &lb,const int &rb)
 
 	if(lb == rb)
 	{
-		tree[n].val = arr[lb];
+		cout<<(tree[n].val = arr[lb - 1]);
 		return;
 	}
 
@@ -85,7 +75,8 @@ void build_tree(const int &n,const int &lb,const int &rb)
 
 int main()
 {
-	int a,b,c;
+	int a,x,y;
+	num_t k;
 
 	cin>>N>>M;
 	for(int i = 0;i < N;++i)
@@ -93,19 +84,22 @@ int main()
 
 	build_tree(1,1,N);
 
+	cout<<"\n\n";
+	for(int i = 0;i < N;++i)
+		cout<<query(1,i,i);
+
 	for(int i = 0;i < M;++i)
 	{
-		cin>>a;
+		cin>>a>>x>>y;
+		--x;
+		--y;
 		if(a == 1)
 		{
-			cin>>a>>b>>c;
-			add(1,a,b,c);
+			cin>>k;
+			add(1,x,y,k);
 		}
 		else
-		{
-			cin>>a>>b;
-			cout<<query(1,a,b);
-		}
+			cout<<query(1,x,y);
 	}
 
 	return 0;
