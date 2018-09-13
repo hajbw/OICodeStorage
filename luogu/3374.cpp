@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-#define lowbit(x) (x&-x)
+#define lowbit(x) ((x)&-(x))
 
 using std::cin;
 using std::cout;
@@ -15,7 +15,7 @@ int arr[MAXN],M,N;
 
 inline void add(int index,const int &value)
 {
-	while(index < N)
+	while(index <= N)
 	{
 		arr[index] += value;
 		index += lowbit(index);
@@ -25,7 +25,7 @@ inline void add(int index,const int &value)
 inline int sum(int r)
 {
 	int ans = 0;
-	while(r >= 0)
+	while(r)
 	{
 		ans += arr[r];
 		r -= lowbit(r);
@@ -44,7 +44,7 @@ int main()
 
 	cin>>N>>M;
 
-	for(int i = 0;i < N;++i)
+	for(int i = 1;i <= N;++i)
 	{
 		cin>>a;
 		add(i,a);
@@ -56,9 +56,8 @@ int main()
 		if(a == 1)
 			add(b,c);
 		else
-			cout<<sum(a,b)<<"\n";
+			cout<<sum(b,c)<<"\n";
 	}
 
 	return 0;
-
 }
