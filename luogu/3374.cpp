@@ -1,5 +1,6 @@
 /*
 	P3374 【模板】树状数组 1
+	AC
 */
 
 #include <iostream>
