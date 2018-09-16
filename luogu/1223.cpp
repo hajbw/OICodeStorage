@@ -1,45 +1,47 @@
-#include <cstdio>
-#include <cstring>
-#include <algorithm>
-
-/**
+/*
 	P1223 排队接水
-	82
 */
 
-using std::scanf;
-using std::printf;
+#include <iostream>
+#include <algorithm>
+
+using std::cin;
+using std::cout;
 
 const int MAXN = 1005;
 
-struct rnl
+struct hpair
 {
-	int order,time;
+	int index,time;
+
+	bool operator<(hpair &a)
+	{
+		return time == a.time ? index < a.index : time < a.time;
+	}
 }
-arr[MAXN];
+persons[MAXN];
+
+int N;
 
 int main()
 {
-	int
-		n,curr_time = 0,//arr[i]'s waiting time
-		total_time = 0;//total wating time
+	int t,total = 0;
 
-	scanf("%d",&n);
-	for(int i = 1;i <= n;++i)
+	cin>>N;
+	for(int i = 1;i <= N;++i)
 	{
-		arr[i].order = i;
-		scanf("%d",&arr[i].time);
+		cin>>t;
+		persons[i] = (hpair){i,t};
 	}
 
-	std::sort(arr + 1,arr + n + 1,[](rnl &a,rnl &b) -> bool{return a.time < b.time;});
+	std::sort(persons + 1,persons + N + 1);
 
-	for(int i = 1;i <= n;++i)
+	for(int i = 1;i <= N;++i)
 	{
-		printf("%d ",arr[i].order);
-		total_time += arr.time * (n - i);
+		cout<<persons[i].index<<" ";
+		total += persons[i].time * (N - i + 1);
 	}
 
-	printf("\n%.2f",double(total_time) / n);
-
-	return 0;
+	cout.precision(2);
+	cout<<"\n"<<(double(total) / N);
 }
