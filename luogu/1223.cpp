@@ -3,6 +3,7 @@
 */
 
 #include <iostream>
+#include <cstdio>
 #include <algorithm>
 
 using std::cin;
@@ -39,9 +40,10 @@ int main()
 	for(int i = 1;i <= N;++i)
 	{
 		cout<<persons[i].index<<" ";
-		total += persons[i].time * (N - i + 1);
+		total += persons[i].time * (N - i);
 	}
 
-	cout.precision(2);
-	cout<<"\n"<<(double(total) / N);
+	std::printf("\n%.2f",double(total) / N);
+
+	return 0;
 }
