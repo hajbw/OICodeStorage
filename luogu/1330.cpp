@@ -93,27 +93,31 @@ int main()
 
 	for(int i = 1;i <= V;++i)
 	{
-		if(!color[i])
+		if(color[i])
+			continue;
+
+		color_cnt[2] = color_cnt[3] = 0;
+		color[i] = 2;
+
+		dfs(i);
+
+		if(flag_fail)
+			break;
+
+#if DEBUG
+		cout<<'\n'<<color_cnt[2]<<'\t'<<color_cnt[3]<<'\n';
+#endif
+
+		if(color_cnt[2])
 		{
-			color_cnt[2] = color_cnt[3] = 0;
-			color[i] = 2;
-
-			dfs(i);
-
-			if(flag_fail)
-				break;
-
-			if(color_cnt[2])
-			{
-				if(color_cnt[3])
-					ans += min(color_cnt[2],color_cnt[3]);
-				else
-					ans += color_cnt[2];
-			}
-			else if(color_cnt[3])
-				ans += color_cnt[3];
-
+			if(color_cnt[3])
+				ans += min(color_cnt[2],color_cnt[3]);
+			else
+				ans += color_cnt[2];
 		}
+		else if(color_cnt[3])
+			ans += color_cnt[3];
+
 	}
 
 #if DEBUG
@@ -122,8 +126,6 @@ int main()
 
 	for(int i = 1;i <= V;++i)
 		cout<<color[i];
-
-	cout<<"\n"<<color_cnt[2]<<"\t"<<color_cnt[3]<<"\n";
 
 	if(flag_fail)
 		cout<<fault_u<<"\t"<<fault_v;
