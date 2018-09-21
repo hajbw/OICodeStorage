@@ -72,7 +72,7 @@ public:
 		}
 		this->index = index;
 
-		return &(*this);
+		return *this;
 	}
 
 	BigInt& operator+(BigInt &a)
@@ -85,7 +85,7 @@ public:
 	BigInt operator-(BigInt &a)
 	{
 		BigInt res(this);
-		res -=a;
+		res -= a;
 		return res;
 	}
 
