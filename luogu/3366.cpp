@@ -1,58 +1,80 @@
+/*
+	P3366 【模板】最小生成树
+*/
+
+#include <algorithm>
 #include <iostream>
 
 using std::cin;
 using std::cout;
 
-const int MAXV = 5010,MAXE = 200010;
+const int MAXV = 5050,MAXE = 200020;
 
 struct edge
 {
 	int from,to,weight;
-
-	bool operator<(edge &a){return this->weight < a.weight;}
-	bool operator>(edge &a){return this->weight > a.weight;}
 }
-edges[MAXE];
+edges[MAXE<<1];
 
-int V,E,iedge = 0,fa[MAXV];
-
-int mininum_spanning_tree_kruskal()
+struct hpair
 {
-	int Vchosen = 0;
-	std::sort(edges,edges + V);
-	while(Vchosen < V)
-	{
+	int x,y;
 
+	bool operator<(hpair &a)
+	{
+		return x == a.x ? y < a.y : x < a.x;
 	}
 }
+pairs[MAXE];
 
-template<class T>void read(std::istream &in,T &x)
+int head[MAXV],iedge = 1,V,E,fa[MAXV];
+
+inline void addedge(const int &u,const int &v,const int &w)
 {
-	char ch = '\0';int flag = 0;x = 0;
-	in.get(ch);
-	while(ch < '0' || ch > '9'){flag ^= (ch == '-');in.get(ch);}
-	while(ch >= '0' && ch <= '9'){x = (x << 1) + (x << 3) + ch - '0';in.get(ch);}
-	if(flag)x = -x;
+	edges[++iedge] = (edge){u,v,w};
+	head[u] = iedge;
+}
+
+inline void addpair(const int &w)
+{
+	pairs[iedge>>1] = (hpair){w,iedge};
+}
+
+inline int find(const int &a)
+{
+	return fa[a] = fa[fa[a]];
 }
 
 int main()
 {
-	int u,v,w;
+	int u,v,w,a,cnt = 1,ans = 0;
 
-	read(cin,V);
-	read(cin,E);
-	for(int i = 0;i > V;++i)
-		fa[i] = i;
+	cin>>V>>E;
 	for(int i = 0;i < E;++i)
 	{
-		read(cin,u);
-		read(cin,v);
-		read(cin,w);
-		edges[i] = (edge){u,v,w};
+		cin>>u>>v>>w;
+		addedge(u,v,w);
+		addedge(u,v,w);
+		addpair(w);
 	}
 
-	w = mininum_spanning_tree_kruskal();
-	cout<<(w = -1 ? "orz" : w);
+	for(int i = 1;i <= E;++i)
+		fa[i] = i;
+
+	std::sort(pairs + 1,pairs + E + 1);
+
+	for(int i = 1;i <= E && cnt < V;++i)
+	{
+		a = pairs[i].y;
+		if(find(edges[a].from) != find(edges[a].to))
+		{
+			fa[edges[a].from] = edges[a].to;
+			ans += edges[a].weight;
+			++cnt;
+		}
+	}
+
+	cout<<ans;
 
 	return 0;
 }
