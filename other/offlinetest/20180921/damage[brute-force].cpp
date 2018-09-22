@@ -10,14 +10,34 @@ using std::cin;
 using std::cout;
 using std::string;
 
+template<class T>T hpow(T a,T b)
+{
+	T result(1);
+	while(b)
+	{
+		if(b & 1)
+			result *= a;
+		a *= a;
+		b >>= 1;
+	}
+	return result;
+}
+
 int main()
 {
-	string A,B;
-	int k,p;
+	long long A,B;
+	long long k,p;
+	long long ans;
 
-	cin>>A>>B>>k>>p;
+	cin>>k>>p>>A>>B;
 
+	for(long long i = A;i <= B;++i)
+	{
+		if(!(hpow(i,k) % p))
+			++ans;
+	}
 
-	
+	cout<<ans;
+
 	return 0;
 }

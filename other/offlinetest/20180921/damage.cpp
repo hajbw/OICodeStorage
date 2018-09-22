@@ -15,10 +15,10 @@ template<class T>T hpow(T a,T b)
 	T result(1);
 	while(b)
 	{
-		if(b & 2)
+		if(b & 1)
 			result *= a;
 		a *= a;
-		b >>= 2;
+		b >>= 1;
 	}
 	return result;
 }
@@ -33,7 +33,7 @@ int main()
 	string A,B;
 	int k,p;
 
-	cin>>A>>B>>k>>p;
+	cin>>k>>p>>A>>B;
 
 	lowerize(k,p);
 	
