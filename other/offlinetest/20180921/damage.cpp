@@ -5,10 +5,13 @@
 
 #include <iostream>
 #include <string>
+#include <cmath>
 
 using std::cin;
 using std::cout;
 using std::string;
+
+const int MAXP = 1005;
 
 template<class T>T hpow(T a,T b)
 {
@@ -23,9 +26,21 @@ template<class T>T hpow(T a,T b)
 	return result;
 }
 
-void lowerize(int &k,int &p)
+void extract(const int &k,int &p)
 {
+	long long base,tbase,cnt;
 
+	for(int i = 2;(tbase = base = hpow((long long)i,(long long)k)) <= p;++i)
+	{
+		if(p % base)
+			continue;
+		cnt = 1;
+		while(!(p % base))
+			base	*= tbase,
+			cnt		*= i;
+		p /= base	/ tbase;
+		p *= cnt	/ i;
+	}
 }
 
 int main()
@@ -35,7 +50,25 @@ int main()
 
 	cin>>k>>p>>A>>B;
 
-	lowerize(k,p);
+	extract(k,p);
+
+	cout<<p;
+
+	/*
+	for i = a to b:
+	if (!i % p)
+	{
+		++ans;
+	}
+
+	alternavive:
+
+	ans2 = (b - a + 1) / p;
+
+	if(!((b - a) % p) && !(a % p))
+		++ans2;
+
+	*/
 	
 	return 0;
 }
