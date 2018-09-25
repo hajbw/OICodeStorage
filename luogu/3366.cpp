@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <iostream>
 
+#define DEBUG 1
+
 using std::cin;
 using std::cout;
 
@@ -42,7 +44,7 @@ inline void addpair(const int &w)
 
 inline int find(const int &a)
 {
-	return fa[a] = fa[fa[a]];
+	return fa[a] = fa[fa[a]] =;
 }
 
 int main()
@@ -71,6 +73,10 @@ int main()
 			fa[edges[a].from] = edges[a].to;
 			ans += edges[a].weight;
 			++cnt;
+
+#if DEBUG
+			cout<<edges[a].from<<'\t'<<edges[a].to<<'\t'<<edges[a].weight<<'\n';
+#endif
 		}
 	}
 
