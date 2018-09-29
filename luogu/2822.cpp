@@ -26,7 +26,7 @@ int main()
 
 	for(int i = 1;i < MAXN;++i)
 		for(int j = 1;j <= i;++j)
-			C[i][j] = (C[i - 1][j] + C[i - 1][j - 1]) % k;
+			cout<<i<<'\t'<<j<<'\t'<<(C[i][j] = (C[i - 1][j] + C[i - 1][j - 1]) % k)<<'\n';
 
 	while(t--)
 	{
