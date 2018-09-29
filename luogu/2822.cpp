@@ -4,6 +4,8 @@
 
 #include <iostream>
 
+#define DEBUG 1
+
 #define min(a,b) ((a) < (b) ? (a) : (b))
 
 using std::cin;
@@ -38,7 +40,9 @@ int main()
 				if(!C[i][j])
 				{
 					++ans;
+#if DEBUG
 					cout<<i<<'\t'<<j<<'\n';
+#endif
 				}
 			}
 		}
