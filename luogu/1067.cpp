@@ -38,9 +38,9 @@ outx:
 		else if(i)
 			cout<<"x^"<<i;
 			
+		//to debug
 		//cout<<'\t'<<i<<endl;
 	}
 
 	return 0;
-	
 }
