@@ -1,5 +1,6 @@
 /*
 	P1327 数列排序
+	happen to be AC
 */
 #include <iostream>
 #include <algorithm>
@@ -27,12 +28,23 @@ int readInt()
 
 int main()
 {
-	int N,a;
+	int N,a,ans = 0,i = 0;
 
 	N = readInt();
 	for(int i = 0;i < N;++i)
 		order[arr[i] = brr[i] = readInt()] = i;
 
-	for(map<int,int>::iterator it = order.begin();it != order.end();++it)
-		cout<<it->first<<'\t'<<it->second<<'\n';
+	for(map<int,int>::iterator it = order.begin();i < N;++i,++it)
+	{
+		if(arr[i] == it->first)
+			continue;
+		++ans;
+		a = it->second;
+		order[arr[i]] = a;
+		arr[a] = arr[i];
+	}
+
+	cout<<ans;
+
+	return 0;
 }
