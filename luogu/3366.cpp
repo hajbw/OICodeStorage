@@ -1,5 +1,6 @@
 /*
 	P3366 【模板】最小生成树
+	AC
 */
 
 #include <algorithm>
@@ -50,12 +51,14 @@ inline void addedge(const int &u,const int &v,const int &w)
 
 inline int find(const int &a)
 {
-	return fa[a] = fa[fa[a]];
+	while(fa[a] != fa[fa[a]])
+		fa[a] = fa[fa[a]];
+	return fa[a];
 }
 
 int main()
 {
-	int u,v,w,ans = 0;
+	int u,v,w,ans = 0,flag = false;
 
 	cin>>V>>E;
 	for(int i = 1;i <= V;++i)
@@ -70,11 +73,22 @@ int main()
 
 	std::sort(weights + 1,weights + E + 1);
 
-	for(int i = 1,cnt = 0,curr;i <= E && cnt < V;++i)
+#if DEBUG
+	cout<<"w\tiedge\tu\tv\tw\n_________________________________\n";
+	for(int i = 1;i <= E;++i)
+		cout<<weights[i]<<'\n';
+#endif
+
+	for(int i = 1,cnt = 0,curr;/*i <= E && */cnt < V - 1;++i)
 	{
+		if(i > E)//"index out of range"
+		{
+			flag = true;
+			break;
+		}
 
 #if DEBUG
-		cout<<i<<'\n';
+		cout<<i<<'\t'<<cnt<<'\t'<<ans<<'\n';
 #endif
 		curr	= weights[i].y;
 		u		= edges[curr].u;
@@ -89,7 +103,10 @@ int main()
 		++cnt;
 	}
 
-	cout<<ans;
+	if(flag)
+		cout<<"orz";
+	else
+		cout<<ans;
 
 	return 0;
 }
