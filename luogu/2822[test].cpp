@@ -27,5 +27,5 @@ int main()
 		for(int j = 2;j <= i;++j)
 			cout<<i<<'\t'<<j<<'\t'<<(C[i][j] = (C[i - 1][j] + C[i - 1][j - 1]) % k)<<'\n';
 
-		return 0;
+	return 0;
 }
