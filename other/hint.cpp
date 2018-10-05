@@ -3,13 +3,6 @@
 */
 #include <iostream>
 
-#ifndef min
-#define min(a,b) ((a) < (b) ? (a) : (b))
-#endif
-#ifndef max
-#define max(a,b) ((a) > (b) ? (a) : (b))
-#endif
-
 using std::cin;
 using std::cout;
 
@@ -46,7 +39,7 @@ public:
 	huint()
 	{
 		std::memset(data,0,sizeof(data));
-		index = 0;
+		index = 1;
 	}
 
 	huint(const unsigned long long &a)
@@ -75,12 +68,12 @@ public:
 		return *this;
 	}
 
-	huint& operator=(const std::string &str)
+	huint& operator=(std::string str)
 	{
 		std::memset(data,0,sizeof(int) * index);
 		
 		int temp = 0,leak = str.length() % BIT_PER_INT;
-		auto it = str.begin();
+		std::string::iterator it = str.begin();
 		index = (str.length() - 1) / BIT_PER_INT + 1;
 
 		if(leak)
@@ -196,53 +189,6 @@ public:
 		return greater(a,b) != 1;
 	}
 
-	/*friend std::istream& operator>>(std::istream &in,huint &a)
-	{
-		struct node
-		{
-			char ch;
-			node *next;
-
-			node():ch(),next(){}
-			node(char ch,node *next):ch(ch),next(next){}
-		}
-		*head;
-		char ch = '\0';
-		int cnt = 0,temp = 0;
-
-		while((ch < '0' || ch > '9') && in.good())
-			in.get(ch);
-		while(ch >= '0' && ch <= '9' && in.good())
-		{
-			head = new node(ch,head);
-			++cnt;
-			in.get(ch);
-		}
-
-		for(int i = cnt % BIT_PER_INT;i;--i)
-		{
-			temp = (temp>>1) + (temp>>3) + head->ch;
-			head = head->next;
-		}
-
-		--cnt;
-
-		a.index = cnt / BIT_BASE + 1;
-		a.data[cnt/BIT_BASE] = temp;
-
-		for(int i = cnt/BIT_BASE - 1;i > -1;--i)
-		{
-			for(int j = 0;j < 4;++j)
-			{
-				temp = (temp>>1) + (temp>>3) + head->ch;
-				head = head->next;
-			}
-			a.data[i] = temp;
-		}
-
-		return in;
-	}*/
-
 	friend std::istream& operator>>(std::istream &in,huint &a)
 	{
 		std::string str;
@@ -253,8 +199,11 @@ public:
 
 	friend std::ostream& operator<<(std::ostream &out,const huint &a)
 	{
-		for(int i = a.index - 1;i > -1;--i)
-			out<<a.data[i];
+		//cout<<a.data[a.index - 1]<<'\\';
+		cout.fill('0');
+		cout.width(4);
+		for(int i = a.index;i > -1;--i)
+			cout<<std::right<<a.data[i]<<'\\';
 		return out;
 	}
 };
@@ -285,14 +234,14 @@ public:
 
 class hint
 {
-private:
+	private:
 
 	unsigned int
 		sign,				//if *this is a negative
 		index,				//how many ints in data[] are used
 		data[MAX_SIZE];
 
-public:
+	public:
 
 	hint():index(),data(){}
 	hint(const int &num){*this = num;}
@@ -455,7 +404,6 @@ public:
 	}
 
 	//end operator with IO
-
 };
 
 #endif
@@ -469,19 +417,24 @@ int main()
 	{
 		cin>>a>>b>>c;
 
-		if(!a && !b)
-			break;
-
 		cout<<a<<'\t'<<b<<'\n';
 
-		if(c == '+')
-			cout<<a + b<<'\n';
-		else if(c == '-')
-			cout<<a - b<<'\n';
-		else if(c == '*')
-			cout<<a * b<<'\n';
-		else
-			cout<<"unsupported operator.\n";
+		switch(c)
+		{
+			case '+':
+				cout<<(a + b)<<'\n';
+			break;
+			case '-':
+				cout<<(a - b)<<'\n';
+			break;
+			case '*':
+				cout<<(a * b)<<'\n';
+			break;
+			case 'q':
+				return 0;
+			default:
+				cout<<"unsuppoted operator.\n";
+		}
 
 	}
 
