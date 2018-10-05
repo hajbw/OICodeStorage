@@ -25,17 +25,18 @@ inline void addedge(const int &u,const int &v)
 	head[u] = iedge;
 }
 
-int dfs(int u)
+void dfs(int u)
 {
-	if(!ans[u])
+	ans[u] = u;
+	for(int i = head[u],v;i;i = e[i].n)
 	{
-		ans[u] = u;
-		for(int i = head[u];i;i = e[i].n)
-		{
-			ans[u] = max(ans[u],dfs(e[i].v));
-		}
+		if(!ans[e[i].v])
+			dfs(e[i].v);
+
+		if(u == 5)
+			cout<<ans[u]<<'\t'<<ans[e[i].v]<<'\n';
+		ans[u] = max(ans[u],ans[e[i].v]);
 	}
-	return ans[u];
 }
 
 int main()
@@ -47,6 +48,16 @@ int main()
 	{
 		cin>>u>>v;
 		addedge(u,v);
+	}
+
+	for(int i = 1;i <= V;++i)
+	{
+		cout<<i;
+		for(int j = head[i];j;i = e[j].n)
+		{
+			cout<<" -> "<<e[j].v;
+		}
+		cout<<"\\\n";
 	}
 
 	for(int i = 1;i <= V;++i)
