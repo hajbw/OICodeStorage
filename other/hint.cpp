@@ -47,10 +47,19 @@ public:
 		std::memset(data,0,sizeof(data));
 		index = 0;
 	}
+
 	huint(const unsigned long long &a)
 	{
 		index = MAX_SIZE;
 		*this = a;
+	}
+
+	huint(const string &str)
+	{
+		for(std::string::reverse_iterator it = str.rbegin();it != str.rend();)
+		{
+			
+		}
 	}
 
 	huint& operator=(unsigned long long a)
@@ -107,6 +116,13 @@ public:
 		return *this;
 	}
 
+	huint operator-(const huint &a)
+	{
+		huint res = *this;
+		res -= a;
+		return res;
+	}
+
 	friend int greater(const huint &a,const huint &b)
 	{
 		if(a.index - b.index)
@@ -145,12 +161,15 @@ public:
 		return greater(a,b) != 1;
 	}
 
-	friend std::istream& operator>>(std::istream &in,huint &a)
+	/*friend std::istream& operator>>(std::istream &in,huint &a)
 	{
 		struct node
 		{
 			char ch;
 			node *next;
+
+			node():ch(),next(){}
+			node(char ch,node *next):ch(ch),next(next){}
 		}
 		*head;
 		char ch = '\0';
@@ -173,9 +192,10 @@ public:
 
 		--cnt;
 
+		a.index = cnt / BIT_BASE + 1;
 		a.data[cnt/BIT_BASE] = temp;
 
-		for(int i = cnt/BIT_BASE;i > -1;--i)
+		for(int i = cnt/BIT_BASE - 1;i > -1;--i)
 		{
 			for(int j = 0;j < 4;++j)
 			{
@@ -185,6 +205,14 @@ public:
 			a.data[i] = temp;
 		}
 
+		return in;
+	}*/
+
+	friend std::istream& operator>>(std::istream &in,huint &a)
+	{
+		std::string str;
+		in>>str;
+		a = str;
 		return in;
 	}
 
@@ -402,10 +430,9 @@ int main()
 	int a,b;
 
 	huint ha,hb;
-	cin>>a>>b;
+	cin>>a>>hb;
 
 	ha = a;
-	hb = b;
 
 	cout<<ha<<'\t'<<hb<<"\n";
 
