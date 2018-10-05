@@ -5,7 +5,7 @@
 #include <iostream>
 #include <algorithm>
 
-#define DEBUG 1
+#define DEBUG 0
 
 using std::cin;
 using std::cout;

@@ -53,6 +53,9 @@ pair<int,int> dfs(int v)
 
 int main()
 {
+	freopen("earth.in","r",stdin);
+	freopen("earth.out","w",stdout);
+
 	int u,v,w;
 
 	cin>>T;
