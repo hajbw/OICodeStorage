@@ -29,6 +29,7 @@ using std::cout;
 #include <istream>
 #include <ostream>
 #include <cstring>
+#include <string>
 
 class huint
 {
@@ -54,12 +55,10 @@ public:
 		*this = a;
 	}
 
-	huint(const string &str)
+	huint(const std::string &str)
 	{
-		for(std::string::reverse_iterator it = str.rbegin();it != str.rend();)
-		{
-			
-		}
+		index = MAX_SIZE;
+		*this = str;		
 	}
 
 	huint& operator=(unsigned long long a)
@@ -71,6 +70,32 @@ public:
 		{
 			data[index++] = a % BIT_BASE;
 			a /= BIT_BASE;
+		}
+
+		return *this;
+	}
+
+	huint& operator=(const std::string &str)
+	{
+		std::memset(data,0,sizeof(int) * index);
+		
+		int temp = 0,leak = str.length() % BIT_PER_INT;
+		auto it = str.begin();
+		index = (str.length() - 1) / BIT_PER_INT + 1;
+
+		if(leak)
+		{
+			for(int i = leak;i;--i,++it)
+				temp = temp * 10 + *it - '0';
+			data[index - 1] = temp;
+		}
+
+		for(int i = index - 1 - (bool)leak;i > -1;--i)
+		{
+			temp = 0;
+			for(int j = 0;j < 4;++j,++it)
+				temp = temp * 10 + *it - '0';
+			data[i] = temp;
 		}
 
 		return *this;
@@ -121,6 +146,16 @@ public:
 		huint res = *this;
 		res -= a;
 		return res;
+	}
+
+	operator bool()
+	{
+		return index && data[0];
+	}
+
+	bool operator!()
+	{
+		return index >= 1 && !data[0];
 	}
 
 	friend int greater(const huint &a,const huint &b)
@@ -427,17 +462,28 @@ public:
 
 int main()
 {
-	int a,b;
+	huint a,b;
+	char c;
 
-	huint ha,hb;
-	cin>>a>>hb;
+	while( ~(1 ^ 1) )
+	{
+		cin>>a>>b>>c;
 
-	ha = a;
+		if(!a && !b)
+			break;
 
-	cout<<ha<<'\t'<<hb<<"\n";
+		cout<<a<<'\t'<<b<<'\n';
 
-	cout<<(ha + hb);
-	//cout<<(ha * hb)<<'\n';
+		if(c == '+')
+			cout<<a + b<<'\n';
+		else if(c == '-')
+			cout<<a - b<<'\n';
+		else if(c == '*')
+			cout<<a * b<<'\n';
+		else
+			cout<<"unsupported operator.\n";
+
+	}
 
 	return 0;
 }
