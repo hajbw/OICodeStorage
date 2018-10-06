@@ -1,5 +1,6 @@
 /*
 	P3916 图的遍历
+	AC
 */
 #include <iostream>
 
@@ -25,9 +26,33 @@ inline void addedge(int u,int v)
 	head[u] = iedge;
 }
 
+void dfs(int u,int s)
+{
+	if(ans[u])
+		return;
+
+	ans[u] = s;
+
+	for(int i = head[u];i;i = e[i].n)
+		dfs(e[i].v,s);
+}
+
 int main()
 {
-	cin>>V>>E;
+	int u,v;
 
-	for
+	cin>>V>>E;
+	for(int i = 1;i <= E;++i)
+	{
+		cin>>u>>v;
+		addedge(v,u);
+	}
+
+	for(int i = V;i;--i)
+		dfs(i,i);
+
+	for(int i = 1;i <= V;++i)
+		cout<<ans[i]<<' ';
+
+	return 0;
 }
