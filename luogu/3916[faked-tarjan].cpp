@@ -32,9 +32,6 @@ void dfs(int u)
 	{
 		if(!ans[e[i].v])
 			dfs(e[i].v);
-
-		if(u == 5)
-			cout<<ans[u]<<'\t'<<ans[e[i].v]<<'\n';
 		ans[u] = max(ans[u],ans[e[i].v]);
 	}
 }
