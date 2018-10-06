@@ -6,6 +6,8 @@
 #define max(a,b) ((a) > (b) ? (a) : (b))
 #define min(a,b) ((a) < (b) ? (a) : (b))
 
+#define DEBUG 1
+
 using std::cin;
 using std::cout;
 
@@ -47,6 +49,7 @@ int main()
 		addedge(u,v);
 	}
 
+#if DEBUG
 	for(int i = 1;i <= V;++i)
 	{
 		cout<<i;
@@ -56,6 +59,7 @@ int main()
 		}
 		cout<<"\\\n";
 	}
+#endif
 
 	for(int i = 1;i <= V;++i)
 		if(!ans[i])
