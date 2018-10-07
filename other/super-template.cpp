@@ -270,3 +270,23 @@ template<class T>bool is_prime(const T &a)
 
 	return true;
 }
+
+int toint(const char *str)
+//string to int
+{
+	int res = 0;
+	while(*str && *str < '0' || *str > '9')++str;
+	while(*str >= '0' && *str <= '9'){res = (res<<1) + (res<<3) + *str - '0';++str;}
+	return res;
+}
+
+double hsqrt(const double &a)
+//sqrt
+{
+	double i = a;
+
+	i = (i + a / i) / 2.0;
+	i = (i + a / i) / 2.0;
+
+	return i;
+}
