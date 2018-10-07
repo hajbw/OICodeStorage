@@ -5,6 +5,7 @@
 
 /**
 	P1563 玩具谜题
+	AC
 */
 
 using std::cin;
@@ -12,7 +13,7 @@ using std::cout;
 using std::endl;
 using std::string;
 
-const int MAXM = 100010,MAXN = 100010;
+const int MAXM = 100010,MAXN = 200010;
 
 struct toy
 {
@@ -33,7 +34,7 @@ int main()
 	for(int i = 0;i < m;++i)
 	{
 		cin>>face>>amount;
-		index += calc(toys[index].face,face) * amount % n;
+		index = (index + calc(toys[index].face,face) * amount) % n;
 		if(index < 0)
 			index += n;
 	}
