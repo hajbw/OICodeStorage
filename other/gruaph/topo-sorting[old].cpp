@@ -2,8 +2,10 @@
 #include <vector>
 #include <queue>
 
-/**
-	topological sorting
+/*
+	topological sorting.
+	(old template)
+	works.
 */
 
 using std::cin;
@@ -19,17 +21,18 @@ vector<int> graph[MAXV];
 int id[MAXV];//in-degree
 int V,E;
 
-queue kahn()
+queue<int> kahn()
 /**
 	Kahn's algorithm for topological sorting
 */
 {
-	queue res,id0;
+	queue<int> res,id0;
 	int flag = 0;
 
 	for(int i = 0;i < V;++i)
 		if(!id[i])
-			res.push(i);
+			id0.push(i);
+
 
 	while(!id0.empty())
 	{
@@ -38,7 +41,7 @@ queue kahn()
 
 		res.push(n);
 
-		for(vector<int>::iterator it = graph[n].begin;it != graph[n].end();++it)
+		for(vector<int>::iterator it = graph[n].begin();it != graph[n].end();++it)
 		{
 			--id[*it];
 			if(!id[*it])
@@ -50,23 +53,35 @@ queue kahn()
 
 	//if graph has edges left,flag != 0
 	for(int i = 0;i < E;++i)
-		flag += graph[i].empty();
+		flag += graph[i].size();
 
-	return flag ? queue() : res;
+	return flag ? queue<int>() : res;
 }
 
 int main()
 {
 	std::ios::sync_with_stdio(false);
 
-	int x,y;
+	int x,y,w;
 
 	cin>>V>>E;
 
 	for(int i = 0;i < E;++i)
 	{
-		cin>>x>>y;
+		cin>>x>>y>>w;
 		graph[x].push_back(y);
-		++indegree[y];
+		++id[y];
 	}
+
+	cout<<"agrareger\n";
+
+	queue<int> res = kahn();
+
+	while(!res.empty())
+	{
+		cout<<res.front()<<'\n';
+		res.pop();
+	}
+
+	return 0;
 }
