@@ -45,7 +45,7 @@ int main()
 		{
 			if(indegree[i])
 				continue;
-			queue.push(i);
+			quq.push(i);
 			++toad;
 			order[i] = toad;
 			otov[toad] = i;
@@ -53,15 +53,15 @@ int main()
 
 		while(!quq.empty())
 		{
-			u = quq.top();
+			u = quq.front();
 			quq.pop();
 
-			for(int i = head[a];i;i = e[i].n)
+			for(int i = head[u];i;i = e[i].n)
 			{
-				v = e[i].to;
+				v = e[i].v;
 				if(order[v])
 					continue;
-				queue.push(v);
+				quq.push(v);
 				++toad;
 				order[i] = toad;
 				otov[toad] = i;
@@ -70,7 +70,7 @@ int main()
 
 		cout<<"|order\t|otov";
 
-		for(int i = 1;i <= N;++i)
+		for(int i = 1;i <= V;++i)
 			cout<<order[i]<<"\t"<<otov[toad]<<'\n';
 	}
 
