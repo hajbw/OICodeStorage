@@ -72,8 +72,10 @@ public:
 	{
 		std::memset(data,0,sizeof(int) * index);
 		
-		int temp = 0,leak = str.length() % BIT_PER_INT;
 		std::string::iterator it = str.begin();
+		while(*it == '0' && str.length() > 1)
+			str.erase(it);
+		int temp = 0,leak = str.length() % BIT_PER_INT;
 		index = (str.length() - 1) / BIT_PER_INT + 1;
 
 		if(leak)
@@ -200,10 +202,19 @@ public:
 	friend std::ostream& operator<<(std::ostream &out,const huint &a)
 	{
 		//cout<<a.data[a.index - 1]<<'\\';
-		cout.fill('0');
-		cout.width(4);
-		for(int i = a.index;i > -1;--i)
-			cout<<std::right<<a.data[i]<<'\\';
+		//cout.fill('0');
+		//cout.width(4);
+		char ostr[5];
+		out<<a.data[a.index - 1];
+		for(int i = a.index - 2;i > -1;--i)
+		{
+			//cout<<std::right<<a.data[i]<<'\\';
+			ostr[0] = a.data[i] / 1000	% 10 + '0';
+			ostr[1] = a.data[i] / 100	% 10 + '0';
+			ostr[2] = a.data[i] / 10	% 10 + '0';
+			ostr[3] = a.data[i] 		% 10 + '0';
+			out<<ostr;		
+		}
 		return out;
 	}
 };
@@ -411,11 +422,15 @@ class hint
 int main()
 {
 	huint a,b;
+	int ia,ib;
 	char c;
 
 	while( ~(1 ^ 1) )
 	{
-		cin>>a>>b>>c;
+		cin>>ia>>ib>>c;
+
+		a = ia;
+		b = ib;
 
 		cout<<a<<'\t'<<b<<'\n';
 
