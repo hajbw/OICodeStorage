@@ -24,13 +24,13 @@ edges[MAXE];
 
 int
 	V,E,S,
-	head[MAXV],
+	head[MAXV],iedge,
 	vis[MAXV],dist[MAXV];//is-finished[v],min-dist[v]
 
-void addedge(const int &i,const int &u,const int &v,const int &w)
+void addedge(const int &u,const int &v,const int &w)
 {
-	edges[i] = (edge){v,w,head[u]};
-	head[u] = i;
+	edges[++iedge] = (edge){v,w,head[u]};
+	head[u] = iedge;
 }
 
 struct cmp
@@ -57,14 +57,18 @@ void dijkstra()
 	{
 		u = quq.top();
 		quq.pop();
-		if(vis[u])
-			continue;
-		vis[u] = 1;
+
 		for(int i = head[u];i;i = edges[i].n)
 		{
 			v = edges[i].v;
-			dist[v] = min(dist[v],dist[u] + edges[i].w);
-			quq.push(v);
+			if(dist[v] - edges[i].w > dist[u])
+			{
+				dist[v] = dist[u] + edges[i].w;
+				if(vis[v])
+					continue;
+				vis[v] = true;
+				quq.push(v);
+			}
 		}
 	}
 }
@@ -77,7 +81,7 @@ int main()
 	for(int i = 1;i <= E;++i)
 	{
 		cin>>u>>v>>w;
-		addedge(i,u,v,w);
+		addedge(u,v,w);
 	}
 
 	dijkstra();
