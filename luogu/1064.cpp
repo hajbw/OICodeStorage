@@ -18,7 +18,6 @@ int
 	M,N,ans,
 	dp[MAXN][MAXM];//max-val(money,curr)
 
-
 template<class T>inline T min(const T &a,const T &b)
 {
 	return a < b ? a : b;
@@ -45,7 +44,7 @@ int main()
 	{
 		item it = items[i];
 		//dirty fix : if undefined dp[][it.fa],calculate it.fa first
-		if(it.fa && !dp[M][it.fa])
+		if(it.fa && !dp[N][it.fa])
 		{
 			int i = it.fa;
 			item it = items[i];
@@ -56,7 +55,7 @@ int main()
 			}
 		}
 		//and that if defined dp[][],continue
-		if(dp[M][i])
+		if(dp[N][i])
 			continue;
 		for(int j = N;j >= it.price + items[it.fa].price;--j)
 		{
