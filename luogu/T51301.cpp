@@ -1,5 +1,6 @@
 /*
 	T51301 最小N个和
+	AC
 */
 #include <iostream>
 #include <algorithm>
