@@ -1,5 +1,6 @@
 /*
 	P1223 排队接水
+	AC
 */
 
 #include <iostream>
@@ -26,7 +27,8 @@ int N;
 
 int main()
 {
-	int t,total = 0;
+	int t;
+	double total = 0.0;
 
 	cin>>N;
 	for(int i = 1;i <= N;++i)
@@ -43,7 +45,7 @@ int main()
 		total += persons[i].time * (N - i);
 	}
 
-	std::printf("\n%.2f",double(total) / N);
+	std::printf("\n%.2lf",total / N);
 
 	return 0;
 }
