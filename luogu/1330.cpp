@@ -34,6 +34,7 @@ int
 	color_cnt[4],
 	flag_fail = false;
 
+/*
 inline void read(int &a,int &b)
 {
 	static char buf[MAXL],*ch;
@@ -45,20 +46,18 @@ inline void read(int &a,int &b)
 	while(*ch && (*ch < '0' || *ch > '9'))++ch;
 	while(*ch >= '0' && *ch <= '9'){b = (b<<1) + (b<<3) + *ch - '0';++ch;}
 }
+*/
 
 void dfs(const int &u)
 {
 #if DEBUG
-	cout<<u;
+	cout<<u<<'\n';
 #endif
 
 	if(flag_fail)
 		return;
 
 	++color_cnt[color[u]];
-
-	if(!head[u])
-		return;
 
 	for(edge *i = head[u];i;i = i->next)
 	{
@@ -69,7 +68,7 @@ void dfs(const int &u)
 		}
 		else if(color[u] == color[i->to])
 		{
-			flag_fail = true;
+			flag0_fail = true;
 #if DEBUG
 			fault_u = u;
 			fault_v = i->to;
@@ -104,10 +103,7 @@ int main()
 		if(flag_fail)
 			break;
 
-#if DEBUG
-		cout<<'\n'<<color_cnt[2]<<'\t'<<color_cnt[3]<<'\n';
-#endif
-
+		/*
 		if(color_cnt[2])
 		{
 			if(color_cnt[3])
@@ -117,6 +113,7 @@ int main()
 		}
 		else if(color_cnt[3])
 			ans += color_cnt[3];
+		*/
 
 	}
 
@@ -127,8 +124,10 @@ int main()
 	for(int i = 1;i <= V;++i)
 		cout<<color[i];
 
+	cout<<"\n";
+
 	if(flag_fail)
-		cout<<fault_u<<"\t"<<fault_v;
+		cout<<"Impossible\t"<<fault_u<<"\t"<<fault_v;
 	else
 		cout<<ans;
 
