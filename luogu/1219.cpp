@@ -1,5 +1,6 @@
 /*
 	P1219 八皇后
+	AC
 */
 
 #include <iostream>
@@ -16,33 +17,30 @@ int
 
 //note:
 //a[y]
-//b[x + y]
-//
+//b[x - y]
+//c[x + y]
 
 void dfs(int x)
 {
-	if(x >= N)
+	if(x > N)
 	{
 		++ans;
-		if(ans < 4)
-		{
-			for(int i = 1;i <= N;++i)
-				cout<<stat[i]<<' ';
-		}
+		if(ans > 3)
+			return;
+		for(int i = 1;i <= N;++i)
+			cout<<stat[i]<<' ';
 		cout<<'\n';
 		return;
 	}
 
-	for(int i = 1;i <= N;++i)
+	for(int y = 1;y <= N;++y)
 	{
-		cout<<x<<'\t'<<i<<'\n';
-		if(!a[i] && !b[x - i] && !c[x + i])
-		{
-			cout<<"-";
-			a[i] = b[x - i] = c[x + i] = 1;
-			stat[i] = x;
-			dfs(x + 1);
-		}
+		if(a[y] || b[x - y] || c[x + y])
+			continue;
+		stat[x] = y;
+		a[y] = b[x - y] = c[x + y] = 1;
+		dfs(x + 1);
+		a[y] = b[x - y] = c[x + y] = 0;
 	}
 }
 
