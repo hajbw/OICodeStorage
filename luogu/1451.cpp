@@ -1,5 +1,6 @@
 /*
 	P1451 求细胞数量
+	AC
 */
 #include <iostream>
 #include <utility>
@@ -20,12 +21,11 @@ int
 	ddx[4]	= {-1,1,1,-1},	ddy[4]	= {0,-1,1,1};
 
 char map[MAXNM][MAXNM];
-queue<pair<int,int>> quq;
+queue<pair<int,int> > quq;
 
 int main()
 {
-	int x,y,xx,yy;
-	char ch;
+	int x,y;
 
 	cin>>M>>N;
 	cin.getline(map[1] + 1,90);
@@ -51,21 +51,28 @@ int main()
 
 				for(int i = 0;i < 4;++i)
 				{
-					xx = x + dx[i];
-					yy = y + dy[i];
+					x += ddx[i];
+					y += ddy[i];
 
-					if(!xx || !yy || xx > M || yy > N)
+					if(!x || !y || x > M || y > N)
 						continue;
 
-					if(map[i][j] == '0' || vis[i][j])
+					if(map[x][y] == '0' || vis[x][y])
 						continue;
 
-					quq.push(make_pair(xx,yy));
-					vis[i][j] = ans;
+					quq.push(make_pair(x,y));
+					vis[x][y] = ans;
 				}
 			}
 		}
 	}
+
+	/*for(int i = 1;i <= M;++i)
+	{
+		for(int j = 1;j <= N;++j)
+			cout<<vis[i][j];
+		cout<<'\n';
+	}*/
 
 	cout<<ans;
 
