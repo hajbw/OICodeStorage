@@ -6,14 +6,15 @@
 #include <iostream>
 #include <algorithm>
 
-#define USE_STL 1
+#define USE_STL 0
+#define DEBUG 1
 
 using std::cin;
 using std::cout;
 
 const int MAXM = 200010,INF = 2147483647;
 
-int order[MAXM],val[MAXM] = {INF},head = 1,ind,M,D,t;
+int order[MAXM],val[MAXM] = {INF},head,ind,M,D,t;
 
 //note:
 //	make val[0] = INF
@@ -36,7 +37,7 @@ inline int query(int i)
 
 inline void insert(int i,int n)
 {
-	head = std::lower_bound(val,val + head + 1,n) - val;
+	head = std::upper_bound(val,val + head + 1,n,rev_cmp) - val;
 	order[head] = i;
 	val[head] = n;
 }
@@ -45,13 +46,47 @@ inline void insert(int i,int n)
 
 inline int query(int i)
 {
-	int l = 0,r = head,mid;//range : (l,r]
-	while()
+	//note :
+	//range : (l,r]
+	//make order[r] >= a,order[l] < a
+	int l = 0,r = head,mid;
+	while(r - l > 1)
+	{
+		mid = l + r >> 1;
+
+		if(order[mid] >= i)
+			r = mid;
+		else
+			l = mid;
+	}
+	return val[r];
 }
 
 inline void insert(int i,int n)
 {
+	if(n < val[head])
+	{
+		++head;
+		order[head] = i;
+		val[head] = n;
+		return;
+	}
 
+	int l = 0,r = head,mid;
+
+	while(r - l > 1)
+	{
+		mid = l + r >> 1;
+
+		if(val[mid] > n)
+			l = mid;
+		else
+			r = mid;
+	}
+
+	head = r;
+	order[head] = i;
+	val[head] = n;
 }
 
 #endif
@@ -69,7 +104,7 @@ int main()
 		if(cmd == 'Q')
 		{
 			cin>>l;
-			cout<<(t == query(ind - l + 1))<<'\n';
+			cout<<(t = query(ind - l + 1))<<'\n';
 		}
 		else
 		{
@@ -78,12 +113,17 @@ int main()
 			insert(ind,(n + t) % D);
 		}
 
+#if DEBUG
+
 		cout<<"\n------------------------------\n"<<head<<'\n';
 		for(int i = 0;i <= head;++i)
 			cout<<order[i]<<'\t';
 		cout<<'\n';
 		for(int i = 0;i <= head;++i)
-			cout<<
+			cout<<val[i]<<'\t';
+		cout<<'\n';
+
+#endif
 	}
 
 	return 0;
