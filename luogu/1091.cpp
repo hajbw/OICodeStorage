@@ -10,6 +10,8 @@ const int MAXN = 105;
 
 int arr[MAXN],N;
 
+int 
+
 int main()
 {
 	cin>>N;
