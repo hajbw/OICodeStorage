@@ -1,6 +1,7 @@
 /*
 	P1091 合唱队形
 	brute-force search
+	50 points got!
 */
 #include <iostream>
 #include <deque>
@@ -19,19 +20,13 @@ void dfs(int n,int cnt)
 	if(n > N)
 	{
 		deque<int>::iterator it;
-		for(it = quq.begin();it != quq.end();++it)
-			cout<<*it<<'\t';
-		cout<<'\n';
-		for(it = quq.begin();it != quq.end() - 1 && *it > *(it + 1);++it) ;
-		for(;it != quq.end() - 1 && *it <= *(it + 1);++it) ;
-		cout<<'\n';
+
+		for(it = quq.begin();it != quq.end() - 1 && *it < *(it + 1);++it) ;
+		for(;it != quq.end() - 1 && *it > *(it + 1);++it) ;
+
 		if(it == quq.end() - 1)
-		{
-			cout<<cnt<<'\n';
 			if(cnt < ans)
 				ans = cnt;
-		}
-
 		return;
 	}
 
