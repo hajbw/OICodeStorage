@@ -2,12 +2,16 @@
 	P1198 [JSOI2008]最大数
 
 	using bisearch + monotone stack + naked array
+
+	aaaaahahhhhhhhhaaaaaaa!!!!!!!I did itttttttttttttt!!!!!
+
+	both STL enabled and disabled works 
 */
 #include <iostream>
 #include <algorithm>
 
-#define USE_STL 0
-#define DEBUG 1
+#define USE_STL 1
+#define DEBUG 0
 
 using std::cin;
 using std::cout;
@@ -26,18 +30,16 @@ int order[MAXM],val[MAXM] = {INF},head,ind,M,D,t;
 
 #if USE_STL
 
-std::less<int> rev_cmp;
+std::greater<int> rev_cmp;
 
 inline int query(int i)
 {
-	if(head == 1)
-		return 0;
 	return val[std::lower_bound(order,order + head + 1,i) - order];
 }
 
 inline void insert(int i,int n)
 {
-	head = std::upper_bound(val,val + head + 1,n,rev_cmp) - val;
+	head = std::lower_bound(val,val + head + 1,n,rev_cmp) - val;
 	order[head] = i;
 	val[head] = n;
 }
@@ -120,7 +122,7 @@ int main()
 			cout<<order[i]<<'\t';
 		cout<<'\n';
 		for(int i = 0;i <= head;++i)
-			cout<<val[i]<<'\t';
+			cout<<(val[i] >= INF ? -1 : val[i])<<'\t';
 		cout<<'\n';
 
 #endif
