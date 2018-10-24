@@ -201,7 +201,7 @@ template<class T> T fast_pow(T a,T b)
 	return result;
 }
 
-long long fast_pow_mod(long long a,long long b)
+template<class T>T fast_pow_mod(T a,T b,T p = T(P))
 /**
 	fast power with mod(long long version).
 	return: a ^ b % P.(it's not a xor b !)
@@ -211,47 +211,43 @@ long long fast_pow_mod(long long a,long long b)
 	while(b)
 	{
 		if(b & 1ll)
-			result = result * a % P;
-		a = a * a % P;
+			result = result * a % p;
+		a = a * a % p;
 		b >>= 1;
 	}
 	return result;
 }
 
-long long inv_mod(long long a)
+template<class T> T inv_mod(T a)
 /**
 	inverse.
 	inv(a) = a^(p-2) (mod p)
 	return: 1 / a % P
 */
 {
-	return fast_pow_mod(a,P - 2);
+	return fast_pow_mod(a,p - 2);
 }
 
-long long gcd(long long a,long long b)
+template<class T> T gcd(T a,T b)
 /**
 	GCD(Greatest Common Divisor).
-	long long version.
 */
 {
 	return b ? gcd(b,a % b) : a;
 }
 
-bool is_prime(const int &a)
+template<class T> T exgcd(T a,T b,T &x,T &y)
 {
-	if(a < 2)
-		return false;
-	if(a < 4)
-		return true;
-	if(a % 6 != 1 && a % 6 != 5)
-		return false;
-
-	int sqrta = sqrt(a);
-	for(int i = 5;i <= sqrta;i += 6)
-		if(!(a % i && a % (i + 2)))
-			return false;
-
-	return true;
+	if(!b)
+	{
+		x = 0;
+		y = 1;
+		return ;
+	}
+	else
+	{
+		T g = exgcd(b,a % b,y,x);
+	}
 }
 
 template<class T>bool is_prime(const T &a)
