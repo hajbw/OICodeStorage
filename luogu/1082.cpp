@@ -1,5 +1,6 @@
 /*
 	P1082 同余方程
+	AC
 */
 #include <iostream>
 
@@ -9,12 +10,12 @@ using std::cout;
 template<class T> T hpow(T a,T n,const T &p)
 {
 	T res = 1;
-	while(b)
+	while(n)
 	{
-		if(b & 1)
+		if(n & 1)
 			res = res * a % p;
 		a = a * a % p;
-		b >>= 1;
+		n >>= 1;
 	}
 	return res;
 }
@@ -32,11 +33,6 @@ template<class T>T exgcd(T a,T b,T &x,T &y)
 	return q;
 }
 
-template<class T> T hinv(T a,T p)
-{
-	return hpow(a,p - 2,p);
-}
-
 int main()
 {
 	long long a,b,x,y;
@@ -45,7 +41,7 @@ int main()
 
 	exgcd(a,b,x,y);
 
-	cout<<
+	cout<<(x + b) % b;
 
 	return 0;
 }
