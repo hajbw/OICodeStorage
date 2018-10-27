@@ -242,12 +242,12 @@ template<class T> T exgcd(T a,T b,T &x,T &y)
 	{
 		x = 0;
 		y = 1;
-		return ;
+		return a;
 	}
-	else
-	{
-		T g = exgcd(b,a % b,y,x);
-	}
+
+	T g = exgcd(b,a % b,y,x);
+	y -= a / b * x;
+	return g;
 }
 
 template<class T>bool is_prime(const T &a)
