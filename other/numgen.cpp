@@ -1,22 +1,11 @@
-#include <bits/stdc++.h>
-#include <windows.h>
+#include <iostream>
 
 /**
 	number generator
-	generates M lines N columns of data
+	generates N lines M columns of data
 */
 
 using namespace std;
-
-double hsqrt(double &a)
-{
-	double i = a;
-
-	i = (i + a / i) / 2.0;
-	i = (i + a / i) / 2.0;
-
-	return i;
-}
 
 int main(int argc, char const *argv[])
 {
@@ -41,11 +30,11 @@ int main(int argc, char const *argv[])
 
 	a = higer_bound - lower_bound + 1;
 
-	cout<<M<<' '<<N<<'\n';
+	cout<<N<<' '<<M<<'\n';
 
-	for(int i = 0;i < M;++i)
+	for(int i = 0;i < N;++i)
 	{
-		for(int j = 0;j < N;++j)
+		for(int j = 0;j < M;++j)
 		{
 			cout<<rand() % a + lower_bound<<" ";
 		}
