@@ -1,7 +1,9 @@
 /*
 	P1807 最长路_NOI导刊2010提高（07）
+	AC
 */
 #include <iostream>
+#include <cstring>
 #include <queue>
 
 #define DEBUG 0
@@ -44,6 +46,9 @@ int main()
 	int u,v,w;
 
 	cin>>V>>E;
+
+	std::memset(dis,128,sizeof(int) * (V + 1));
+
 	for(int i = 1;i <= E;++i)
 	{
 		cin>>u>>v>>w;
@@ -51,6 +56,7 @@ int main()
 		++ind[v];
 	}
 
+	dis[1] = 0;
 	for(int i = 1;i <= V;++i)
 		if(!ind[i])
 			quq.push(i);
@@ -75,7 +81,7 @@ int main()
 
 #else
 
-	cout<<(dis[V] ? dis[V] : -1);
+	cout<<(dis[V] > 0 ? dis[V] : -1);
 
 #endif
 
