@@ -1,5 +1,6 @@
 /*
 	P1083 借教室
+	AC
 */
 #include <iostream>
 #include <cstring>
@@ -7,7 +8,7 @@
 using std::cin;
 using std::cout;
 
-const int MAXM = 100010,MAXN = 100010;
+const int MAXM = 1000010,MAXN = 1000010;
 
 long long r[MAXN],d[MAXM],diff[MAXN],sum;
 int M,N,s[MAXM],t[MAXM],flag;
@@ -43,7 +44,7 @@ int main()
 	for(int i = 1;i <= M;++i)
 		cin>>d[i]>>s[i]>>t[i];
 
-	int lb = 1,rb = M + 1,mid;
+	int lb = 0,rb = M + 1,mid;
 
 	while(rb - lb > 1)
 	{
