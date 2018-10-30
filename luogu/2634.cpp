@@ -47,12 +47,13 @@ void dfs(int u,int fa = 0)
 		ans[u] += ans[it->v];
 
 		for(int i = 0;i < 3;++i)
-		{
+			ans[u] += dp[u][(i + it->w) % 3] * dp[it->v][i];
+
+		for(int i = 0;i < 3;++i)
 			dp[u][(i + it->w) % 3] += dp[it->v][i];
 
-			for(edge *iit = head[u];iit != it;iit = iit->n)
-				ans[u] += dp[it->v][(i + it->w) % 3] * dp[iit->v][(6 - i - it->w + iit->w) % 3];
-		}
+		//for(edge *iit = head[u];iit != it;iit = iit->n)
+		//	ans[u] += dp[it->v][(i + it->w) % 3] * dp[iit->v][(6 - i - it->w + iit->w) % 3];
 
 #if DEBUG
 
