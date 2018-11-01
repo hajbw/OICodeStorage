@@ -1,5 +1,6 @@
 /*
 	P1803 凌乱的yyy / 线段覆盖
+	AC
 */
 #include <iostream>
 #include <algorithm>
@@ -15,7 +16,7 @@ struct hpair
 
 	bool operator<(const hpair &a)const
 	{
-		return x == a.x ? y < a.y : x < a.x;
+		return y == a.y ? x > a.x : y < a.y;
 	}
 
 	friend std::istream& operator>>(std::istream &in,hpair &a)
@@ -25,7 +26,10 @@ struct hpair
 }
 contests[MAXN];
 
-int dp[MAXN];
+int dp[MAXN],N,ans,right;
+
+template<class T>inline const T& min(const T &a,const T &b){return a < b ? a : b;}
+template<class T>inline const T& max(const T &a,const T &b){return a > b ? a : b;}
 
 int main()
 {
@@ -35,12 +39,18 @@ int main()
 
 	std::sort(contests + 1,contests + 1 + N);
 
-	for(int i = 1;i <= N;++i)
+	++ans;
+	right = contests[1].y;
+	for(int i = 2;i <= N;++i)
 	{
-		dp[contests[i].y] = max(dp[contests[i].y],dp[contests[i].x] + 1);
+		if(contests[i].x >= right)
+		{
+			++ans;
+			right = contests[i].y;
+		}
 	}
 
-	cout<<dp[N];
+	cout<<ans;
 
 	return 0;
 }
