@@ -16,15 +16,8 @@ int
 	X[MAXN],Y[MAXN],up[MAXN],down[MAXN],tube[MAXN],
 	dp[MAXN][MAXM];
 
-template<class T>inline T min(T a,T b)
-{
-	return a < b ? a : b;
-}
-
-template<class T>inline T max(T a,T b)
-{
-	return a > b ? a : b;
-}
+template<class T>inline const T& min(const T &a,const T &b){return a < b ? a : b;}
+template<class T>inline const T& max(const T &a,const T &b){return a > b ? a : b;}
 
 int main()
 {
