@@ -2,36 +2,35 @@
 	P3371 【模板】单源最短路径（弱化版）
 */
 #include <iostream>
-#include <utility>
+#include <cstring>
 #include <queue>
-//use INT_MAX directly???
-//not on luogu.org :(
 #include <climits>
-
-#define min(a,b) ((a) < (b) ? (a) : (b))
 
 using std::cin;
 using std::cout;
-using std::priority_queue;
 
-const int MAXV = 20005,MAXE = 600010;
+const int MAXV = 10005,MAXE = 500010;
 
 struct edge
 {
-	int v,w,n;
+	int v,w;
+	edge *n;
 }
-edges[MAXE];
+edge_pool[MAXE],
+*iedge = edge_pool,
+*head[MAXV];
 
 int
 	V,E,S,
-	head[MAXV],iedge,
 	vis[MAXV],dist[MAXV];//is-finished[v],min-dist[v]
 
 void addedge(const int &u,const int &v,const int &w)
 {
-	edges[++iedge] = (edge){v,w,head[u]};
+	*(++iedge) = (edge){v,w,head[u]};
 	head[u] = iedge;
 }
+
+template<class T>inline const T& min(const T &a,const T &b){return a < b ? a : b;}
 
 struct cmp
 {
@@ -44,12 +43,8 @@ struct cmp
 void dijkstra()
 {
 	//intitalize
-	priority_queue<int,std::vector<int>,cmp> quq;
+	std::priority_queue<int,std::vector<int>,cmp> quq;
 	int u,v;
-
-	for(int i = 1;i <= E;++i)
-		dist[i] = INT_MAX;
-	dist[S] = 0;
 
 	quq.push(S);
 
@@ -58,18 +53,48 @@ void dijkstra()
 		u = quq.top();
 		quq.pop();
 
-		for(int i = head[u];i;i = edges[i].n)
+		if(vis[u])
+			continue;
+		vis[u] = 1;
+
+		for(edge *it = head[u];it;it = it->n)
 		{
-			v = edges[i].v;
-			if(dist[v] - edges[i].w > dist[u])
-			{
-				dist[v] = dist[u] + edges[i].w;
-				if(vis[v])
-					continue;
-				vis[v] = true;
-				quq.push(v);
-			}
+			v =it->v;
+			dist[v] = min(dist[v],dist[u] + it->w);
+			quq.push(v);
 		}
+	}
+}
+
+void SPFA()
+{
+	std::queue<int> quq;
+	int u;
+
+	//note: vis now means inqueue
+	vis[S] = 1;
+	quq.push(S);
+
+	while(!quq.empty())
+	{
+		u = quq.front();
+		quq.pop();
+
+		for(edge *it = head[u];it;it = it->n)
+		{
+			if(dist[u] >= dist[it->v] - it->w)
+				continue;
+
+			dist[it->v] = dist[u] + it->w;
+
+			if(vis[it->v])
+				continue;
+
+			vis[it->v] = 1;
+			quq.push(it->v);
+		}
+
+		vis[u] = 0;
 	}
 }
 
@@ -84,7 +109,13 @@ int main()
 		addedge(u,v,w);
 	}
 
-	dijkstra();
+	//init
+	for(int i = 1;i <= E;++i)
+		dist[i] = INT_MAX;
+	dist[S] = 0;
+
+	//dijkstra();
+	SPFA();
 
 	for(int i = 1;i <= V;++i)
 		cout<<dist[i]<<' ';
