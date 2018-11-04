@@ -5,6 +5,7 @@
 
 /**
 	P1220 关路灯
+	AC
 */
 
 using std::cin;
