@@ -75,7 +75,7 @@ int main()
 		if(!tube[i])
 		{
 			for(j = 1;j <= X[i];++j)
-				dp[i][M] = max(dp[i][M],dp[i][M - j] + 1);
+				dp[i][M] = min(dp[i][M],dp[i][M - j] + 1);
 		}
 
 		//if unable
