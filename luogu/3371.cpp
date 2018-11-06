@@ -9,7 +9,7 @@
 using std::cin;
 using std::cout;
 
-const int MAXV = 10005,MAXE = 500010;
+const int MAXV = 1000050,MAXE = 5000100;
 
 struct edge
 {
@@ -22,7 +22,7 @@ edge_pool[MAXE],
 
 int
 	V,E,S,
-	vis[MAXV],dist[MAXV];//is-finished[v],min-dist[v]
+	vis[MAXV],dist[MAXV];
 
 void addedge(const int &u,const int &v,const int &w)
 {
@@ -55,11 +55,11 @@ void dijkstra()
 
 		if(vis[u])
 			continue;
-		vis[u] = 1;
+		++vis[u];
 
 		for(edge *it = head[u];it;it = it->n)
 		{
-			v =it->v;
+			v = it->v;
 			dist[v] = min(dist[v],dist[u] + it->w);
 			quq.push(v);
 		}
@@ -110,12 +110,11 @@ int main()
 	}
 
 	//init
-	for(int i = 1;i <= E;++i)
-		dist[i] = INT_MAX;
+	std::memset(dist,0x3f,sizeof(int) * (V + 2));
 	dist[S] = 0;
 
-	//dijkstra();
-	SPFA();
+	dijkstra();
+	//SPFA();
 
 	for(int i = 1;i <= V;++i)
 		cout<<dist[i]<<' ';
