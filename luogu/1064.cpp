@@ -15,18 +15,11 @@ struct item
 items[MAXN];
 
 int
-	M,N,ans,
+	M,N,
 	dp[MAXN][MAXM];//max-val(money,curr)
 
-template<class T>inline T min(const T &a,const T &b)
-{
-	return a < b ? a : b;
-}
-
-template<class T>inline T max(const T &a,const T &b)
-{
-	return a > b ? a : b;
-}
+template<class T>inline const T& min(const T &a,const T &b){return a < b ? a : b;}
+template<class T>inline const T& max(const T &a,const T &b){return a > b ? a : b;}
 
 int main()
 {
@@ -54,7 +47,7 @@ int main()
 				dp[j][0] = max(dp[j][0],dp[j][i]);
 			}
 		}
-		//and that if defined dp[][],continue
+		//and that if defined dp[][i],continue
 		if(dp[N][i])
 			continue;
 		for(int j = N;j >= it.price + items[it.fa].price;--j)
