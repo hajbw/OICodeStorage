@@ -2,6 +2,8 @@
 	P1144 最短路计数
 */
 #include <iostream>
+#include <cstring>
+#include <algorithm>
 
 using std::cin;
 using std::cout;
@@ -48,6 +50,8 @@ void dijkstra()
 {
 	register int u,v;
 
+	std::memset(dist + 2,0x7f,sizeof(int) * V);
+
 	push(1);
 	++vis[1];
 
@@ -74,4 +78,27 @@ void dijkstra()
 			push(v);
 		}
 	}
+}
+
+int main()
+{
+	//std::ios::sync_with_stdio(false);
+	//cin.tie(NULL);
+
+	register u,v;
+
+	cin>>V>>E;
+	for(register int i = 1;i <= V;++i)
+	{
+		cin>>u>>v;
+		if(u != v)
+			addedge(u,v);
+	}
+
+	dijkstra();
+
+	for(register int i = 1;i <= V;++i)
+		cout<<i<<'\n';
+
+	return 0;
 }
