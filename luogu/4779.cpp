@@ -21,7 +21,7 @@ edge_pool[MAXE],
 
 int
 	V,E,S,
-	vis[MAXV],dist[MAXV];
+	vis[MAXV],dist[MAXV],heap[MAXE],*r;
 
 void addedge(const int &u,const int &v,const int &w)
 {
@@ -39,18 +39,47 @@ struct cmp
 	}
 };
 
+bool cmp2(const int &a,const int &b){return dist[a] > dist[b];}
+
+inline void init()
+{
+	r = heap;
+}
+
+inline void push(const int &a)
+{
+	*(r++) = a;
+	std::push_heap(heap,r,cmp2);
+}
+
+inline void pop()
+{
+	std::pop_heap(heap,r,cmp2);
+	--r;
+}
+
+inline int& top()
+{
+	return *heap;
+}
+
+inline bool empty()
+{
+	return r == heap;
+}
+
 void dijkstra()
 {
 	//intitalize
-	std::priority_queue<int,std::vector<int>,cmp> quq;
-	int u,v;
+	init();
+	register int u,v;
 
-	quq.push(S);
+	push(S);
 
-	while(!quq.empty())
+	while(!empty())
 	{
-		u = quq.top();
-		quq.pop();
+		u = top();
+		pop();
 
 		if(vis[u])
 			continue;
@@ -60,7 +89,7 @@ void dijkstra()
 		{
 			v = it->v;
 			dist[v] = min(dist[v],dist[u] + it->w);
-			quq.push(v);
+			push(v);
 		}
 	}
 }
