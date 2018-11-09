@@ -53,7 +53,6 @@ void dijkstra()
 	std::memset(dist + 2,0x7f,sizeof(int) * V);
 
 	push(1);
-	++vis[1];
 
 	while(r != heap)
 	{

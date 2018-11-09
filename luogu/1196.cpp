@@ -2,6 +2,7 @@
 	P1196 [NOI2002]银河英雄传说
 */
 #include <iostream>
+#include <cmath>
 
 using std::cin;
 using std::cout;
@@ -12,7 +13,7 @@ int fa[N + 2],len[N + 2],front[N + 2];
 
 inline int find(const int &a)
 {
-	if(fa[a] = a)
+	if(fa[a] == a)
 		return fa[a];
 	register int k = fa[a];
 	fa[a] = find(fa[a]);

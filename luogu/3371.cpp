@@ -44,7 +44,7 @@ void dijkstra()
 {
 	//intitalize
 	std::priority_queue<int,std::vector<int>,cmp> quq;
-	int u,v;
+	int u;
 
 	quq.push(S);
 
@@ -59,9 +59,8 @@ void dijkstra()
 
 		for(edge *it = head[u];it;it = it->n)
 		{
-			v = it->v;
-			dist[v] = min(dist[v],dist[u] + it->w);
-			quq.push(v);
+			dist[it->v] = min(dist[it->v],dist[u] + it->w);
+			quq.push(it->v);
 		}
 	}
 }
