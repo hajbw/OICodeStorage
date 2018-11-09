@@ -85,7 +85,7 @@ int main()
 	//std::ios::sync_with_stdio(false);
 	//cin.tie(NULL);
 
-	register u,v;
+	register int u,v;
 
 	cin>>V>>E;
 	for(register int i = 1;i <= V;++i)
